@@ -14,4 +14,20 @@ CHIP Inc16 {
 
     PARTS:
    // Put you code here:
-}
+   HalfAdder(a=in[0],b=true,sum=out[0],carry=neg);
+   HalfAdder(a=in[1],b=neg,sum=out[1],carry=neg1);
+   HalfAdder(a=in[2],b=neg1,sum=out[2],carry=neg2);
+   HalfAdder(a=in[3],b=neg2,sum=out[3],carry=neg3);
+   HalfAdder(a=in[4],b=neg3,sum=out[4],carry=neg4);
+   HalfAdder(a=in[5],b=neg4,sum=out[5],carry=neg5);
+   HalfAdder(a=in[6],b=neg5,sum=out[6],carry=neg6);
+   HalfAdder(a=in[7],b=neg6,sum=out[7],carry=neg7);
+   HalfAdder(a=in[8],b=neg7,sum=out[8],carry=neg8);
+   HalfAdder(a=in[9],b=neg8,sum=out[9],carry=neg9);
+   HalfAdder(a=in[10],b=neg9,sum=out[10],carry=neg10);
+   HalfAdder(a=in[11],b=neg10,sum=out[11],carry=neg11);
+   HalfAdder(a=in[12],b=neg11,sum=out[12],carry=neg12);
+   HalfAdder(a=in[13],b=neg12,sum=out[13],carry=neg13);
+   HalfAdder(a=in[14],b=neg13,sum=out[14],carry=neg14);
+   HalfAdder(a=in[15],b=neg14,sum=out[15],carry=neg15);
+   }
