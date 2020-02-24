@@ -17,4 +17,11 @@ CHIP PC {
 
     PARTS:
     // Put your code here:
+    //logic gates, inc16, register
+    
+    Inc16(in=ex,out=o5);
+    Mux16(a=o4,b=false,sel=reset,out=o2);s
+    Mux16(a=o3,b=in,sel=load,out=o4);
+    Mux16(a=ex,b=o5,sel=inc,out=o3);
+    Register(in=o2,load=true,out=out,out=ex);
 }
