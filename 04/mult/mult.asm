@@ -8,11 +8,10 @@
 
 // Put your code here.
 //find value at ram0 and 1 and save. multiply together and save mult. set mult to ram2
-@R0
-D=0
-@R1
-M=1
-@mult
-M=0
-D=
+@0
+M=D
+@1
+M=A
+@2
 M=D&A
+
