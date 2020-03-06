@@ -8,10 +8,19 @@
 
 // Put your code here.
 //find value at ram0 and 1 and save. multiply together and save mult. set mult to ram2
-@0
-D=M
-@1
-D=D&M
-@2
-M=D
+//add ram1 together  as many times as  the value ofram0
+	@i
+	M=0
+	@sum
+	M=1
+(LOOP)
+	@1
+	M=D
+	@1
+	D=D+M
+	@2
+	M=D
+(END)
+	@END
+	0;JMP
 
