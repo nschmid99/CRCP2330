@@ -11,15 +11,26 @@
 //add ram1 together  as many times as  the value ofram0
 	@i
 	M=0
-	@sum
-	M=1
 (LOOP)
+//if i <=RAM0, i++
+	@i
+	D=M
+	@0
+	D=D-A //Max value
+	@END
+	D;JGT//if D=D-A>0 JGT
+
+//add
+	@i
+	D=M
 	@1
-	M=D
-	@1
-	D=D+M
+	M=D+D
 	@2
 	M=D
+	@i
+	M=M+1
+	@LOOP
+	0;JMP
 (END)
 	@END
 	0;JMP
