@@ -12,36 +12,37 @@
 //add r0 into r2 as many times as r1 isnt 0
 	
 	@i
-	M=D
-	@R1
-	D=M
+	M=0    
+	    
+	@R2 
+	M=0
 	
 
 (LOOP)
 //if i <=RAM1, i++
 	@i
 	D=M
-	@R0
+	@R1
 	D=D-A
 	@END
-	D;JGT//if D=D-A>0 JGT
+	D;JGT
 	
-	@i
-	D=M
-
 	@R2
 	D=M
-
 	@R0
 	D=D+M
 
 	@R2
 	M=D
 
-	
+	@i
+	M=M+1
+
+
 	@LOOP	
 	0;JMP
 (END)
+
 	0;JMP
 	
 
