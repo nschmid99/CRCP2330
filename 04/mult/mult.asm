@@ -9,38 +9,37 @@
 // Put your code here.
 //find value at ram0 and 1 and save. multiply together and save mult. set mult to ram2
 //add ram1 together  as many times as  the value ofram0
-	@1
-	D=M
+//add r0 into r2 as many times as r1 isnt 0
+	
 	@i
 	M=D
-	@0
-	D=A
-	@2
-	M=D
+	@R1
+	D=M
 	
 
 (LOOP)
-//if i <=RAM0, i++
+//if i <=RAM1, i++
 	@i
 	D=M
-	//Max value
+	@R0
+	D=D-A
 	@END
 	D;JGT//if D=D-A>0 JGT
-	@R1
-	D=D-M
-@i
-M=D
+	
+	@i
+	D=M
+
 	@R2
 	D=M
 
 	@R0
-	M=D+M
+	D=D+M
 
 	@R2
 	M=D
 
 	
-	@LOOP
+	@LOOP	
 	0;JMP
 (END)
 	0;JMP
