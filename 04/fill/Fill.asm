@@ -14,32 +14,46 @@
 // Put your code here.
 // 1=black 0=white. when keypressed, screen=1 when keypressed=false. screen=0
 
-@8192
+@SCREEN                
   D=A
   @n  
    M=D  // n = RAM[0]
 
+(LOOP)
+
   @i
   M=0  // i = 0
 
+(DEFAULT)
   @KBD
   D=M
-  @i
-  D=M
-  @SCREEN
-  A=A+D
-  M=0
+  @WHITE
   D;JEQ
 
-(LOOP)
+  (WHITE)
    @i
    D=M
    @SCREEN
-   M=M+D 
-   M=-1
+   M=A+D 
+   M=0
    @END
    0;JMP
 
+(BLACK)
+  @i
+  D=M
+  @SCREEN
+  M=A+D
+  M=-1
+  @END
+  0;JMP
+
 (END)
-   @LOOP  // program’s end
+  @i
+  MD=M+1
+  @n
+  D=D-M
+  @LOOP
+  D;JEQ
+   @DEFAULT  // program’s end
    0;JMP                                                               
