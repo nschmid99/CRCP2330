@@ -12,19 +12,23 @@
 // the screen should remain fully clear as long as no key is pressed.
 
 // Put your code here.
-// 1=black 0=white. when keypressed, screen=1 when keypressed=false. screen=0
+// 1=black 0=white. when keypressed, screen=1 when keypressed=false. 
 
 (LOOP)
 @SCREEN
 D=A
 @n
 M=D
+
 @i
-M=0
+D=0
+
   @KBD
   D=M
+
   @WHITE
   D;JEQ
+
   @BLACK
   0;JEQ
 
@@ -42,6 +46,12 @@ M=0
   A=M
   M=D
 
+  @n
+  M=M+1
+
+  @FILL
+  0;JMP
+
   (WHITE)
    @i
    M=0
@@ -53,8 +63,4 @@ M=0
   M=-1
   @FILL
   0;JMP
-
-
-(END)
-  @END
-   0;JMP                                                               
+                                                           
