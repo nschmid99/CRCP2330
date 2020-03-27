@@ -28,4 +28,7 @@ CHIP Memory {
 
     PARTS:
     // Put your code here:
+    //uses  RAM16, SCREEN, KEYBOARD
+   RAM16(in=in, load=load, address=aram, out=oram);
+
 }
