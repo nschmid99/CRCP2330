@@ -30,9 +30,10 @@ CHIP Memory {
     // Put your code here:
     //uses  RAM16, SCREEN, KEYBOARD
 
-DMux(in=load,  sel=sel, a=loadr, b=loads)
+DMux4Way(in=load,  sel=address, a=ao, b=bo,c=co, d=do)
    RAM16(in=in, load=loadr, address=address, out=oram);
    Screen(in=in, load=loads, address=address(0..13), out=oscreen);
    Keyboard(out=);
+   Mux4Way16(a=, b=, c=, d=, sel=,  out=)
 
 }
