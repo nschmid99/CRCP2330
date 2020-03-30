@@ -41,7 +41,7 @@ CHIP CPU {
     PARTS:
     // Put your code here:
     Mux16(a=, b=,sel=,out=);
-    Or();
+    Or(a=);
     ARegister(in=, load=, out=);
     Mux16(a=, b=,sel=,out=);
     Or();
