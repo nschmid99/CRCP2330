@@ -40,17 +40,17 @@ CHIP CPU {
 
     PARTS:
     // Put your code here:
-    //not 15
-   Not(in=instruction[15],out=noti15);
-    Mux16(a=instruction, b=aluoutput,sel=nc1,out=o1);
-    Or(a=nc1,b=,out=);
-    ARegister(in=, load=, out=);
-    Mux16(a=inM[16], b=,sel=,out=);
+   Not(in=instruction[15],out=ni15);
+    Mux16(a=instruction, b=aluoutput,sel=ni15,out=o1);
+    Or(a=ni15,b=instuction[5],out=o2);
+    ARegister(in=o1, load=o2, out=03);
+    Mux16(a=inM[16], b=o3,sel=,out=);
+    DRegister(in=, load=,out=);
+    ALU(x=,y=,zx=,nx=zy=,ny=,f=,no=,out=outM[16],zr=writeM,ng=addressM[15]);
     Or();
     PC(in=, load=reset, inc=, reset=,out=pc[15]);
-    DRegister(in=, load=,out=);
     And();
     And();
     And();
-    ALU(x=,y=,zx=,nx=zy=,ny=,f=,no=,out=outM[16],zr=writeM,ng=addressM[15]);
+    
 }
