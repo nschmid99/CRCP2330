@@ -40,7 +40,8 @@ CHIP CPU {
 
     PARTS:
     // Put your code here:
-   Not(in=c1,out=nc1);
+    //not 15
+   Not(in=instruction[15],out=noti15);
     Mux16(a=instruction, b=aluoutput,sel=nc1,out=o1);
     Or(a=nc1,b=,out=);
     ARegister(in=, load=, out=);
