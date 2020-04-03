@@ -43,17 +43,14 @@ CHIP CPU {
    Not(in=instruction[15],out=ni15);
     Mux16(a=instruction, b=aluoutput,sel=ni15,out=o1);
     Or(a=ni15,b=instuction[5],out=o2);
-    ARegister(in=o1, load=o2, out=03, out[0..14]=oA);
+    ARegister(in=o1, load=o2, out=o3, out[0..14]=oA);
     And(a=instruction[15], b=instruction[12], out=A);
     Mux16(a=inM[16], b=o3,sel=A,out=outmux2);
     And(a=instruction[15], b=instruction[4], out=D);
     DRegister(in=?, load=D, out=oD);
-    ALU(x=, y=, zx=, nx=, zy=, ny=, f=, no=, out=outM[16], zr=writeM, ng=addressM[15]);
-    
-
-    Or();
-    PC(in=, load=reset, inc=, reset=,out=pc[15]);
-    And();
-    And();
+    ALU(x=oD, y=outmux2, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=outM, zr=zro, ng=ngo);
+    And(a=instruction[15], b=instruction[3], out=writeM);
+    And(a=o3, b=instruction[2], out=addressM);
+    PC(in=, load=, inc=, reset=reset,out=pc[15]);
     
 }
