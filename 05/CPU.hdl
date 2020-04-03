@@ -40,17 +40,31 @@ CHIP CPU {
 
     PARTS:
     // Put your code here:
-   Not(in=instruction[15],out=ni15);
-    Mux16(a=instruction, b=aluoutput,sel=ni15,out=o1);
-    Or(a=ni15,b=instuction[5],out=o2);
-    ARegister(in=o1, load=o2, out=o3, out[0..14]=oA);
-    And(a=instruction[15], b=instruction[12], out=A);
-    Mux16(a=inM[16], b=o3,sel=A,out=outmux2);
+ 
+    Mux16(a=instruction, b=aOut,sel=ni15,out=o1);
+    Not(in=instruction[15],out=ni15);
+    Or(a=ni15,b=instruction[5],out=o2);
+    ARegister(in=o1, load=o2, out[0..14]=addressM, out=oA);
+
+    
     And(a=instruction[15], b=instruction[4], out=D);
-    DRegister(in=?, load=D, out=oD);
-    ALU(x=oD, y=outmux2, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=outM, zr=zro, ng=ngo);
+    DRegister(in=aOut, load=D, out=oD);
+
+    Mux16(a=inM, b=oA,sel=instruction[12],out=outmux2);
+
+    ALU(x=oD, y=outmux2, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=outM, out=aOut, zr=zro, ng=ngo);
     And(a=instruction[15], b=instruction[3], out=writeM);
-    And(a=o3, b=instruction[2], out=addressM);
-    PC(in=, load=, inc=, reset=reset,out=pc[15]);
+    Or(a=zro,  b= ngo, out=o6);
+    Not(in=o6, out=notalu);
+    //jump bits
+    And(a=ngo, b=instruction[2], out=jump1);
+    And(a=zro, b=instruction[1], out=jump2);
+    And(a=notalu, b=instruction[0], out=jump3);
+    Or(a=jump1, b=jump2, out=ej);
+    Or(a=jump3,b=ej,out=ej2);
+    And(a=instruction[15], b=ej2,  out=jmp);
+
+
+    PC(in=oA, load=jmp, inc=true, reset=reset,out[0..14]=pc, out[15]=o7);
     
 }
