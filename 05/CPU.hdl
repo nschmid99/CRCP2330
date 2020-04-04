@@ -40,8 +40,7 @@ CHIP CPU {
 
     PARTS:
     // Put your code here:
- 
-    Mux16(a=instruction, b=aOut,sel=ni15,out=o1);
+    Mux16(a=instruction, b=aOut,sel=instruction[15],out=o1);
     Not(in=instruction[15],out=ni15);
     Or(a=ni15,b=instruction[5],out=o2);
     ARegister(in=o1, load=o2, out[0..14]=addressM, out=oA);
@@ -53,18 +52,20 @@ CHIP CPU {
     Mux16(a=inM, b=oA,sel=instruction[12],out=outmux2);
 
     ALU(x=oD, y=outmux2, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=outM, out=aOut, zr=zro, ng=ngo);
+
     And(a=instruction[15], b=instruction[3], out=writeM);
     Or(a=zro,  b= ngo, out=o6);
     Not(in=o6, out=notalu);
+    
     //jump bits
-    And(a=ngo, b=instruction[2], out=jump1);
-    And(a=zro, b=instruction[1], out=jump2);
-    And(a=notalu, b=instruction[0], out=jump3);
+    And(a=instruction[2], b=ngo, out=jump1);
+    And(a=instruction[1], b=zro, out=jump2);
+    And(a=instruction[0], b=notalu, out=jump3);
     Or(a=jump1, b=jump2, out=ej);
     Or(a=jump3,b=ej,out=ej2);
     And(a=instruction[15], b=ej2,  out=jmp);
+    Not(in=jmp, out=nojmp);
 
-
-    PC(in=oA, load=jmp, inc=true, reset=reset,out[0..14]=pc, out[15]=o7);
+    PC(in=oA, load=jmp, inc=nojmp, reset=reset,out[0..14]=pc);
     
 }
