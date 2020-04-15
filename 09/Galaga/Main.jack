@@ -1,0 +1,11 @@
+//setting up game and runs it 
+
+class Main {
+    function void main() {
+        var Galaga game;
+        let game = GalagaGame.new();
+        do game.run();
+        do game.dispose();
+        return;
+    }
+}
