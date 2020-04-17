@@ -1,4 +1,5 @@
 class Spaceship {
+//spaceship needs ability to shoot at aliens and to move. if shot hits aliens, add points to highscore
 
    field int x;
    field int y; 
