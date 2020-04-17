@@ -2,10 +2,11 @@
 
 class Main {
     function void main() {
-        var Galaga game;
-        let game = GalagaGame.new();
+        var Game game;
+        let game = Game.new();
         do game.run();
         do game.dispose();
         return;
+
     }
 }

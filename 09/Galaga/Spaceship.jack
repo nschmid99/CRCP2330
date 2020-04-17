@@ -23,6 +23,11 @@ class Spaceship {
       return;
    }
 
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+
 
    method void moveLeft() {
       if (x > 1) {
