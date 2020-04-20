@@ -2,7 +2,8 @@ class Aliens {
 /*array of aliens. Need them to move randomly on screen like particle engine and randomly shoot at spaceship. if bullet hits spaceship 3x game is over*/
    field int x;
    field int y; 
-  field int size; 
+  field int size;
+ field int i; 
   field Array aliens;
  
    /** Constructs a new square with a given location and size. */
@@ -19,20 +20,22 @@ class Aliens {
 
 //initializes array
 method void initializeAlien(){
-   var int i;
-   var Array a;
+      var Array a;
    let i=0;
    let aliens = Array.new(20);
    while(i<20){
-      let aliens[i]=Screen.drawRectangle(x*i, y*i, x + size, y + size);
-      let i= i+1;
+      let aliens[i]=Screen.drawRectangle(x+i, y+i, (x +i +20), (x +i +20));
+      let i= i+30;
    }
    return;
 }
    /** Draws the square on the screen. */
    method void draw() {
       do Screen.setColor(true);
-      do Screen.drawRectangle(x, y, x + size, y + size);
+      while(i<20){
+      do Screen.drawRectangle(x+i, y+i, (x +i +20), (y +i+20));
+      let i=i+30;
+      }
       return;
    }
 
