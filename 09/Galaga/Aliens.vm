@@ -1,5 +1,5 @@
 function Aliens.new 0
-push constant 3
+push constant 4
 call Memory.alloc 1
 pop pointer 0
 push argument 0
@@ -9,9 +9,54 @@ pop this 1
 push argument 2
 pop this 2
 push pointer 0
+call Aliens.initializeAlien 1
+pop temp 0
+push pointer 0
 call Aliens.draw 1
 pop temp 0
 push pointer 0
+return
+function Aliens.initializeAlien 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+push constant 20
+call Array.new 1
+pop this 3
+label WHILE_EXP0
+push local 0
+push constant 20
+lt
+not
+if-goto WHILE_END0
+push local 0
+push this 3
+add
+push this 0
+push local 0
+call Math.multiply 2
+push this 1
+push local 0
+call Math.multiply 2
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
 return
 function Aliens.draw 0
 push argument 0

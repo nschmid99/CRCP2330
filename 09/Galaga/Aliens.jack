@@ -3,21 +3,32 @@ class Aliens {
    field int x;
    field int y; 
   field int size; 
-
-
+  field Array aliens;
+ 
    /** Constructs a new square with a given location and size. */
 
    constructor Aliens new(int Nx, int Ny, int Nsize) {
    let x = Nx;
       let y = Ny;
       let size = Nsize;
-      
+      do initializeAlien();
       do draw();
 
       return this;
    }
 
-
+//initializes array
+method void initializeAlien(){
+   var int i;
+   var Array a;
+   let i=0;
+   let aliens = Array.new(20);
+   while(i<20){
+      let aliens[i]=Screen.drawRectangle(x*i, y*i, x + size, y + size);
+      let i= i+1;
+   }
+   return;
+}
    /** Draws the square on the screen. */
    method void draw() {
       do Screen.setColor(true);
