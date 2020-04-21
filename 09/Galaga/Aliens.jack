@@ -1,65 +1,47 @@
 class Aliens {
-/*array of aliens. Need them to move randomly on screen like particle engine and randomly shoot at spaceship. if bullet hits spaceship 3x game is over*/
-   field int x;
-   field int y; 
-  field int size;
- field int i; 
- field int length;
-field Array aliens;
- 
-   /** Constructs a new square with a given location and size. */
 
-   constructor Aliens new(int Nx, int Ny, int Nsize) {
+   field Array aliens;
+   field int x;
+   field int y;
+   field int x2;
+   field int y2;
+   field int i;
+
+
+   constructor Aliens new(int Nx, int Ny, int Nx2, int Ny2) {
    let x = Nx;
       let y = Ny;
-      let size = Nsize;
-      let length =20;
-  do initializeAlien();
+      let x2= Nx2;
+      let y2=Ny2;
+      do initializeAlien();
+     
       return this;
+
    }
 
-//initializes array
 method void initializeAlien(){
- var Array a;
+     
    let i=0;
-   let aliens = Array.new(length);
-   while(i<length){
-    let aliens[i]=Screen.drawRectangle(x+i, y+i, (x +i +20), (x +i +20));
+   
+   let aliens = Array.new(20);
+   while(i<20){
+    let aliens[i]=Screen.drawRectangle(x+i, y+i+15, (x +i +20), (x +i +20));
       do draw();
-      let i= i+30;
+      let i= i+10;
    }
- return;
+   return;
 }
    /** Draws the square on the screen. */
    method void draw() {
-      do Screen.setColor(true);
-      do Screen.drawRectangle(x, y, x +size , y +size);
 
+   do Screen.setColor(true);
+   do Screen.drawRectangle(x+i, y+i+15, x2+i+20, y2+i+20);
       return;
    }
 
  method void dispose() {
-      do Memory.deAlloc(this);
-      return;
+  do Memory.deAlloc(this);
+     return;
    }
-
-
-   method void moveLeft() {
-         do Screen.setColor(false);
-         do Screen.drawRectangle((x + size) - 1, y, x + size, y + size);
-         let x = x - 2;
-         do Screen.setColor(true);
-         do Screen.drawRectangle(x, y, x + 1, y + size);
-      return;
-   }
-
-   method void moveRight() {
-    
-         do Screen.setColor(false);
-         do Screen.drawRectangle(x, y, x + 1, y + size);
-         let x = x + 2;
-         do Screen.setColor(true);
-         do Screen.drawRectangle((x + size) - 1, y, x + size, y + size);
-      return;
-      }
 }
+

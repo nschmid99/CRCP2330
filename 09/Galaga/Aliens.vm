@@ -3,48 +3,50 @@ push constant 6
 call Memory.alloc 1
 pop pointer 0
 push argument 0
-pop this 0
-push argument 1
 pop this 1
-push argument 2
+push argument 1
 pop this 2
-push constant 20
+push argument 2
+pop this 3
+push argument 3
 pop this 4
 push pointer 0
 call Aliens.initializeAlien 1
 pop temp 0
 push pointer 0
 return
-function Aliens.initializeAlien 1
+function Aliens.initializeAlien 0
 push argument 0
 pop pointer 0
 push constant 0
-pop this 3
-push this 4
-call Array.new 1
 pop this 5
+push constant 20
+call Array.new 1
+pop this 0
 label WHILE_EXP0
-push this 3
-push this 4
+push this 5
+push constant 20
 lt
 not
 if-goto WHILE_END0
-push this 3
 push this 5
-add
 push this 0
-push this 3
 add
 push this 1
-push this 3
+push this 5
 add
-push this 0
-push this 3
+push this 2
+push this 5
+add
+push constant 15
+add
+push this 1
+push this 5
 add
 push constant 20
 add
-push this 0
-push this 3
+push this 1
+push this 5
 add
 push constant 20
 add
@@ -56,10 +58,10 @@ pop that 0
 push pointer 0
 call Aliens.draw 1
 pop temp 0
-push this 3
-push constant 30
+push this 5
+push constant 10
 add
-pop this 3
+pop this 5
 goto WHILE_EXP0
 label WHILE_END0
 push constant 0
@@ -71,13 +73,23 @@ push constant 0
 not
 call Screen.setColor 1
 pop temp 0
-push this 0
 push this 1
-push this 0
-push this 2
+push this 5
 add
-push this 1
 push this 2
+push this 5
+add
+push constant 15
+add
+push this 3
+push this 5
+add
+push constant 20
+add
+push this 4
+push this 5
+add
+push constant 20
 add
 call Screen.drawRectangle 4
 pop temp 0
@@ -88,86 +100,6 @@ push argument 0
 pop pointer 0
 push pointer 0
 call Memory.deAlloc 1
-pop temp 0
-push constant 0
-return
-function Aliens.moveLeft 0
-push argument 0
-pop pointer 0
-push constant 0
-call Screen.setColor 1
-pop temp 0
-push this 0
-push this 2
-add
-push constant 1
-sub
-push this 1
-push this 0
-push this 2
-add
-push this 1
-push this 2
-add
-call Screen.drawRectangle 4
-pop temp 0
-push this 0
-push constant 2
-sub
-pop this 0
-push constant 0
-not
-call Screen.setColor 1
-pop temp 0
-push this 0
-push this 1
-push this 0
-push constant 1
-add
-push this 1
-push this 2
-add
-call Screen.drawRectangle 4
-pop temp 0
-push constant 0
-return
-function Aliens.moveRight 0
-push argument 0
-pop pointer 0
-push constant 0
-call Screen.setColor 1
-pop temp 0
-push this 0
-push this 1
-push this 0
-push constant 1
-add
-push this 1
-push this 2
-add
-call Screen.drawRectangle 4
-pop temp 0
-push this 0
-push constant 2
-add
-pop this 0
-push constant 0
-not
-call Screen.setColor 1
-pop temp 0
-push this 0
-push this 2
-add
-push constant 1
-sub
-push this 1
-push this 0
-push this 2
-add
-push this 1
-push this 2
-add
-call Screen.drawRectangle 4
 pop temp 0
 push constant 0
 return

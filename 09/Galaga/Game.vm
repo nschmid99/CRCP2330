@@ -1,5 +1,5 @@
 function Game.new 0
-push constant 7
+push constant 11
 call Memory.alloc 1
 pop pointer 0
 push constant 200
@@ -7,15 +7,14 @@ push constant 100
 push constant 10
 call Spaceship.new 3
 pop this 0
-push constant 10
-push constant 10
-push constant 10
-call Aliens.new 3
+push constant 5
+push constant 55
+push constant 15
+push constant 65
+call Aliens.new 4
 pop this 1
 push constant 0
-pop this 5
-push constant 0
-pop this 6
+pop this 10
 push constant 0
 pop this 2
 push pointer 0
@@ -37,7 +36,7 @@ return
 function Game.moveSpaceship 0
 push argument 0
 pop pointer 0
-push this 6
+push this 10
 push constant 3
 eq
 if-goto IF_TRUE0
@@ -47,7 +46,7 @@ push this 0
 call Spaceship.moveLeft 1
 pop temp 0
 label IF_FALSE0
-push this 6
+push this 10
 push constant 4
 eq
 if-goto IF_TRUE1

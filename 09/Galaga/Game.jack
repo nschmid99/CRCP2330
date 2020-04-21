@@ -1,39 +1,41 @@
 class Game{
+
 	field Spaceship spaceship; // the spaceship
-	field Aliens aliens; //the aliens
+	field Aliens alien; //the aliens
+
 	field int pos; //alien position
-  field  int x;
-  field int  y;
-  field int i;
+  field  int x, x2;
+  field int length;
+  field int  y,y2;
+  field int i,j;
    field int direction; // the spaceships's current direction: 
                         // 0=none, 3=left, 4=right
 
    /** Constructs a new Square Game. */
    constructor Game new() {
-      // Creates a 10 by 10 pixels square and positions it at the 200,100
       let spaceship = Spaceship.new(200, 100, 10);
-      let aliens = Aliens.new(10,10,10);
-      let i=0;
-      
+      let alien= Aliens.new (5,55,15,65);
       let direction = 0;  // initial state is no movement
       let pos = 0;
 
       return this;
    }
+
+ 
   method void dispose() {
       do spaceship.dispose();
-      do aliens.dispose();
+      do alien.dispose();
       do Memory.deAlloc(this);
       return;
    }
 
-method void moveSpaceship() {
+   
+   method void moveSpaceship() {
       if (direction = 3) { do spaceship.moveLeft(); }
       if (direction = 4) { do spaceship.moveRight(); }
       do Sys.wait(5);  // delays the next movement
       return;
    }
-
 /*  method void moveAliens() {
    if (pos > 0) { do aliens.moveLeft(); 
   let pos=pos+2;}
@@ -47,7 +49,7 @@ method void moveSpaceship() {
       var char key;  // the key currently pressed by the user
       var boolean exit;
       let exit = false;
-      
+
       //do moveAliens();
 
      /* while (~exit) {
@@ -68,5 +70,7 @@ method void moveSpaceship() {
      }  */
      return;
    }
+
+
 
 }
