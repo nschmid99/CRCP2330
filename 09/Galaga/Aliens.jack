@@ -4,7 +4,8 @@ class Aliens {
    field int y; 
   field int size;
  field int i; 
-  field Array aliens;
+ field int length;
+field Array aliens;
  
    /** Constructs a new square with a given location and size. */
 
@@ -12,30 +13,28 @@ class Aliens {
    let x = Nx;
       let y = Ny;
       let size = Nsize;
-      do initializeAlien();
-      do draw();
-
+      let length =20;
+  do initializeAlien();
       return this;
    }
 
 //initializes array
 method void initializeAlien(){
-      var Array a;
+ var Array a;
    let i=0;
-   let aliens = Array.new(20);
-   while(i<20){
-      let aliens[i]=Screen.drawRectangle(x+i, y+i, (x +i +20), (x +i +20));
+   let aliens = Array.new(length);
+   while(i<length){
+    let aliens[i]=Screen.drawRectangle(x+i, y+i, (x +i +20), (x +i +20));
+      do draw();
       let i= i+30;
    }
-   return;
+ return;
 }
    /** Draws the square on the screen. */
    method void draw() {
       do Screen.setColor(true);
-      while(i<20){
-      do Screen.drawRectangle(x+i, y+i, (x +i +20), (y +i+20));
-      let i=i+30;
-      }
+      do Screen.drawRectangle(x, y, x +size , y +size);
+
       return;
    }
 
