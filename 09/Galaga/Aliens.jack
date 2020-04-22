@@ -24,20 +24,24 @@ method void initializeAlien(){
    let i=0;
    
    let aliens = Array.new(20);
-   while(i<20){
-    let aliens[i]=Screen.drawRectangle(x+i, y+i+15, (x +i +20), (x +i +20));
-      do draw();
-      let i= i+10;
+   while(i<512){
+      if(i<256){
+      let aliens[i]=Screen.drawRectangle(x+i, y,x2+i , y2);
+      //let y=y-10;
+      let i= i+25.6;
+    }
+     
+      
    }
    return;
 }
    /** Draws the square on the screen. */
-   method void draw() {
+  // method void draw() {
 
-   do Screen.setColor(true);
-   do Screen.drawRectangle(x+i, y+i+15, x2+i+20, y2+i+20);
-      return;
-   }
+   //do Screen.setColor(true);
+  // do Screen.drawRectangle(x+i, y+i, x2+i+20, y2+i+20);
+  //    return;
+ //  }
 
  method void dispose() {
   do Memory.deAlloc(this);

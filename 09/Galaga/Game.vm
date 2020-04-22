@@ -7,10 +7,10 @@ push constant 100
 push constant 10
 call Spaceship.new 3
 pop this 0
-push constant 5
+push constant 128
 push constant 55
-push constant 15
-push constant 65
+push constant 128
+push constant 55
 call Aliens.new 4
 pop this 1
 push constant 0
