@@ -6,6 +6,7 @@ class Aliens {
    field int x2;
    field int y2;
    field int i;
+   field int j;
 
 
    constructor Aliens new(int Nx, int Ny, int Nx2, int Ny2) {
@@ -14,6 +15,7 @@ class Aliens {
       let x2= Nx2;
       let y2=Ny2;
       do initializeAlien();
+      do moveLeft();
      
       return this;
 
@@ -22,26 +24,29 @@ class Aliens {
 method void initializeAlien(){
      
    let i=0;
-   
    let aliens = Array.new(20);
    while(i<512){
+
       if(i<256){
-      let aliens[i]=Screen.drawRectangle(x+i, y,x2+i , y2);
-      //let y=y-10;
-      let i= i+25.6;
-    }
+          let aliens[i]=Screen.drawRectangle(x+i, y,x2+i , y2);
+          let i= i+30;
+          do moveLeft();
+      }
+
      
       
    }
    return;
 }
-   /** Draws the square on the screen. */
-  // method void draw() {
 
-   //do Screen.setColor(true);
-  // do Screen.drawRectangle(x+i, y+i, x2+i+20, y2+i+20);
-  //    return;
- //  }
+
+   /** Moves the square left by 2 pixels. */
+   method void moveLeft() {
+      if (x > 1) {
+        let x= x+10;}
+      return;
+   }
+
 
  method void dispose() {
   do Memory.deAlloc(this);

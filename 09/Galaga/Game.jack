@@ -2,7 +2,6 @@ class Game{
 
 	field Spaceship spaceship; // the spaceship
 	field Aliens alien; //the aliens
-
 	field int pos; //alien position
   field  int x, x2;
   field int length;
@@ -14,7 +13,7 @@ class Game{
    /** Constructs a new Square Game. */
    constructor Game new() {
       let spaceship = Spaceship.new(200, 100, 10);
-      let alien= Aliens.new (128,55,128,55);
+      let alien= Aliens.new (128,75,153.6,85);
       let direction = 0;  // initial state is no movement
       let pos = 0;
 
@@ -36,23 +35,15 @@ class Game{
       do Sys.wait(5);  // delays the next movement
       return;
    }
-/*  method void moveAliens() {
-   if (pos > 0) { do aliens.moveLeft(); 
-  let pos=pos+2;}
-   if (pos + 10 < 510) { do aliens.moveRight();
-   let pos=pos-2; }
-   do Sys.wait(5); 
-   return;
-   }*/
+  
 
      method void run() {
       var char key;  // the key currently pressed by the user
       var boolean exit;
       let exit = false;
 
-      //do moveAliens();
-
-     /* while (~exit) {
+  
+      while (~exit) {
          // waits for a key to be pressed
          while (key = 0) {
             let key = Keyboard.keyPressed();
@@ -67,7 +58,7 @@ class Game{
             let key = Keyboard.keyPressed();
             do moveSpaceship();
          }
-     }  */
+     }  
      return;
    }
 

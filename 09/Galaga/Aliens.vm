@@ -1,5 +1,5 @@
 function Aliens.new 0
-push constant 6
+push constant 7
 call Memory.alloc 1
 pop pointer 0
 push argument 0
@@ -12,6 +12,9 @@ push argument 3
 pop this 4
 push pointer 0
 call Aliens.initializeAlien 1
+pop temp 0
+push pointer 0
+call Aliens.moveLeft 1
 pop temp 0
 push pointer 0
 return
@@ -52,12 +55,31 @@ pop pointer 1
 push temp 0
 pop that 0
 push this 5
-push constant 25
+push constant 30
 add
 pop this 5
+push pointer 0
+call Aliens.moveLeft 1
+pop temp 0
 label IF_FALSE0
 goto WHILE_EXP0
 label WHILE_END0
+push constant 0
+return
+function Aliens.moveLeft 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 1
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 1
+push constant 10
+add
+pop this 1
+label IF_FALSE0
 push constant 0
 return
 function Aliens.dispose 0
