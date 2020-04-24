@@ -17,6 +17,8 @@ push constant 0
 pop this 10
 push constant 0
 pop this 2
+push constant 0
+pop this 8
 push pointer 0
 return
 function Game.dispose 0

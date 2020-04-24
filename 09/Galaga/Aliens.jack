@@ -15,7 +15,7 @@ class Aliens {
       let x2= Nx2;
       let y2=Ny2;
       do initializeAlien();
-      do moveLeft();
+      
      
       return this;
 
@@ -25,26 +25,29 @@ method void initializeAlien(){
      
    let i=0;
    let aliens = Array.new(20);
-   while(i<512){
-
-      if(i<256){
-          let aliens[i]=Screen.drawRectangle(x+i, y,x2+i , y2);
-          let i= i+30;
-          do moveLeft();
-      }
-
-     
-      
-   }
+   do drawAlien();
+   do  moveL();
    return;
 }
 
 
    /** Moves the square left by 2 pixels. */
-   method void moveLeft() {
-      if (x > 1) {
-        let x= x+10;}
+   method void drawAlien() {
+   while(i<512){
+      if(i<256){
+          let aliens[i]=Screen.drawRectangle(x+i, y,x2+i , y2);
+          let i= i+30;
+      }
+   }
       return;
+   }
+
+   method void moveL(){
+   while(x>500){
+   let x=x+5;
+   let x2=x2+5;
+   do drawAlien();}
+   return;
    }
 
 

@@ -14,9 +14,6 @@ push pointer 0
 call Aliens.initializeAlien 1
 pop temp 0
 push pointer 0
-call Aliens.moveLeft 1
-pop temp 0
-push pointer 0
 return
 function Aliens.initializeAlien 0
 push argument 0
@@ -26,6 +23,17 @@ pop this 5
 push constant 20
 call Array.new 1
 pop this 0
+push pointer 0
+call Aliens.drawAlien 1
+pop temp 0
+push pointer 0
+call Aliens.moveL 1
+pop temp 0
+push constant 0
+return
+function Aliens.drawAlien 0
+push argument 0
+pop pointer 0
 label WHILE_EXP0
 push this 5
 push constant 512
@@ -58,28 +66,33 @@ push this 5
 push constant 30
 add
 pop this 5
-push pointer 0
-call Aliens.moveLeft 1
-pop temp 0
 label IF_FALSE0
 goto WHILE_EXP0
 label WHILE_END0
 push constant 0
 return
-function Aliens.moveLeft 0
+function Aliens.moveL 0
 push argument 0
 pop pointer 0
+label WHILE_EXP0
 push this 1
-push constant 1
+push constant 500
 gt
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
+not
+if-goto WHILE_END0
 push this 1
-push constant 10
+push constant 5
 add
 pop this 1
-label IF_FALSE0
+push this 3
+push constant 5
+add
+pop this 3
+push pointer 0
+call Aliens.drawAlien 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
 push constant 0
 return
 function Aliens.dispose 0

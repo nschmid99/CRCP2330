@@ -1,5 +1,5 @@
 function Spaceship.new 0
-push constant 3
+push constant 4
 call Memory.alloc 1
 pop pointer 0
 push argument 0
@@ -30,6 +30,15 @@ push this 2
 add
 call Screen.drawRectangle 4
 pop temp 0
+push this 0
+push constant 5
+add
+push this 1
+push constant 5
+add
+push constant 2
+call Bullet.new 3
+pop this 3
 push constant 0
 return
 function Spaceship.dispose 0

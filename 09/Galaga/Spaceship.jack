@@ -4,6 +4,7 @@ class Spaceship {
    field int x;
    field int y; 
    field int size; 
+   field Bullet  bullet;
 
    /** Constructs a new square with a given location and size. */
    constructor Spaceship new(int Nx, int Ny, int Nsize) {
@@ -20,6 +21,7 @@ class Spaceship {
    method void draw() {
       do Screen.setColor(true);
       do Screen.drawRectangle(x, y, x + size, y + size);
+      let bullet=Bullet.new(x+5,y+5,2);
       return;
    }
 

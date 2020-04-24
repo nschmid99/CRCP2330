@@ -16,6 +16,7 @@ class Game{
       let alien= Aliens.new (128,75,153.6,85);
       let direction = 0;  // initial state is no movement
       let pos = 0;
+      let i=0;
 
       return this;
    }
@@ -35,19 +36,22 @@ class Game{
       do Sys.wait(5);  // delays the next movement
       return;
    }
-  
+
 
      method void run() {
       var char key;  // the key currently pressed by the user
       var boolean exit;
       let exit = false;
 
+      
+      
   
       while (~exit) {
          // waits for a key to be pressed
          while (key = 0) {
             let key = Keyboard.keyPressed();
             do moveSpaceship();
+          // do alien.moveLeft();
          }
          if (key = 81)  { let exit = true; }     // q key
          if (key = 130) { let direction = 3; }   // left arrow
