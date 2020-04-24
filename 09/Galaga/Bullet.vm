@@ -39,7 +39,7 @@ function Bullet.moveUp 0
 push argument 0
 pop pointer 0
 push this 1
-push constant 1
+push constant 8
 gt
 if-goto IF_TRUE0
 goto IF_FALSE0
@@ -50,7 +50,7 @@ pop temp 0
 push this 0
 push this 1
 push constant 1
-sub
+add
 push this 2
 call Screen.drawCircle 3
 pop temp 0
@@ -65,9 +65,9 @@ pop temp 0
 push this 0
 push this 1
 push constant 1
-add
+sub
 push this 2
-call Screen.drawRectangle 3
+call Screen.drawCircle 3
 pop temp 0
 label IF_FALSE0
 push constant 0

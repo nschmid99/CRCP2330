@@ -36,7 +36,7 @@ add
 push this 1
 push constant 5
 add
-push constant 2
+push constant 5
 call Bullet.new 3
 pop this 3
 push constant 0
@@ -46,6 +46,14 @@ push argument 0
 pop pointer 0
 push pointer 0
 call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Spaceship.shootBullet 0
+push argument 0
+pop pointer 0
+push this 3
+call Bullet.moveUp 1
 pop temp 0
 push constant 0
 return

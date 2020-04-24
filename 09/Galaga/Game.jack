@@ -1,30 +1,27 @@
 class Game{
 
 	field Spaceship spaceship; // the spaceship
-	field Aliens alien; //the aliens
+	//field Aliens alien; //the aliens
 	field int pos; //alien position
   field  int x, x2;
   field int length;
   field int  y,y2;
   field int i,j;
    field int direction; // the spaceships's current direction: 
-                        // 0=none, 3=left, 4=right
+                        // 0=none, 3=left, 4=right, 1=up(bullet)
 
    /** Constructs a new Square Game. */
    constructor Game new() {
       let spaceship = Spaceship.new(200, 100, 10);
-      let alien= Aliens.new (128,75,153.6,85);
+     // let alien= Aliens.new (128,75,153.6,85);
       let direction = 0;  // initial state is no movement
-      let pos = 0;
-      let i=0;
-
       return this;
    }
 
  
   method void dispose() {
       do spaceship.dispose();
-      do alien.dispose();
+     // do alien.dispose();
       do Memory.deAlloc(this);
       return;
    }
@@ -33,6 +30,7 @@ class Game{
    method void moveSpaceship() {
       if (direction = 3) { do spaceship.moveLeft(); }
       if (direction = 4) { do spaceship.moveRight(); }
+      if (direction = 1) { do spaceship.shootBullet(); }
       do Sys.wait(5);  // delays the next movement
       return;
    }
@@ -43,19 +41,18 @@ class Game{
       var boolean exit;
       let exit = false;
 
-      
-      
-  
       while (~exit) {
+
          // waits for a key to be pressed
          while (key = 0) {
             let key = Keyboard.keyPressed();
             do moveSpaceship();
-          // do alien.moveLeft();
          }
+
          if (key = 81)  { let exit = true; }     // q key
          if (key = 130) { let direction = 3; }   // left arrow
          if (key = 132) { let direction = 4; }   // right arrow
+         if (key = 131 ) { let direction =1;}
 
          // waits for the key to be released
          while (~(key = 0)) {

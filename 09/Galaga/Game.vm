@@ -1,5 +1,5 @@
 function Game.new 0
-push constant 11
+push constant 10
 call Memory.alloc 1
 pop pointer 0
 push constant 200
@@ -7,18 +7,8 @@ push constant 100
 push constant 10
 call Spaceship.new 3
 pop this 0
-push constant 128
-push constant 75
-push constant 153
-push constant 85
-call Aliens.new 4
-pop this 1
 push constant 0
-pop this 10
-push constant 0
-pop this 2
-push constant 0
-pop this 8
+pop this 9
 push pointer 0
 return
 function Game.dispose 0
@@ -26,9 +16,6 @@ push argument 0
 pop pointer 0
 push this 0
 call Spaceship.dispose 1
-pop temp 0
-push this 1
-call Aliens.dispose 1
 pop temp 0
 push pointer 0
 call Memory.deAlloc 1
@@ -38,7 +25,7 @@ return
 function Game.moveSpaceship 0
 push argument 0
 pop pointer 0
-push this 10
+push this 9
 push constant 3
 eq
 if-goto IF_TRUE0
@@ -48,7 +35,7 @@ push this 0
 call Spaceship.moveLeft 1
 pop temp 0
 label IF_FALSE0
-push this 10
+push this 9
 push constant 4
 eq
 if-goto IF_TRUE1
@@ -58,6 +45,16 @@ push this 0
 call Spaceship.moveRight 1
 pop temp 0
 label IF_FALSE1
+push this 9
+push constant 1
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 0
+call Spaceship.shootBullet 1
+pop temp 0
+label IF_FALSE2
 push constant 5
 call Sys.wait 1
 pop temp 0
@@ -103,7 +100,7 @@ if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
 push constant 3
-pop this 10
+pop this 9
 label IF_FALSE1
 push local 0
 push constant 132
@@ -112,8 +109,17 @@ if-goto IF_TRUE2
 goto IF_FALSE2
 label IF_TRUE2
 push constant 4
-pop this 10
+pop this 9
 label IF_FALSE2
+push local 0
+push constant 131
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 1
+pop this 9
+label IF_FALSE3
 label WHILE_EXP2
 push local 0
 push constant 0
