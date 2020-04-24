@@ -35,6 +35,13 @@ class Game{
       return;
    }
 
+   method void killAlien(){
+      //checkpos of bullet. if bullet=alien
+      //erase bullet
+      //erase alien
+      return;
+   }
+
 
      method void run() {
       var char key;  // the key currently pressed by the user

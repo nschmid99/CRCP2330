@@ -1,30 +1,54 @@
 class Bullet{
-	field int x, y; // screen location of the square's top-left corner
-   field int r; // length of this square, in pixels
-   
+	field int x, y; // screen location of the bullet 
+   field int r; // radius of  bullet
+   field int data;
+   field List next;
 
-   /** Constructs a new square with a given location and size. */
-   constructor Bullet new(int Ax, int Ay, int Ar) {
+   /** Constructs a new bullet with a given location and size. */
+   /*constructor Bullet new(int Ax, int Ay, int Ar) {
       let x = Ax;
       let y = Ay;
       let r= Ar;
-      do draw();
+      return this;
+   }*/
+
+   constructor Bullet new(int bullet, List blt, int Ax, int Ay, int Ar){
+      let data=bullet;
+      let next = blt;
+      let x = Ax;
+      let y = Ay;
+      let r= Ar;
       return this;
    }
 
    /** Disposes this square. */
    method void dispose() {
+   if(~(next == null)){
+      do next.dispose();
+   }
       do Memory.deAlloc(this);
       return;
    }
 
    /** Draws the square on the screen. */
    method void draw() {
+   var List  current;
+   let current = this;
+
+   while(~(current==null)){
+      do current.getData();
       do Screen.setColor(true);
       do Screen.drawCircle(x, y, r);
+      do  current =current.getNext();
+      }
       return;
    }
 
+   method void erase(){
+      do Screen.setColor(false);
+      do Screen.drawCircle(x, y, r);
+      return;
+   }
    
    /** Moves the square up by 2 pixels. */
    method void moveUp() {
