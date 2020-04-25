@@ -4,6 +4,7 @@ class Spaceship {
    field int x;
    field int y; 
    field int size; 
+   field int inc;
    field Bullet  bullet;
 
    /** Constructs a new square with a given location and size. */
@@ -11,6 +12,7 @@ class Spaceship {
       let x = Nx;
       let y = Ny;
       let size = Nsize;
+      let inc=0;
       do draw();
       return this;
    }
@@ -21,7 +23,7 @@ class Spaceship {
    method void draw() {
       do Screen.setColor(true);
       do Screen.drawRectangle(x, y, x + size, y + size);
-      let bullet=Bullet.new(1,null,x+5,y+5,5);
+      
       return;
    }
 
@@ -31,28 +33,23 @@ class Spaceship {
    }
 
    method void shootBullet(){
+        do draw();
+   let bullet=Bullet.new(inc,null,x+5,y+5,5);
       do bullet.moveUp();
-      do Screen.setColor(true);
-      do Screen.drawRectangle(x, y, x + size, y + size);
+      do draw();
       return;
    }
 
-   method void newBullet(){
-      //if (shootBullet=true){
-      //create new instance of bullet
-      }
-      return
-   }
 
-   method  void checkBulletPost(){
+  /* method  void checkBulletPost(){
       //check bullet pos
-      return
+      return;
    }
 
    method void eraseBullet(){
       do bullet.erase();
       return;
-   }
+   }*/
 
    method void moveLeft() {
       if (x > 1) {
@@ -64,6 +61,7 @@ class Spaceship {
       }
       return;
    }
+   
 
    method void moveRight() {
       if ((x + size) < 510) {

@@ -13,17 +13,17 @@ class Bullet{
    }*/
 
    constructor Bullet new(int bullet, List blt, int Ax, int Ay, int Ar){
-      let data=bullet;
-      let next = blt;
-      let x = Ax;
-      let y = Ay;
-      let r= Ar;
-      return this;
+       let data = bullet;       // the identifiers car and cdr are used in 
+        let next = blt;       // memory of the Lisp programming language
+        let x=Ax;
+        let y=Ay;
+        let r=Ar;
+        return this;
    }
 
    /** Disposes this square. */
    method void dispose() {
-   if(~(next == null)){
+   if( ~(next = null)){
       do next.dispose();
    }
       do Memory.deAlloc(this);
@@ -32,17 +32,17 @@ class Bullet{
 
    /** Draws the square on the screen. */
    method void draw() {
-   var List  current;
-   let current = this;
+        var List current;    // initializes current to the first item
+        let current = this;  // of this list
+        while (~(current = null)) {
+              do current.getData();
+            do Screen.setColor(true);
+            do Screen.drawCircle(x, y, r);
+            let current = current.getNext();
+        }
+        return;
+    }
 
-   while(~(current==null)){
-      do current.getData();
-      do Screen.setColor(true);
-      do Screen.drawCircle(x, y, r);
-      do  current =current.getNext();
-      }
-      return;
-   }
 
    method void erase(){
       do Screen.setColor(false);
@@ -52,7 +52,7 @@ class Bullet{
    
    /** Moves the square up by 2 pixels. */
    method void moveUp() {
-      if (y > 8) {
+      if (y > 0) {
          do Screen.setColor(false);
          do Screen.drawCircle(x,y +1, r);
          let y = y - 2;
@@ -61,8 +61,6 @@ class Bullet{
       }
       return;
    }
-
-  
 
    
 }
