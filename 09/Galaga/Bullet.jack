@@ -42,7 +42,9 @@ class Bullet{
         }
         return;
     }
-
+method int getY(){
+   return y;
+}
 
    method void erase(){
       do Screen.setColor(false);
@@ -58,6 +60,7 @@ class Bullet{
          let y = y - 2;
          do Screen.setColor(true);
          do Screen.drawCircle(x, y-1, r);
+         do Sys.wait(10);
       }
       return;
    }

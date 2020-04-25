@@ -2,6 +2,12 @@ function Game.new 0
 push constant 10
 call Memory.alloc 1
 pop pointer 0
+push constant 10
+call Array.new 1
+pop this 1
+push pointer 0
+call Game.initAliens 1
+pop temp 0
 push constant 200
 push constant 100
 push constant 10
@@ -11,15 +17,69 @@ push constant 0
 pop this 9
 push pointer 0
 return
+function Game.initAliens 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+push constant 10
+lt
+not
+if-goto WHILE_END0
+push this 4
+push this 7
+push constant 10
+call Aliens.new 3
+pop local 0
+push local 1
+push this 1
+add
+push local 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 4
+push constant 26
+add
+pop this 4
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
 function Game.dispose 0
 push argument 0
 pop pointer 0
 push this 0
 call Spaceship.dispose 1
 pop temp 0
+call alien.dispose 0
+pop temp 0
 push pointer 0
 call Memory.deAlloc 1
 pop temp 0
+push constant 0
+return
+function Game.alienPos 0
+push argument 0
+pop pointer 0
+push this 1
+call Array.getY 1
+pop this 2
+push constant 0
+return
+function Game.bulletPos 0
+push argument 0
+pop pointer 0
+push this 0
+call Spaceship.getY 1
+pop this 3
 push constant 0
 return
 function Game.moveSpaceship 0
@@ -63,7 +123,30 @@ return
 function Game.killAlien 0
 push argument 0
 pop pointer 0
+push this 2
+push this 3
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 0
+call Spaceship.eraseBullet 1
+pop temp 0
+push this 1
+call Array.dispose 1
+pop temp 0
+goto IF_END0
+label IF_FALSE0
+push pointer 0
+call Game.run 1
+pop temp 0
+label IF_END0
 push constant 0
+return
+function Game.getY 0
+push argument 0
+pop pointer 0
+push this 7
 return
 function Game.run 2
 push argument 0
@@ -75,6 +158,9 @@ push local 1
 not
 not
 if-goto WHILE_END0
+push pointer 0
+call Game.killAlien 1
+pop temp 0
 label WHILE_EXP1
 push local 0
 push constant 0
@@ -117,7 +203,7 @@ push constant 4
 pop this 9
 label IF_FALSE2
 push local 0
-push constant 131
+push constant 32
 eq
 if-goto IF_TRUE3
 goto IF_FALSE3

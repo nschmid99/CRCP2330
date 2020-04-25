@@ -3,103 +3,55 @@ push constant 7
 call Memory.alloc 1
 pop pointer 0
 push argument 0
-pop this 1
-push argument 1
-pop this 2
-push argument 2
-pop this 3
-push argument 3
-pop this 4
-push pointer 0
-call Aliens.initializeAlien 1
-pop temp 0
-push pointer 0
-return
-function Aliens.initializeAlien 0
-push argument 0
-pop pointer 0
-push constant 0
-pop this 5
-push constant 20
-call Array.new 1
 pop this 0
+push argument 1
+pop this 1
+push argument 2
+pop this 2
 push pointer 0
-call Aliens.drawAlien 1
+call Aliens.draw 1
 pop temp 0
 push pointer 0
-call Aliens.moveL 1
-pop temp 0
-push constant 0
 return
-function Aliens.drawAlien 0
+function Aliens.draw 0
 push argument 0
 pop pointer 0
-label WHILE_EXP0
-push this 5
-push constant 512
-lt
+push constant 0
 not
-if-goto WHILE_END0
-push this 5
-push constant 256
-lt
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push this 5
+call Screen.setColor 1
+pop temp 0
 push this 0
+push this 1
+push this 0
+push this 2
 add
 push this 1
-push this 5
-add
 push this 2
-push this 3
-push this 5
 add
-push this 4
 call Screen.drawRectangle 4
 pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push this 5
-push constant 30
-add
-pop this 5
-label IF_FALSE0
-goto WHILE_EXP0
-label WHILE_END0
-push constant 0
-return
-function Aliens.moveL 0
-push argument 0
-pop pointer 0
-label WHILE_EXP0
-push this 1
-push constant 500
-gt
-not
-if-goto WHILE_END0
-push this 1
-push constant 5
-add
-pop this 1
-push this 3
-push constant 5
-add
-pop this 3
-push pointer 0
-call Aliens.drawAlien 1
-pop temp 0
-goto WHILE_EXP0
-label WHILE_END0
 push constant 0
 return
 function Aliens.dispose 0
 push argument 0
 pop pointer 0
-push pointer 0
-call Memory.deAlloc 1
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
 pop temp 0
 push constant 0
+return
+function Aliens.getY 0
+push argument 0
+pop pointer 0
+push this 4
 return

@@ -2,30 +2,56 @@ class Game{
 
 	field Spaceship spaceship; // the spaceship
 	//field Aliens alien; //the aliens
-	field int pos; //alien position
+  field Array aliens;
+	field int aPos; //alien position
+  field int bPos;
   field  int x, x2;
   field int length;
   field int  y,y2;
-  field int i,j;
+  
    field int direction; // the spaceships's current direction: 
                         // 0=none, 3=left, 4=right, 1=up(bullet)
 
    /** Constructs a new Square Game. */
    constructor Game new() {
-      let spaceship = Spaceship.new(200, 100, 10);
+   let aliens=Array.new(10);
+   do initAliens();
+      
      // let alien= Aliens.new (128,75,153.6,85);
+      let spaceship = Spaceship.new(200, 100, 10);
       let direction = 0;  // initial state is no movement
       return this;
    }
 
+ method void initAliens(){
+ var Aliens a;
+var int i;
+
+let i=0;
  
+ while(i<10){
+  let a=Aliens.new(x,y,10);
+  let aliens[i]=a;
+  let x=x+26.4;
+  let i=i+1;
+ }
+ return;
+ }
   method void dispose() {
       do spaceship.dispose();
-     // do alien.dispose();
+      do alien.dispose();
       do Memory.deAlloc(this);
       return;
    }
 
+   method void alienPos(){
+    let aPos=aliens.getY();
+    return;
+   }
+method void bulletPos(){
+    let bPos=spaceship.getY();
+    return;
+   }
    
    method void moveSpaceship() {
       if (direction = 3) { do spaceship.moveLeft(); }
@@ -36,19 +62,26 @@ class Game{
    }
 
    method void killAlien(){
-      //checkpos of bullet. if bullet=alien
-      //erase bullet
-      //erase alien
+      if(aPos=bPos){
+     do spaceship.eraseBullet();
+      do aliens.dispose();}
+      else{do run();
+    
+      }
       return;
    }
-
+method int getY(){
+   return y;
+}
 
      method void run() {
       var char key;  // the key currently pressed by the user
       var boolean exit;
       let exit = false;
+      
 
       while (~exit) {
+        do killAlien();
 
          // waits for a key to be pressed
          while (key = 0) {
@@ -59,7 +92,7 @@ class Game{
          if (key = 81)  { let exit = true; }     // q key
          if (key = 130) { let direction = 3; }   // left arrow
          if (key = 132) { let direction = 4; }   // right arrow
-         if (key = 131 ) { let direction =1;}
+         if (key = 32 ) { let direction =1;}
 
          // waits for the key to be released
          while (~(key = 0)) {

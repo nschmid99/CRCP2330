@@ -1,20 +1,44 @@
 class Aliens {
 
-   field Array aliens;
+   //field Array aliens;
    field int x;
    field int y;
+   field int size;
    field int x2;
    field int y2;
    field int i;
    field int j;
 
+constructor Aliens new(int Nx, int Ny, int Nsize){
+   let x=Nx;
+   let y=Ny;
+   let size=Nsize;
+   do draw();
+   return this;
+}
 
-   constructor Aliens new(int Nx, int Ny, int Nx2, int Ny2) {
+method void draw(){
+   do Screen.setColor(true);
+   do Screen.drawRectangle(x,y,x+size,y+size);
+   return;
+}
+
+method void dispose(){
+   do Screen.setColor(false);
+    do Screen.drawRectangle(x,y,x+size,y+size);
+   return;
+}
+
+
+
+
+ /*  constructor Aliens new(int Nx, int Ny, int Nx2, int Ny2) {
    let x = Nx;
       let y = Ny;
       let x2= Nx2;
       let y2=Ny2;
       do initializeAlien();
+      do drawAlien();
       
      
       return this;
@@ -25,28 +49,41 @@ method void initializeAlien(){
      
    let i=0;
    let aliens = Array.new(20);
-   do drawAlien();
-   do  moveL();
    return;
 }
 
 
-   /** Moves the square left by 2 pixels. */
    method void drawAlien() {
-   while(i<512){
+   
       if(i<256){
+         do Screen.setColor(true);
           let aliens[i]=Screen.drawRectangle(x+i, y,x2+i , y2);
           let i= i+30;
       }
-   }
       return;
    }
 
-   method void moveL(){
+   method void eraseAlien(){
+  
+      if(i<256){
+         do Screen.setColor(false);
+          let aliens[i]=Screen.drawRectangle(x+i, y,x2+i , y2);
+          let i= i+30;
+      }
+      return;
+
+   }*/
+
+   method int getY(){
+   return y2;
+}
+
+   /*method void moveL(){
    while(x>500){
    let x=x+5;
    let x2=x2+5;
-   do drawAlien();}
+   do drawAlien();
+   }
    return;
    }
 
@@ -54,6 +91,6 @@ method void initializeAlien(){
  method void dispose() {
   do Memory.deAlloc(this);
      return;
-   }
+   }*/
 }
 

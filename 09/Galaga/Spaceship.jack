@@ -3,8 +3,11 @@ class Spaceship {
 
    field int x;
    field int y; 
+   field int xb;
+   field int yb;
    field int size; 
    field int inc;
+   field int bPos;
    field Bullet  bullet;
 
    /** Constructs a new square with a given location and size. */
@@ -35,21 +38,18 @@ class Spaceship {
    method void shootBullet(){
         do draw();
    let bullet=Bullet.new(inc,null,x+5,y+5,5);
-      do bullet.moveUp();
+   do bullet.moveUp();
       do draw();
       return;
    }
-
-
-  /* method  void checkBulletPost(){
-      //check bullet pos
-      return;
-   }
+method int getY(){
+   return y;
+}
 
    method void eraseBullet(){
       do bullet.erase();
-      return;
-   }*/
+     return;
+   }
 
    method void moveLeft() {
       if (x > 1) {
