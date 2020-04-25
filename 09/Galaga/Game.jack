@@ -12,31 +12,31 @@ class Game{
    field int direction; // the spaceships's current direction: 
                         // 0=none, 3=left, 4=right, 1=up(bullet)
 
-   /** Constructs a new Square Game. */
+   /** Constructs a new  Game. */
    constructor Game new() {
-   let aliens=Array.new(10);
-   do initAliens();
-      
-     // let alien= Aliens.new (128,75,153.6,85);
-      let spaceship = Spaceship.new(200, 100, 10);
+      let aliens=Array.new(10);
+      do initAliens();  
+      let spaceship = Spaceship.new(200, 200, 10);
       let direction = 0;  // initial state is no movement
       return this;
    }
 
- method void initAliens(){
- var Aliens a;
-var int i;
-
-let i=0;
+ method void initAliens(){ //sets up aliens in row  across the screen
+  var Aliens a;
+  var int i;
+  let x=116;  //starting point x
+  let y= 20;  //starting point y
+  let i=0;
  
  while(i<10){
   let a=Aliens.new(x,y,10);
   let aliens[i]=a;
-  let x=x+26.4;
+  let x=x+26.4; //distance between each alien
   let i=i+1;
  }
  return;
  }
+
   method void dispose() {
       do spaceship.dispose();
       do alien.dispose();
@@ -44,12 +44,12 @@ let i=0;
       return;
    }
 
-   method void alienPos(){
+   method void alienPos(){    //gets Y position of alien
     let aPos=aliens.getY();
     return;
    }
 method void bulletPos(){
-    let bPos=spaceship.getY();
+    let bPos=spaceship.getY(); //gets Y position of bullet
     return;
    }
    
@@ -57,22 +57,20 @@ method void bulletPos(){
       if (direction = 3) { do spaceship.moveLeft(); }
       if (direction = 4) { do spaceship.moveRight(); }
       if (direction = 1) { do spaceship.shootBullet(); }
+      //if(direction = 2) {do killAlien();}   //to check if issue was alien or bullet
       do Sys.wait(10);  // delays the next movement
+  
       return;
    }
 
    method void killAlien(){
-      if(aPos=bPos){
-     do spaceship.eraseBullet();
-      do aliens.dispose();}
-      else{do run();
-    
+if(aliens.getY()=spaceship.getYBul()){   //if the bullet hits the alien, AKA they have the same Y vale then erase the alien
+      do aliens.dispose();
+      //do Output.printString("Is Dead");   //used to test if method  was running
       }
       return;
    }
-method int getY(){
-   return y;
-}
+
 
      method void run() {
       var char key;  // the key currently pressed by the user
@@ -81,23 +79,26 @@ method int getY(){
       
 
       while (~exit) {
-        do killAlien();
+        
 
          // waits for a key to be pressed
          while (key = 0) {
             let key = Keyboard.keyPressed();
             do moveSpaceship();
+            do killAlien();
          }
 
          if (key = 81)  { let exit = true; }     // q key
-         if (key = 130) { let direction = 3; }   // left arrow
-         if (key = 132) { let direction = 4; }   // right arrow
-         if (key = 32 ) { let direction =1;}
+         if (key = 130) { let direction = 3; }   // left arrow to move
+         if (key = 132) { let direction = 4; }   // right arrow to move
+         if (key = 32 ) { let direction =1;}     //spacebar to shoot
+         //if(key=131){let direction=2;}          //to check if issue was alien or bullet
 
          // waits for the key to be released
          while (~(key = 0)) {
             let key = Keyboard.keyPressed();
             do moveSpaceship();
+            do killAlien();
          }
      }  
      return;

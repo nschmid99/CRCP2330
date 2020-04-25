@@ -4,34 +4,28 @@ class Bullet{
    field int data;
    field List next;
 
-   /** Constructs a new bullet with a given location and size. */
-   /*constructor Bullet new(int Ax, int Ay, int Ar) {
-      let x = Ax;
-      let y = Ay;
-      let r= Ar;
-      return this;
-   }*/
 
-   constructor Bullet new(int bullet, List blt, int Ax, int Ay, int Ar){
-       let data = bullet;       // the identifiers car and cdr are used in 
-        let next = blt;       // memory of the Lisp programming language
+   constructor Bullet new(int bullet, List blt, int Ax, int Ay, int Ar){    //constructs list
+       let data = bullet;      
+        let next = blt;     
         let x=Ax;
         let y=Ay;
         let r=Ar;
         return this;
    }
 
-   /** Disposes this square. */
-   method void dispose() {
+   method void dispose() {    //disposes bullet
    if( ~(next = null)){
+      do Screen.setColor(false);
+      do Screen.drawCircle(x, y, r);
       do next.dispose();
+
    }
       do Memory.deAlloc(this);
       return;
    }
 
-   /** Draws the square on the screen. */
-   method void draw() {
+   method void draw() { //draws bullet and puts each one in a segment of the list
         var List current;    // initializes current to the first item
         let current = this;  // of this list
         while (~(current = null)) {
@@ -42,18 +36,14 @@ class Bullet{
         }
         return;
     }
-method int getY(){
+
+method int getY(){    //gets  ypos of bullet
    return y;
 }
 
-   method void erase(){
-      do Screen.setColor(false);
-      do Screen.drawCircle(x, y, r);
-      return;
-   }
    
-   /** Moves the square up by 2 pixels. */
-   method void moveUp() {
+
+   method void moveUp() {   //moves bullet up when shot
       if (y > 0) {
          do Screen.setColor(false);
          do Screen.drawCircle(x,y +1, r);

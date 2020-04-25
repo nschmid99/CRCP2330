@@ -24,6 +24,14 @@ not
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 2
+call Screen.drawCircle 3
+pop temp 0
 push this 4
 call List.dispose 1
 pop temp 0
@@ -68,19 +76,6 @@ function Bullet.getY 0
 push argument 0
 pop pointer 0
 push this 1
-return
-function Bullet.erase 0
-push argument 0
-pop pointer 0
-push constant 0
-call Screen.setColor 1
-pop temp 0
-push this 0
-push this 1
-push this 2
-call Screen.drawCircle 3
-pop temp 0
-push constant 0
 return
 function Bullet.moveUp 0
 push argument 0

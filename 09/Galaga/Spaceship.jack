@@ -10,7 +10,6 @@ class Spaceship {
    field int bPos;
    field Bullet  bullet;
 
-   /** Constructs a new square with a given location and size. */
    constructor Spaceship new(int Nx, int Ny, int Nsize) {
       let x = Nx;
       let y = Ny;
@@ -21,8 +20,6 @@ class Spaceship {
    }
 
   
-
-   /** Draws the square on the screen. */
    method void draw() {
       do Screen.setColor(true);
       do Screen.drawRectangle(x, y, x + size, y + size);
@@ -35,23 +32,27 @@ class Spaceship {
       return;
    }
 
-   method void shootBullet(){
-        do draw();
-   let bullet=Bullet.new(inc,null,x+5,y+5,5);
-   do bullet.moveUp();
+   method void shootBullet(){    //bullet needs to have same pos as spaceship
+      do draw();
+      let bullet=Bullet.new(inc+1,inc,x+5,y+5,5);
+      do bullet.moveUp();
       do draw();
       return;
    }
-method int getY(){
+method int getY(){ //get y pos  to match with alien
    return y;
 }
 
-   method void eraseBullet(){
+method int getYBul(){ //get  y pos of bullet
+   do bullet.getY();
+}
+
+ /*  method void eraseBullet(){
       do bullet.erase();
      return;
-   }
+   }*/
 
-   method void moveLeft() {
+   method void moveLeft() {   //moves spaceship L
       if (x > 1) {
          do Screen.setColor(false);
          do Screen.drawRectangle((x + size) - 1, y, x + size, y + size);
@@ -63,7 +64,7 @@ method int getY(){
    }
    
 
-   method void moveRight() {
+   method void moveRight() {  //moves spaceship R
       if ((x + size) < 510) {
          do Screen.setColor(false);
          do Screen.drawRectangle(x, y, x + 1, y + size);
