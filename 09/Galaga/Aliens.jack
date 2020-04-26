@@ -3,12 +3,15 @@ class Aliens {
    field int x;
    field int y;
    field int size;
-   field 
+   field int dead;
+   field int pos;
+   field int direction;
 
 constructor Aliens new(int Nx, int Ny, int Nsize){
    let x=Nx;
    let y=Ny;
    let size=Nsize;
+   let dead=0;
    do draw();
    return this;
 }
@@ -22,9 +25,10 @@ method void draw(){   //draws aliens
 }
 
 method void dispose(){    //erases alien from screen
+    let dead=1;
    do Screen.setColor(false);
     do Screen.drawRectangle(x,y,x+size,y+size);
-    do Screen.setCColor(true);
+    do Screen.setColor(true);
    return;
 }
 
@@ -36,21 +40,42 @@ method int getY(){    //get y to check if equal to bullet pos so alien can die
   return y;
 }
 
+method int getPos(){
+  return pos;
+}
+
+method int deadAlien(){
+  return dead;
+}
+
+method int getDir(){
+  return direction;
+}
+
+method void chngDirection(){
+  if(direction=0){
+  let  direction=1;
+  }
+  else{
+  let direction=0;
+  }
+  return;
+}
 
 method void moveLeft() {  //moves alien left. currently not called
-      if (x > 1) {
+      if (dead=0) {
          do Screen.setColor(false);
-         do Screen.drawRectangle((x - 1, y, x + size, y + size);
+         do Screen.drawRectangle(x - 1, y, x + size, y + size);
          let x = x - 2;
          do Screen.setColor(true);
-         do Screen.drawRectangle(x, y, x +size+ 1, y + size);
+         do Screen.drawRectangle(x, y, (x +size) + 1, y + size);
       }
       return;
    }
    
 
    method void moveRight() {    //moves alien right. currently not called
-      if ((x + size) < 510) {
+      if (dead=0) {
          do Screen.setColor(false);
          do Screen.drawRectangle(x, y, x + 1, y + size);
          let x = x + 2;

@@ -55,11 +55,97 @@ method void bulletPos(){
     return;
    }*/
    
+method void moveAlien(){
+  var Aliens al;
+  var Aliens temp;
+  var int aRight, aLeft;
+  var int j;
+  var int d;
+  var int died;
+  var int found;
+  var Aliens alienRightmost, alienrx;
+  var  Aliens alienLeftmost, alienlx;
+
+let j=0;
+let found=0;
+let aRight=0;
+let aLeft=0;
+
+while((j<10)&~found){  //have to find the leftmost alien for colision  detection
+  let temp=aliens[j];
+  let died=temp.deadAlien();  //alien might have been shot and "died" so have to check
+  if (died=0){
+  let alienLeftmost=temp;
+  let found=1;
+  }
+  let j=j+1;    //if alien did die check next alien
+}
+
+let j=9;
+let found=0;
+while((j>-1)&~found){   //does same thing for rightmost alien
+  let temp=aliens[j];
+  let died=temp.deadAlien();
+  if (died=0){
+  let alienRightmost=temp;
+  let found=1;
+  }
+  let j=j-1;
+}
+let alienrx=alienRightmost.getX();
+let alienlx=alienLeftmost.getX();
+let d=alienRightmost.getDir();
+
+if(alienrx>480){
+  let aLeft=1;
+}
+if(alienlx<0){
+  let aRight=1;
+}
+  if(d=0){
+    if(aRight=0){
+    let j=0;
+    while(j<10){
+    let al=aliens[j];
+    do al.moveRight();
+    let j=j+1;
+    }}
+    else{
+    if(aRight=0){
+    let j=0;
+    while(j<10){
+    let al=aliens[j];
+    do al.moveLeft();
+    do al.chngDirection();
+    let j=j+1;
+    }
+  }}}
+    if(d=1){
+    if(aLeft=0){
+    let j=0;
+    while(j<10){
+    let al=aliens[j];
+    do al.moveLeft();
+    let j=j+1;
+    }}
+     else{
+    let j=0;
+    while(j<10){
+    let al=aliens[j];
+    do al.moveRight();
+    do al.chngDirection();
+    let j=j+1;
+    }
+    }
+
+  }
+  return;
+}
+
    method void moveSpaceship() {
       if (direction = 3) { do spaceship.moveLeft(); }
       if (direction = 4) { do spaceship.moveRight(); }
       if (direction = 1) { do spaceship.shootBullet(); }
-      //if(direction = 2) {do killAlien();}   //to check if issue was alien or bullet
       do Sys.wait(10);  // delays the next movement
   
       return;
@@ -82,17 +168,24 @@ method void bulletPos(){
 
      method void run() {
       var char key;  // the key currently pressed by the user
+      var int time;
+      var int timemod;
       var boolean exit;
       let exit = false;
+
+
       
 
       while (~exit) {
-        
+        let time=time+1;
 
          // waits for a key to be pressed
          while (key = 0) {
             let key = Keyboard.keyPressed();
             do moveSpaceship();
+            if(time>0){
+            do moveAlien();
+            let time=time+1;} 
             //do killAlien();
          }
 
@@ -100,12 +193,15 @@ method void bulletPos(){
          if (key = 130) { let direction = 3; }   // left arrow to move
          if (key = 132) { let direction = 4; }   // right arrow to move
          if (key = 32 ) { let direction =1;}     //spacebar to shoot
-         //if(key=131){let direction=2;}          //to check if issue was alien or bullet
 
          // waits for the key to be released
          while (~(key = 0)) {
+         let time=time+1;
             let key = Keyboard.keyPressed();
             do moveSpaceship();
+            if(time>0){
+            do moveAlien();
+            let time=time+1;}
             //do killAlien();
          }
      }  

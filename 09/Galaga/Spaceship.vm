@@ -1,5 +1,5 @@
 function Spaceship.new 0
-push constant 8
+push constant 9
 call Memory.alloc 1
 pop pointer 0
 push argument 0
@@ -45,34 +45,32 @@ return
 function Spaceship.shootBullet 0
 push argument 0
 pop pointer 0
-push pointer 0
-call Spaceship.draw 1
-pop temp 0
+push this 0
+push constant 5
+add
+pop this 6
+push this 1
+push constant 5
+add
+pop this 7
 push this 5
 push constant 1
 add
 push this 5
-push this 0
-push constant 5
-add
-push this 1
-push constant 5
-add
+push this 6
+push this 7
 push constant 5
 call Bullet.new 5
-pop this 7
-push this 7
+pop this 8
+push this 8
 call Bullet.moveUp 1
-pop temp 0
-push pointer 0
-call Spaceship.draw 1
 pop temp 0
 push constant 0
 return
-function Spaceship.getY 0
+function Spaceship.getBullet 0
 push argument 0
 pop pointer 0
-push this 1
+push this 8
 return
 function Spaceship.moveLeft 0
 push argument 0
