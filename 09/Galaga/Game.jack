@@ -39,19 +39,21 @@ class Game{
 
   method void dispose() {
       do spaceship.dispose();
-      do alien.dispose();
+      do aliens.dispose();
       do Memory.deAlloc(this);
       return;
    }
 
-   method void alienPos(){    //gets Y position of alien
-    let aPos=aliens.getY();
+   /*method void alienPos(){    //gets Y position of alien
+   
+    let aPos=a.getY();
+    
     return;
    }
 method void bulletPos(){
     let bPos=spaceship.getY(); //gets Y position of bullet
     return;
-   }
+   }*/
    
    method void moveSpaceship() {
       if (direction = 3) { do spaceship.moveLeft(); }
@@ -63,13 +65,19 @@ method void bulletPos(){
       return;
    }
 
-   method void killAlien(){
-if(aliens.getY()=spaceship.getYBul()){   //if the bullet hits the alien, AKA they have the same Y vale then erase the alien
+   
+
+   /*method void killAlien(){
+  if(aPos=bPos){   //if the bullet hits the alien, AKA they have the same Y vale then erase the alien
       do aliens.dispose();
       //do Output.printString("Is Dead");   //used to test if method  was running
+       
       }
+ 
+ }
+
       return;
-   }
+   }*/
 
 
      method void run() {
@@ -85,7 +93,7 @@ if(aliens.getY()=spaceship.getYBul()){   //if the bullet hits the alien, AKA the
          while (key = 0) {
             let key = Keyboard.keyPressed();
             do moveSpaceship();
-            do killAlien();
+            //do killAlien();
          }
 
          if (key = 81)  { let exit = true; }     // q key
@@ -98,7 +106,7 @@ if(aliens.getY()=spaceship.getYBul()){   //if the bullet hits the alien, AKA the
          while (~(key = 0)) {
             let key = Keyboard.keyPressed();
             do moveSpaceship();
-            do killAlien();
+            //do killAlien();
          }
      }  
      return;

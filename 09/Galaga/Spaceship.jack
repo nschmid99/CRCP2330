@@ -7,8 +7,9 @@ class Spaceship {
    field int yb;
    field int size; 
    field int inc;
-   field int bPos;
-   field Bullet  bullet;
+   field int bPosx;
+   field int bPosy;
+   field Bullet bullet;
 
    constructor Spaceship new(int Nx, int Ny, int Nsize) {
       let x = Nx;
@@ -33,24 +34,16 @@ class Spaceship {
    }
 
    method void shootBullet(){    //bullet needs to have same pos as spaceship
-      do draw();
-      let bullet=Bullet.new(inc+1,inc,x+5,y+5,5);
+      let bPosx=x+5;
+      let bPosy=y+5;
+      let bullet=Bullet.new(inc+1,inc,bPosx,bPosy,5);
       do bullet.moveUp();
-      do draw();
       return;
    }
-method int getY(){ //get y pos  to match with alien
-   return y;
-}
 
-method int getYBul(){ //get  y pos of bullet
-   do bullet.getY();
-}
-
- /*  method void eraseBullet(){
-      do bullet.erase();
-     return;
-   }*/
+   method Bullet getBullet(){
+      return bullet;
+   }
 
    method void moveLeft() {   //moves spaceship L
       if (x > 1) {
