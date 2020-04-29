@@ -173,16 +173,16 @@ if-goto IF_TRUE2
 goto IF_FALSE2
 label IF_TRUE2
 push constant 1
-pop local 3
+pop local 2
 label IF_FALSE2
 push local 11
-push constant 0
+push constant 30
 lt
 if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
 push constant 1
-pop local 2
+pop local 3
 label IF_FALSE3
 push local 5
 push constant 0
@@ -222,7 +222,7 @@ label WHILE_END2
 goto IF_END5
 label IF_FALSE5
 push local 2
-push constant 0
+push constant 1
 eq
 if-goto IF_TRUE6
 goto IF_FALSE6
@@ -293,6 +293,12 @@ goto WHILE_EXP4
 label WHILE_END4
 goto IF_END8
 label IF_FALSE8
+push local 3
+push constant 1
+eq
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
 push constant 0
 pop local 4
 label WHILE_EXP5
@@ -319,6 +325,7 @@ add
 pop local 4
 goto WHILE_EXP5
 label WHILE_END5
+label IF_FALSE9
 label IF_END8
 label IF_FALSE7
 push constant 0
