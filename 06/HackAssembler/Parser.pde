@@ -74,7 +74,7 @@ void dest(String temp){
 //comp, return string 28 posibilities
 void comp(String temp){
   //split temp. first 3 # are 1 4-10 are comp 11-13 are dest 14-16 are jump
-  int a; int c1; int c2; int c3; int c4; int c5; int c6;
+int c1; int c2; int c3; int c4; int c5; int c6;
   //check first number after 1. 
   if(temp=="0"){
     c1=1; c2=0; c3=1; c4=0; c5=1; c6=0;
@@ -132,7 +132,31 @@ void comp(String temp){
   }
 }
 //jump, return string
-void jump(){
-
+void jump(String temp){
+   int j1; int j2; int j3;
+  if( temp=="null"){
+  j1=0; j2=0; j3=0;
+  }
+  else if( temp=="JGT"){
+  j1=0; j2=0; j3=1;
+  }
+  else if(temp=="JEQ"){
+  j1=0; j2=1; j3=0;
+  }
+ else if(temp=="JGE"){
+  j1=0; j2=1; j3=1;
+  }
+  else if( temp=="JLT"){
+  j1=1; j2=0; j3=0;
+  }
+  else if(temp=="JNE"){
+  j1=1; j2=0; j3=1;
+  }
+  else if(temp=="JLE"){
+  j1=1; j2=1; j3=0;
+  }
+  else if(temp=="JMP"){
+  j1=1; j2=1; j3=1;
+  }
 }
 }
