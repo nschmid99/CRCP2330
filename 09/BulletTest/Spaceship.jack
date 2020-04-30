@@ -1,0 +1,63 @@
+class Spaceship {
+//spaceship needs ability to shoot at aliens and to move. if shot hits aliens, add points to highscore
+
+   field int x;
+   field int y; 
+   field int xb;
+   field int yb;
+   field int size; 
+   field int inc;
+   field int bPosx;
+   field int bPosy;
+   field int bulletx;
+   field int bullety;
+   field Bullet bullet;
+
+   constructor Spaceship new(int Nx, int Ny, int Nsize) {
+      let x = Nx;
+      let y = Ny;
+      let size = Nsize;
+      let inc=0;
+      let bPosx=x+5;
+      let bPosy=y+5;
+            let bullet=Bullet.new(bPosx,bPosy,5);
+      do draw();
+      return this;
+   }
+
+  
+   method void draw() {
+      do Screen.setColor(true);
+      do Screen.drawRectangle(x, y, x + size, y + size);
+
+      
+      return;
+   }
+
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+
+   method int bulletposx(){
+   let bulletx=bullet.bulletX();
+   return bulletx;
+   }
+
+
+   method int bulletposy(){
+   let bullety=bullet.bulletY();
+   return bullety;
+   }
+
+   method void shootBullet(){    //bullet needs to have same pos as spaceship
+      
+       do bullet.moveUp();
+       let inc=inc+1;
+     
+      return;
+   }
+
+   
+  
+}

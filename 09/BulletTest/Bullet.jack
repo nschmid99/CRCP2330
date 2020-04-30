@@ -1,0 +1,50 @@
+class Bullet{
+	field int x, y; // screen location of the bullet 
+   field int r; // radius of  bullet
+   
+   constructor Bullet new(int Ax, int Ay, int Ar){    //constructs list
+       
+        let x=Ax;
+        let y=Ay;
+        let r=Ar;
+        return this;
+   }
+
+   method void dispose() {    //disposes bullet
+
+      do Screen.setColor(false);
+      do Screen.drawCircle(x, y,r);
+      do Memory.deAlloc(this);
+      return;
+   }
+
+   method void draw() { //draws bullet and puts each one in a segment of the list
+        
+            do Screen.setColor(true);
+            do Screen.drawCircle(x, y, r);
+        return;
+    }
+
+    method int bulletX(){
+    return x;
+    }
+
+    method int bulletY(){
+    return y;
+    }
+
+
+   method void moveUp() {   //moves bullet up when shot
+      if (y > 10) {
+         do Screen.setColor(false);
+         do Screen.drawCircle(x, (y + r) - 1,r);
+         let y = y - 2;
+         do Screen.setColor(true);
+         do Screen.drawCircle(x, y+1, r);
+        do Sys.wait(5);
+      }
+      return;
+   }
+
+   
+}
