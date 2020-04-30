@@ -67,10 +67,11 @@ call Bullet.moveUp 1
 pop temp 0
 push constant 0
 return
-function Spaceship.getBullet 0
+function Spaceship.getBulletY 0
 push argument 0
 pop pointer 0
 push this 8
+call Bullet.getY 1
 return
 function Spaceship.moveLeft 0
 push argument 0

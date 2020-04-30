@@ -98,7 +98,7 @@ call Screen.drawCircle 3
 pop temp 0
 push this 1
 push constant 2
-sub
+add
 pop this 1
 push constant 0
 not
@@ -110,9 +110,6 @@ push constant 1
 add
 push this 2
 call Screen.drawCircle 3
-pop temp 0
-push constant 10
-call Sys.wait 1
 pop temp 0
 label IF_FALSE0
 push constant 0

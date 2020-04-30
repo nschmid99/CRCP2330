@@ -47,10 +47,10 @@ method int getY(){    //gets  ypos of bullet
       if (y > 1) {
          do Screen.setColor(false);
          do Screen.drawCircle(x,y -1, r);
-         let y = y - 2;
+         let y = y + 2;
          do Screen.setColor(true);
          do Screen.drawCircle(x, y+1, r);
-         do Sys.wait(10);
+         //do Sys.wait(10);
       }
       return;
    }

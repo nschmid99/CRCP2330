@@ -41,8 +41,8 @@ class Spaceship {
       return;
    }
 
-   method Bullet getBullet(){
-      return bullet;
+   method Bullet getBulletY(){
+      return bullet.getY();
    }
 
    method void moveLeft() {   //moves spaceship L

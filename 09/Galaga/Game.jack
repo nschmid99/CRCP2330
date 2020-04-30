@@ -44,17 +44,6 @@ class Game{
       return;
    }
 
-   /*method void alienPos(){    //gets Y position of alien
-   
-    let aPos=a.getY();
-    
-    return;
-   }
-method void bulletPos(){
-    let bPos=spaceship.getY(); //gets Y position of bullet
-    return;
-   }*/
-   
 method void moveAlien(){
   var Aliens al;
   var Aliens temp;
@@ -75,7 +64,7 @@ while((j<10)&~collide){  //have to find the leftmost alien for colision  detecti
   let temp=aliens[j];
   let died=temp.deadAlien();  //alien might have been shot and "died" so have to check
   if (died=0){
-  let alienLeftmost=temp;
+  let alienLeftmost=temp;   
   let collide=1;
   }
   let j=j+1;    //if alien did die check next alien
@@ -92,65 +81,78 @@ while((j>-1)&~collide){   //does same thing for rightmost alien
   }
   let j=j-1;
 }
-let alienrx=alienRightmost.getX();
-let alienlx=alienLeftmost.getX();
-let d=alienRightmost.getDir();
 
-if(alienrx>480){
+let alienrx=alienRightmost.getX();    //sets rightmost alienX pos to a variable
+let alienlx=alienLeftmost.getX();   //sets leftmost alienX pos to a variable
+let d=alienRightmost.getDir();      //doesnt matter if using L or R
+
+if(alienrx>480){    //right boundary
   let aRight=1;
 }
-if(alienlx<30){
+if(alienlx<30){    //left boundary
   let aLeft=1;
 }
-  if(d=0){
-    if(aRight=0){
+
+if(d=0){    //0 goes right
+  if(aRight=0){
     let j=0;
-    while(j<10){
-    let al=aliens[j];
-    do al.moveRight();
-    let j=j+1;
-      }
+      while(j<10){
+      let al=aliens[j];
+      do al.moveRight();
+      let j=j+1;
+        }
     }
-    else{
+  else{     //change direction
     if(aRight=1){
     let j=0;
-    while(j<10){
-    let al=aliens[j];
-    do al.moveLeft();
-    do al.chngDirection();
-    let j=j+1;
-        }
+      while(j<10){
+      let al=aliens[j];
+      do al.moveLeft();
+      do al.chngDirection();    //changes d from 0 to 1
+      let j=j+1;
+          }
       }
     }
   }
     
-    if(d=1){
-    if(aLeft=0){
-    let j=0;
+if(d=1){      //1 goes left
+  if(aLeft=0){
+  let j=0;
     while(j<10){
     let al=aliens[j];
     do al.moveLeft();
     let j=j+1;
-    }}
-     else{
-     if(aLeft=1){
-    let j=0;
-    while(j<10){
-    let al=aliens[j];
-    do al.moveRight();
-    do al.chngDirection();
-    let j=j+1;
+      }
     }
-    }}
+  else{    //change direction
+    if(aLeft=1){
+    let j=0;
+      while(j<10){
+      let al=aliens[j];
+      do al.moveRight();
+      do al.chngDirection();
+      let j=j+1;
+        }
+      }
+    }
 
   }
   return;
 }
 
    method void moveSpaceship() {
+   var int k;
       if (direction = 3) { do spaceship.moveLeft(); }
       if (direction = 4) { do spaceship.moveRight(); }
-      if (direction = 1) { do spaceship.shootBullet(); }
+      if (direction = 1) {
+      let k=0;
+      while(k<10){
+      //do spaceship.getBulletY();
+       do spaceship.shootBullet(); 
+       let k=k+1;
+      }
+
+      }
       do Sys.wait(10);  // delays the next movement
   
       return;
