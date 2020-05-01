@@ -132,31 +132,35 @@ int c1; int c2; int c3; int c4; int c5; int c6;
   }
 }
 //jump, return string
-void jump(String temp){
-   int j1; int j2; int j3;
-  if( temp=="null"){
+int jump(int j1, int j2, int j3){
+   
+  if( current=="null"){
   j1=0; j2=0; j3=0;
   }
-  else if( temp=="JGT"){
+  else if( current=="JGT"){
   j1=0; j2=0; j3=1;
   }
-  else if(temp=="JEQ"){
+  else if(current=="JEQ"){
   j1=0; j2=1; j3=0;
   }
- else if(temp=="JGE"){
+ else if(current=="JGE"){
   j1=0; j2=1; j3=1;
   }
-  else if( temp=="JLT"){
+  else if( current=="JLT"){
   j1=1; j2=0; j3=0;
   }
-  else if(temp=="JNE"){
+  else if(current=="JNE"){
   j1=1; j2=0; j3=1;
   }
-  else if(temp=="JLE"){
+  else if(current=="JLE"){
   j1=1; j2=1; j3=0;
   }
-  else if(temp=="JMP"){
+  else if(current=="JMP"){
   j1=1; j2=1; j3=1;
   }
+  return j1;
+  return j2;
+  return j3;
 }
+
 }
