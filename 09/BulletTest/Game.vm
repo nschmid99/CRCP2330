@@ -1,5 +1,5 @@
 function Game.new 0
-push constant 11
+push constant 12
 call Memory.alloc 1
 pop pointer 0
 push constant 10
@@ -13,6 +13,8 @@ push constant 200
 push constant 10
 call Spaceship.new 3
 pop this 0
+push constant 0
+pop this 11
 push constant 0
 pop this 10
 push pointer 0
@@ -66,6 +68,14 @@ pop this 3
 push this 0
 call Spaceship.bulletposy 1
 pop this 4
+push constant 0
+return
+function Game.shoot 0
+push argument 0
+pop pointer 0
+push this 0
+call Spaceship.shootBullet 1
+pop temp 0
 push constant 0
 return
 function Game.sortArray 6
@@ -129,6 +139,14 @@ pop local 1
 push local 1
 call Aliens.dispose 1
 pop temp 0
+push this 0
+call Spaceship.eraseBullet 1
+pop temp 0
+push this 0
+call Spaceship.rstBullet 1
+pop temp 0
+push constant 0
+pop this 10
 goto IF_END0
 label IF_FALSE0
 push this 4
@@ -188,61 +206,70 @@ not
 if-goto WHILE_END1
 call Keyboard.keyPressed 0
 pop local 0
-push this 10
+push this 11
 push constant 1
 eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-push this 0
-call Spaceship.shootBullet 1
+push this 10
+push constant 1
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+call Game.shoot 1
 pop temp 0
+label IF_FALSE1
+label IF_FALSE0
 push pointer 0
 call Game.bulletPosCheck 1
 pop temp 0
 push pointer 0
 call Game.sortArray 1
 pop temp 0
-label IF_FALSE0
 goto WHILE_EXP1
 label WHILE_END1
 push local 0
 push constant 81
 eq
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push constant 0
-not
-pop local 3
-label IF_FALSE1
-push local 0
-push constant 130
-eq
 if-goto IF_TRUE2
 goto IF_FALSE2
 label IF_TRUE2
-push constant 3
-pop this 10
+push constant 0
+not
+pop local 3
 label IF_FALSE2
 push local 0
-push constant 132
+push constant 130
 eq
 if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
-push constant 4
-pop this 10
+push constant 3
+pop this 11
 label IF_FALSE3
 push local 0
-push constant 32
+push constant 132
 eq
 if-goto IF_TRUE4
 goto IF_FALSE4
 label IF_TRUE4
+push constant 4
+pop this 11
+label IF_FALSE4
+push local 0
+push constant 32
+eq
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push constant 1
+pop this 11
 push constant 1
 pop this 10
-label IF_FALSE4
+label IF_FALSE5
 label WHILE_EXP2
 push local 0
 push constant 0
@@ -252,16 +279,23 @@ not
 if-goto WHILE_END2
 call Keyboard.keyPressed 0
 pop local 0
+push this 11
+push constant 1
+eq
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
 push this 10
 push constant 1
 eq
-if-goto IF_TRUE5
-goto IF_FALSE5
-label IF_TRUE5
-push this 0
-call Spaceship.shootBullet 1
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push pointer 0
+call Game.shoot 1
 pop temp 0
-label IF_FALSE5
+label IF_FALSE7
+label IF_FALSE6
 push pointer 0
 call Game.bulletPosCheck 1
 pop temp 0

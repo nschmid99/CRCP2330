@@ -33,9 +33,22 @@ class Bullet{
     return y;
     }
 
+    method void erase(){
+      do Screen.setColor(false);
+            do Screen.drawCircle(x, y, r);
+        return;
+    }
+
+    method int resetBullet(int Ax, int Ay, int Ar){
+      let x=Ax;
+      let y=Ay;
+      let r=Ar;
+      return 0;
+    }
 
    method void moveUp() {   //moves bullet up when shot
       if (y > 10) {
+      do bulletY();
          do Screen.setColor(false);
          do Screen.drawCircle(x, (y + r) - 1,r);
          let y = y - 2;

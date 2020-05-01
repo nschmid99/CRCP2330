@@ -37,8 +37,6 @@ return
 function Aliens.dispose 0
 push argument 0
 pop pointer 0
-push constant 1
-pop this 3
 push constant 0
 call Screen.setColor 1
 pop temp 0

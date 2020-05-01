@@ -23,7 +23,6 @@ method void draw(){   //draws aliens
 }
 
 method void dispose(){    //erases alien from screen
-    let dead=1;
    do Screen.setColor(false);
     do Screen.drawRectangle(x,y,x+size,y+size);
     do Screen.setColor(true);

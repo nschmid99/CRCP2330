@@ -50,10 +50,20 @@ class Spaceship {
    return bullety;
    }
 
+   method void rstBullet(){
+   do bullet.resetBullet(bPosx,bPosy,5);
+   return;
+   }
+
+   method void eraseBullet(){
+      do bullet.erase();
+      return;
+   }
+
    method void shootBullet(){    //bullet needs to have same pos as spaceship
       do bulletposy();
        do bullet.moveUp();
-       let inc=inc+1;
+       //let inc=inc+1;
      
       return;
    }

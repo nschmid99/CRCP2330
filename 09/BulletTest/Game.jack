@@ -11,6 +11,7 @@ class Game{
   field int length;
   field int  y;
   field int y2;
+  field int go;
   
    field int direction; // the spaceships's current direction: 
                         // 0=none, 3=left, 4=right, 1=up(bullet)
@@ -21,6 +22,7 @@ class Game{
       do initAliens(); 
       let spaceship = Spaceship.new(200, 200, 10);
       let direction = 0;  // initial state is no movement
+      let go=0;
       return this;
    }
 
@@ -46,6 +48,12 @@ class Game{
  return;
  }
 
+method void shoot(){
+do spaceship.shootBullet();
+//let go=0;
+  return;
+}
+
  method void sortArray(){
 var int s;
 var Aliens atemp;
@@ -69,6 +77,11 @@ while(s<10){ //go through array
     let s=s-1;
     let atemp=aliens[s];
     do atemp.dispose();
+    do spaceship.eraseBullet();
+    do spaceship.rstBullet();
+//go(collsion) needs to be  true ( 1). If 1 stop shooting bullet. if spacebar=hit shoot
+    let go=0;
+
   }
   else {if  (~(bPosY<alienY+10)){  //if not
    let d=0; //reminder d=0;
@@ -76,6 +89,7 @@ while(s<10){ //go through array
   }
   
 }}
+
  
  return;
 
@@ -84,43 +98,6 @@ while(s<10){ //go through array
 
 
 
-
-/* method int killAlien(Aliens alientodie){
- var Aliens temp;
- var int j;
-  var int deadAlien;
- var int alienY;
- var  int  alienX;
- let j=0;
- let deadAlien=0;
-
-//do bulletPosCheck();
-
- while(j<10){
- let temp=aliens[j];
- let alienY=temp.getY();
- let alienX=temp.getX();
- let j=j+1;
- }
-
- if (alienY<bPosY)&(~(bPosX>alienX))&(~(bPosX<alienX+10)){
-    let deadAlien=0;
-    // do Output.printString("alive");
-     //do Output.printInt(bPosY);
-     do bulletPosCheck();
- }
- else{
-  let deadAlien=1;
- }
-
- if(deadAlien=1){
- do temp.dispose();
- }
- return;
-
- }*/
-
- 
 
 
   method void dispose() {
@@ -147,25 +124,26 @@ while(s<10){ //go through array
          while (key = 0) {
             let key = Keyboard.keyPressed();
              if(direction=1){
-            do spaceship.shootBullet();
+             if(go=1){
+            do shoot();
+            }}
             do bulletPosCheck();
             do sortArray();
-           //do killAlien();
           
-            }
          }
 
          if (key = 81)  { let exit = true; }     // q key
          if (key = 130) { let direction = 3; }   // left arrow to move
          if (key = 132) { let direction = 4; }   // right arrow to move
-         if (key = 32 ) { let direction =1;}     //spacebar to shoot
+         if (key = 32 ) { let direction =1; let go =  1;}     //spacebar to shoot
 
          // waits for the key to be released
          while (~(key = 0)) {
             let key = Keyboard.keyPressed();
             if(direction=1){
-            do spaceship.shootBullet();
-            }
+            if(go=1){
+            do shoot();
+            }}
             do bulletPosCheck();
             do sortArray();
             //do killAlien();

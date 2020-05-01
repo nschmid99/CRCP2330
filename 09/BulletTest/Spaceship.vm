@@ -71,6 +71,25 @@ call Bullet.bulletY 1
 pop this 9
 push this 9
 return
+function Spaceship.rstBullet 0
+push argument 0
+pop pointer 0
+push this 10
+push this 6
+push this 7
+push constant 5
+call Bullet.resetBullet 4
+pop temp 0
+push constant 0
+return
+function Spaceship.eraseBullet 0
+push argument 0
+pop pointer 0
+push this 10
+call Bullet.erase 1
+pop temp 0
+push constant 0
+return
 function Spaceship.shootBullet 0
 push argument 0
 pop pointer 0
@@ -80,9 +99,5 @@ pop temp 0
 push this 10
 call Bullet.moveUp 1
 pop temp 0
-push this 5
-push constant 1
-add
-pop this 5
 push constant 0
 return
