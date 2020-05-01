@@ -132,8 +132,8 @@ int c1; int c2; int c3; int c4; int c5; int c6;
   }
 }
 //jump, return string
-int jump(int j1, int j2, int j3){
-   
+String jump(String jmpMn){
+   int j1=0; int j2=0; int j3=0;
   if( current=="null"){
   j1=0; j2=0; j3=0;
   }
@@ -158,9 +158,9 @@ int jump(int j1, int j2, int j3){
   else if(current=="JMP"){
   j1=1; j2=1; j3=1;
   }
-  return j1;
-  return j2;
-  return j3;
+  
+ String jmpMnem=str(j1+j2+j3);
+ return jmpMnem;
 }
 
 }
