@@ -51,7 +51,7 @@ class Spaceship {
    }
 
    method void shootBullet(){    //bullet needs to have same pos as spaceship
-      
+      do bulletposy();
        do bullet.moveUp();
        let inc=inc+1;
      

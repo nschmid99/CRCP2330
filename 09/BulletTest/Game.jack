@@ -50,7 +50,7 @@ class Game{
  method void killAlien(){
  var Aliens temp;
  var int j;
- var int deadAlien;
+  var int deadAlien;
  var int alienY;
  var  int  alienX;
  let j=0;
@@ -67,17 +67,22 @@ class Game{
 
  if (alienY<bPosY){
     let deadAlien=0;
-     do Output.printString("alive");
-     do Output.printInt(bPosY);
+    // do Output.printString("alive");
+     //do Output.printInt(bPosY);
+     do bulletPosCheck();
  }
  else{
-  do Output.printString("dead");
   let deadAlien=1;
+ }
+
+ if(deadAlien=1){
+ do temp.dispose();
  }
  return;
 
  }
 
+ 
 
 
   method void dispose() {
@@ -106,7 +111,7 @@ class Game{
              if(direction=1){
             do spaceship.shootBullet();
             do bulletPosCheck();
-          // do killAlien();
+           do killAlien();
           
             }
          }

@@ -107,40 +107,24 @@ goto IF_FALSE0
 label IF_TRUE0
 push constant 0
 pop local 2
-push constant 5
-call String.new 1
-push constant 97
-call String.appendChar 2
-push constant 108
-call String.appendChar 2
-push constant 105
-call String.appendChar 2
-push constant 118
-call String.appendChar 2
-push constant 101
-call String.appendChar 2
-call Output.printString 1
-pop temp 0
-push this 4
-call Output.printInt 1
+push pointer 0
+call Game.bulletPosCheck 1
 pop temp 0
 goto IF_END0
 label IF_FALSE0
-push constant 4
-call String.new 1
-push constant 100
-call String.appendChar 2
-push constant 101
-call String.appendChar 2
-push constant 97
-call String.appendChar 2
-push constant 100
-call String.appendChar 2
-call Output.printString 1
-pop temp 0
 push constant 1
 pop local 2
 label IF_END0
+push local 2
+push constant 1
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 0
+call Aliens.dispose 1
+pop temp 0
+label IF_FALSE1
 push constant 0
 return
 function Game.dispose 0
@@ -190,6 +174,9 @@ call Spaceship.shootBullet 1
 pop temp 0
 push pointer 0
 call Game.bulletPosCheck 1
+pop temp 0
+push pointer 0
+call Game.killAlien 1
 pop temp 0
 label IF_FALSE0
 goto WHILE_EXP1
