@@ -18,6 +18,12 @@ return
 function Aliens.draw 0
 push argument 0
 pop pointer 0
+push this 3
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
 push constant 0
 not
 call Screen.setColor 1
@@ -35,11 +41,14 @@ pop temp 0
 push pointer 0
 call Aliens.moveLeft 1
 pop temp 0
+label IF_FALSE0
 push constant 0
 return
 function Aliens.dispose 0
 push argument 0
 pop pointer 0
+push constant 1
+pop this 3
 push constant 0
 call Screen.setColor 1
 pop temp 0

@@ -17,14 +17,16 @@ constructor Aliens new(int Nx, int Ny, int Nsize){
 }
 
 method void draw(){   //draws aliens
+if (dead=0) {
    do Screen.setColor(true);
    do Screen.drawRectangle(x,y,x+size,y+size);
    do moveLeft();
-
+}
    return;
 }
 
 method void dispose(){    //erases alien from screen
+let dead=1;
    do Screen.setColor(false);
     do Screen.drawRectangle(x,y,x+size,y+size);
     do Screen.setColor(true);

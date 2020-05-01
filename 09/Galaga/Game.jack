@@ -69,10 +69,10 @@ while(s<10){ //go through array
  do bulletPosCheck();// check bulletpos
 
   if  ( (bPosY<alienY) & (bPosX>alienX+20)  & (bPosX<(alienX-10))  ){ //is by above ay
-  //do Output.printString("die");   //print die
     let d=1;      //let  d=1;
     let s=s-1;
     let atemp=aliens[s];
+    let d=atemp.deadAlien();
     do atemp.dispose();
     do spaceship.eraseBullet();
     do spaceship.rstBullet();
