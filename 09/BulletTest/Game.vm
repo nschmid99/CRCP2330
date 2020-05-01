@@ -68,63 +68,88 @@ call Spaceship.bulletposy 1
 pop this 4
 push constant 0
 return
-function Game.killAlien 5
+function Game.sortArray 6
 push argument 0
 pop pointer 0
 push constant 0
-pop local 1
+pop local 5
 push constant 0
-pop local 2
+pop local 0
 label WHILE_EXP0
-push local 1
+push local 0
 push constant 10
 lt
 not
 if-goto WHILE_END0
-push local 1
+push local 0
 push this 1
 add
 pop pointer 1
 push that 0
-pop local 0
-push local 0
+pop local 1
+push local 1
 call Aliens.getY 1
 pop local 3
-push local 0
+push local 1
 call Aliens.getX 1
 pop local 4
-push local 1
-push constant 1
-add
-pop local 1
-goto WHILE_EXP0
-label WHILE_END0
-push local 3
-push this 4
-lt
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 0
-pop local 2
 push pointer 0
 call Game.bulletPosCheck 1
 pop temp 0
+push this 4
+push local 3
+lt
+push this 3
+push local 4
+gt
+push constant 20
+add
+and
+push this 3
+push local 4
+push constant 10
+sub
+lt
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 1
+pop local 5
+push local 0
+push constant 1
+sub
+pop local 0
+push local 0
+push this 1
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 1
+call Aliens.dispose 1
+pop temp 0
 goto IF_END0
 label IF_FALSE0
-push constant 1
-pop local 2
-label IF_END0
-push local 2
-push constant 1
-eq
+push this 4
+push local 3
+lt
+push constant 10
+add
+not
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
+push constant 0
+pop local 5
 push local 0
-call Aliens.dispose 1
-pop temp 0
+push constant 1
+add
+pop local 0
 label IF_FALSE1
+label IF_END0
+goto WHILE_EXP0
+label WHILE_END0
 push constant 0
 return
 function Game.dispose 0
@@ -176,7 +201,7 @@ push pointer 0
 call Game.bulletPosCheck 1
 pop temp 0
 push pointer 0
-call Game.killAlien 1
+call Game.sortArray 1
 pop temp 0
 label IF_FALSE0
 goto WHILE_EXP1
@@ -241,7 +266,7 @@ push pointer 0
 call Game.bulletPosCheck 1
 pop temp 0
 push pointer 0
-call Game.killAlien 1
+call Game.sortArray 1
 pop temp 0
 goto WHILE_EXP2
 label WHILE_END2
