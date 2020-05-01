@@ -55,6 +55,16 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
+function Spaceship.spaceshipX 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Spaceship.spaceshipY 0
+push argument 0
+pop pointer 0
+push this 1
+return
 function Spaceship.bulletposx 0
 push argument 0
 pop pointer 0
@@ -74,6 +84,13 @@ return
 function Spaceship.rstBullet 0
 push argument 0
 pop pointer 0
+push pointer 0
+call Spaceship.spaceshipX 1
+pop temp 0
+push this 0
+push constant 5
+add
+pop this 6
 push this 10
 push this 6
 push this 7
@@ -110,6 +127,9 @@ gt
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
+push pointer 0
+call Spaceship.rstBullet 1
+pop temp 0
 push constant 0
 call Screen.setColor 1
 pop temp 0
@@ -159,6 +179,9 @@ lt
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
+push pointer 0
+call Spaceship.rstBullet 1
+pop temp 0
 push constant 0
 call Screen.setColor 1
 pop temp 0
