@@ -9,6 +9,8 @@ class Spaceship {
    field int inc;
    field int bPosx;
    field int bPosy;
+   field int bulletx;
+   field int bullety;
    field Bullet bullet;
 
    constructor Spaceship new(int Nx, int Ny, int Nsize) {
@@ -16,6 +18,9 @@ class Spaceship {
       let y = Ny;
       let size = Nsize;
       let inc=0;
+      let bPosx=x+5;
+      let bPosy=y+5;
+      let bullet=Bullet.new(bPosx,bPosy,5);
       do draw();
       return this;
    }
@@ -33,18 +38,36 @@ class Spaceship {
       return;
    }
 
-   method void shootBullet(){    //bullet needs to have same pos as spaceship
-      let bPosx=x+5;
-      let bPosy=y+5;
-      let bullet=Bullet.new(inc+1,inc,bPosx,bPosy,5);
-      do bullet.moveUp();
+    method int bulletposx(){
+   let bulletx=bullet.bulletX();
+   return bulletx;
+   }
+
+
+   method int bulletposy(){
+   let bullety=bullet.bulletY();
+   return bullety;
+   }
+
+   method void rstBullet(){
+   do bullet.resetBullet(bPosx,bPosy,5);
+   return;
+   }
+
+   method void eraseBullet(){
+      do bullet.erase();
       return;
    }
 
-   method Bullet getBulletY(){
-      return bullet.getY();
+   method void shootBullet(){    //bullet needs to have same pos as spaceship
+      do bulletposy();
+       do bullet.moveUp();
+       //let inc=inc+1;
+     
+      return;
    }
 
+   
    method void moveLeft() {   //moves spaceship L
       if (x > 1) {
          do Screen.setColor(false);

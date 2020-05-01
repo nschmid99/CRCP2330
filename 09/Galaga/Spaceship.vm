@@ -1,5 +1,5 @@
 function Spaceship.new 0
-push constant 9
+push constant 11
 call Memory.alloc 1
 pop pointer 0
 push argument 0
@@ -10,6 +10,19 @@ push argument 2
 pop this 4
 push constant 0
 pop this 5
+push this 0
+push constant 5
+add
+pop this 6
+push this 1
+push constant 5
+add
+pop this 7
+push this 6
+push this 7
+push constant 5
+call Bullet.new 3
+pop this 10
 push pointer 0
 call Spaceship.draw 1
 pop temp 0
@@ -42,36 +55,51 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
-function Spaceship.shootBullet 0
+function Spaceship.bulletposx 0
 push argument 0
 pop pointer 0
-push this 0
-push constant 5
-add
-pop this 6
-push this 1
-push constant 5
-add
-pop this 7
-push this 5
-push constant 1
-add
-push this 5
+push this 10
+call Bullet.bulletX 1
+pop this 8
+push this 8
+return
+function Spaceship.bulletposy 0
+push argument 0
+pop pointer 0
+push this 10
+call Bullet.bulletY 1
+pop this 9
+push this 9
+return
+function Spaceship.rstBullet 0
+push argument 0
+pop pointer 0
+push this 10
 push this 6
 push this 7
 push constant 5
-call Bullet.new 5
-pop this 8
-push this 8
-call Bullet.moveUp 1
+call Bullet.resetBullet 4
 pop temp 0
 push constant 0
 return
-function Spaceship.getBulletY 0
+function Spaceship.eraseBullet 0
 push argument 0
 pop pointer 0
-push this 8
-call Bullet.getY 1
+push this 10
+call Bullet.erase 1
+pop temp 0
+push constant 0
+return
+function Spaceship.shootBullet 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Spaceship.bulletposy 1
+pop temp 0
+push this 10
+call Bullet.moveUp 1
+pop temp 0
+push constant 0
 return
 function Spaceship.moveLeft 0
 push argument 0

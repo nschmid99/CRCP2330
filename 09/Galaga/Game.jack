@@ -4,10 +4,12 @@ class Game{
 	//field Aliens alien; //the aliens
   field Array aliens;
 	field int aPos; //alien position
-  field int bPos;
+  field int bPosX;
+  field int bPosY;
   field  int x, x2;
   field int length;
   field int  y,y2;
+  field int go;
   
    field int direction; // the spaceships's current direction: 
                         // 0=none, 3=left, 4=right, 1=up(bullet)
@@ -37,6 +39,60 @@ class Game{
  return;
  }
 
+  method void bulletPosCheck(){
+ let bPosX=spaceship.bulletposx();
+ let bPosY=spaceship.bulletposy();
+ return;
+ }
+
+method void shoot(){
+do spaceship.shootBullet();
+do spaceship.draw();
+  return;
+}
+
+ method void sortArray(){
+var int s;
+var Aliens atemp;
+var Aliens alientodie;
+var int alienY;
+ var  int  alienX;
+ var int d;
+
+let d=0;
+let s=0;
+while(s<10){ //go through array
+  let atemp=aliens[s];  //get array 0
+  let alienY=atemp.getY(); //gety
+  let alienX=atemp.getX();  //getx
+ 
+ do bulletPosCheck();// check bulletpos
+
+  if  ( (bPosY<alienY) & (bPosX>alienX+20)  & (bPosX<(alienX-10))  ){ //is by above ay
+  //do Output.printString("die");   //print die
+    let d=1;      //let  d=1;
+    let s=s-1;
+    let atemp=aliens[s];
+    do atemp.dispose();
+    do spaceship.eraseBullet();
+    do spaceship.rstBullet();
+//go(collsion) needs to be  true ( 1). If 1 stop shooting bullet. if spacebar=hit shoot
+    let go=0;
+
+  }
+  else {if  (~(bPosY<alienY+10)){  //if not
+   let d=0; //reminder d=0;
+   let s=s+1;   //moveon  to check next part of array
+  }
+  
+}}
+
+ 
+ return;
+
+ }
+
+
   method void dispose() {
       do spaceship.dispose();
       do aliens.dispose();
@@ -59,6 +115,8 @@ let j=0;
 let collide=0;
 let aRight=0;
 let aLeft=0;
+
+do Sys.wait(8);
 
 while((j<10)&~collide){  //have to find the leftmost alien for colision  detection
   let temp=aliens[j];
@@ -144,33 +202,12 @@ if(d=1){      //1 goes left
    var int k;
       if (direction = 3) { do spaceship.moveLeft(); }
       if (direction = 4) { do spaceship.moveRight(); }
-      if (direction = 1) {
-      let k=0;
-      while(k<10){
-      //do spaceship.getBulletY();
-       do spaceship.shootBullet(); 
-       let k=k+1;
-      }
-
-      }
       do Sys.wait(10);  // delays the next movement
   
       return;
    }
 
    
-
-   /*method void killAlien(){
-  if(aPos=bPos){   //if the bullet hits the alien, AKA they have the same Y vale then erase the alien
-      do aliens.dispose();
-      //do Output.printString("Is Dead");   //used to test if method  was running
-       
-      }
- 
- }
-
-      return;
-   }*/
 
 
      method void run() {
@@ -185,30 +222,45 @@ if(d=1){      //1 goes left
 
       while (~exit) {
         let time=time+1;
-
          // waits for a key to be pressed
          while (key = 0) {
             let key = Keyboard.keyPressed();
+            if(direction=1){
+            if(go=1){
+            do shoot();
+            }
+            }
             do moveSpaceship();
+          
             if(time>0){
             do moveAlien();
             let time=time+1;} 
-            //do killAlien();
+              do bulletPosCheck();
+            do sortArray();
+            
          }
 
          if (key = 81)  { let exit = true; }     // q key
          if (key = 130) { let direction = 3; }   // left arrow to move
          if (key = 132) { let direction = 4; }   // right arrow to move
-         if (key = 32 ) { let direction =1;}     //spacebar to shoot
+         if (key = 32 ) { let direction =1; let go=1;}     //spacebar to shoot
 
          // waits for the key to be released
          while (~(key = 0)) {
          let time=time+1;
             let key = Keyboard.keyPressed();
+            if(direction=1){
+            if(go=1){
+            do shoot();
+            }
+            }
             do moveSpaceship();
+           
             if(time>0){
             do moveAlien();
             let time=time+1;}
+             do bulletPosCheck();
+            do sortArray();
             //do killAlien();
          }
      }  

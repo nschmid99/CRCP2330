@@ -1,13 +1,9 @@
 class Bullet{
-	field int x, y; // screen location of the bullet 
+  field int x, y; // screen location of the bullet 
    field int r; // radius of  bullet
-   field int data;
-   field List next;
-
-
-   constructor Bullet new(int bullet, List blt, int Ax, int Ay, int Ar){    //constructs list
-       let data = bullet;      
-        let next = blt;     
+   
+   constructor Bullet new(int Ax, int Ay, int Ar){    //constructs list
+       
         let x=Ax;
         let y=Ay;
         let r=Ar;
@@ -15,42 +11,51 @@ class Bullet{
    }
 
    method void dispose() {    //disposes bullet
-   if( ~(next = null)){
-      do Screen.setColor(false);
-      do Screen.drawCircle(x, y, r);
-      do next.dispose();
 
-   }
+      do Screen.setColor(false);
+      do Screen.drawCircle(x, y,r);
       do Memory.deAlloc(this);
       return;
    }
 
    method void draw() { //draws bullet and puts each one in a segment of the list
-        var List current;    // initializes current to the first item
-        let current = this;  // of this list
-        while (~(current = null)) {
-              do current.getData();
+        
             do Screen.setColor(true);
             do Screen.drawCircle(x, y, r);
-            let current = current.getNext();
-        }
         return;
     }
 
-method int getY(){    //gets  ypos of bullet
-   return y;
-}
+    method int bulletX(){
+    return x;
+    }
 
-   
+    method int bulletY(){
+    return y;
+    }
+
+    method void erase(){
+      do Screen.setColor(false);
+            do Screen.drawCircle(x, y, r);
+        return;
+    }
+
+    method int resetBullet(int Ax, int Ay, int Ar){
+    do Screen.setColor(true);
+      let x=Ax;
+      let y=Ay;
+      let r=Ar;
+      return 0;
+    }
 
    method void moveUp() {   //moves bullet up when shot
-      if (y > 1) {
+      if (y > 10) {
+      do bulletY();
          do Screen.setColor(false);
-         do Screen.drawCircle(x,y -1, r);
-         let y = y + 2;
+         do Screen.drawCircle(x, (y + r) - 1,r);
+         let y = y - 2;
          do Screen.setColor(true);
          do Screen.drawCircle(x, y+1, r);
-         //do Sys.wait(10);
+        
       }
       return;
    }
