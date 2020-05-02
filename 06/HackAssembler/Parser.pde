@@ -2,7 +2,7 @@
 
 String [] text;
 String current;
-String next;
+//String next;
 int i;
 
 //constructor
@@ -18,11 +18,13 @@ boolean moreCommands(){
   if(i>=text.length){
   return(false);
   }else{
+  return(true);
+  }
+  }
+  
+void advance(){
     current=text[i].trim();
   i++;
-  return(true);
-}
-  
 }
 
 //command type A/C/L,  return A/C/L command
