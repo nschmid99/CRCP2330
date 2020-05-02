@@ -55,4 +55,31 @@ void secondPass(){
   //If symbol is found replceit with numeric meaning
   //if not found must represent new variable
   //for new variable, add pair (Xxx,n) to symbol  table where n  is next available  RAM
+  while(parser.moreCommands()==true){
+    parser.advance();
+      if((parser.current.length()!=0) && (parser.current.startsWith("/",0)==false)){
+      switch(parser.cmdtype()){
+      case "A_COMMAND":
+      {
+       //rom++;
+      break;
+      }
+      case "C_COMMAND":
+      {
+       String comp = parser.comp();
+       String dest=parser.dest();
+       String jump=parser.jump();
+       
+       String instruction="111";
+       String ins= instruction+comp+dest+jump;
+         
+       output.println(ins);
+       
+       break;
+      }
+      }
+ }
+}
+output.flush();
+output.close();
 }

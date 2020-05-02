@@ -45,7 +45,7 @@ if(current.charAt(0)==0){
 //symbol(ignore for now, test  symbol-less first return string
 
 //dest,return  string
-String dest(String destMnem){
+String dest(){
   //split temp. first 3 # are 1 4-10 are comp 11-13 are dest 14-16 are jump
   int d1=0; int d2=0; int  d3=0;
    if( current=="null"){
@@ -72,11 +72,11 @@ String dest(String destMnem){
   else if(current=="AMD"){
   d1=1; d2=1; d3=1;
   }
-  destMnem=str(d1+d2+d3);
+  String destMnem=str(d1+d2+d3);
  return destMnem;
 }
 //comp, return string 28 posibilities
-String comp(String compMnem){
+String comp(){
   //split temp. first 3 # are 1 4-10 are comp 11-13 are dest 14-16 are jump
 int c1=0; int c2=0; int c3=0; int c4=0; int c5=0; int c6=0;
   //check first number after 1. 
@@ -134,11 +134,11 @@ int c1=0; int c2=0; int c3=0; int c4=0; int c5=0; int c6=0;
   else if(current=="D|A"||current=="D|M"){
     c1=0; c2=1; c3=0; c4=1; c5=0; c6=1;
   }
-  compMnem=str(c1+c2+c3+c4+c5+c6);
+ String compMnem=str(c1+c2+c3+c4+c5+c6);
  return compMnem;
 }
 //jump, return string
-String jump(String jmpMnem){
+String jump(){
    int j1=0; int j2=0; int j3=0;
   if( current=="null"){
   j1=0; j2=0; j3=0;
@@ -165,7 +165,7 @@ String jump(String jmpMnem){
   j1=1; j2=1; j3=1;
   }
   
- jmpMnem=str(j1+j2+j3);
+ String jmpMnem=str(j1+j2+j3);
  return jmpMnem;
 }
 
