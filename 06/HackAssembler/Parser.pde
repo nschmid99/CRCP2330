@@ -57,7 +57,7 @@ if(firstchar=='@'){
   return commandtype;
 }
 //symbol(ignore for now, test  symbol-less first return string
-/*String symbol(){
+String symbol(){
   
 if(commandtype=="A_COMMAND"){
   return commandtype.substring(1);
@@ -65,7 +65,7 @@ if(commandtype=="A_COMMAND"){
 else{
   return null;
 }
-}*/
+}
 
 //dest,return  string
 String dest(){

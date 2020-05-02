@@ -1,22 +1,24 @@
 Parser parser;
-//SymbolTable st;
+SymbolTable st;
 BufferedReader reader;
 PrintWriter output;
 String fileName="Add";
+int rom;
 
 void setup() {
   //initialize symbol table with predefined symbols and pre=allocated ram address
   output=createWriter(fileName+".hack");
   parser= new Parser(fileName+".asm");
-  //st= new SymbolTa+".asm"ble();
+  st= new SymbolTable();
 
   noLoop();
 }
 
 void draw() {
-  //firstPass();
-  println(parser.current);
+  firstPass();
+  //println(parser.current);
   secondPass();
+  println(rom);
   exit();
 }
 
@@ -29,21 +31,19 @@ void firstPass() {
   //first pass is  to enter all labels and ROM addresses into symbol table
   while (parser.moreCommands()==true) {
     parser.advance();
-    char firstchar=parser.current.charAt(0);
-    println(firstchar);
-    println(parser.current.length());
-    //i//f((parser.current.length()==0) || (firstchar=='/')){
-    //parser.advance();
-    // println("nothing");
-    // }
-    //else{
+    if ((checkwhite()==false) && (checkComments()==false)) {
     println("mOve");
     switch(parser.cmdtype()) {
     case "A_COMMAND":
+    {
+     // String symb =parser.symbol();
+      
+      break;
+    }
     case "C_COMMAND":
       {
-        println("c");
-        // rom=rom+1;
+        println("a/c");
+         rom=rom+1;
         break;
       }
     case "L_COMMAND":
@@ -53,7 +53,7 @@ void firstPass() {
         break;
       }
     }
-  }
+    }}
   // }}
 }
 boolean checkwhite() {
@@ -109,7 +109,7 @@ void secondPass() {
           if (temp.charAt(0)==0||temp.charAt(0)==1||temp.charAt(0)==2||temp.charAt(0)==3||temp.charAt(0)==4||temp.charAt(0)==5||temp.charAt(0)==6||temp.charAt(0)==7||temp.charAt(0)==8||temp.charAt(0)==9) {
             temp2=binary(int( temp), 16);
             output.println(temp2);
-            println("a2");
+            println(output);
           }
           break;
         }
