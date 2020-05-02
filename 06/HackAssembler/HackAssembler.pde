@@ -109,7 +109,7 @@ void secondPass() {
           if (temp.charAt(0)==0||temp.charAt(0)==1||temp.charAt(0)==2||temp.charAt(0)==3||temp.charAt(0)==4||temp.charAt(0)==5||temp.charAt(0)==6||temp.charAt(0)==7||temp.charAt(0)==8||temp.charAt(0)==9) {
             temp2=binary(int( temp), 16);
             output.println(temp2);
-            println(output);
+            println("a2");
           }
           break;
         }
