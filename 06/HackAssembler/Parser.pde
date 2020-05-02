@@ -2,16 +2,19 @@
 
 String [] text;
 String current;
-//String next;
+String next;
+ String commandtype;
 int i;
 
 //constructor
 Parser(String file){
-  i=0;
-  text=loadStrings(file);
-  current=text[i].trim();
-  
+  this.i=0;
+  this.text=loadStrings(file);
+  this.current=text[i].trim();
+
 }
+
+
 //boolean more commands, return boolean
 boolean moreCommands(){
   //i> length of file there arent more.i<length thereare more
@@ -23,18 +26,20 @@ boolean moreCommands(){
   }
   
 void advance(){
-    current=text[i].trim();
+    this.current=text[i].trim();
   i++;
 }
 
 //command type A/C/L,  return A/C/L command
 //a=0,c=1,label=everything else
 String cmdtype(){
-  String commandtype;
-if(current.charAt(0)==0){
+ 
+  char firstchar=current.charAt(0);
+  char lastchar=current.charAt(current.length()-1);
+if(firstchar=='@'){
   commandtype="A_COMMAND";
   }
-  else if(current.charAt(0)==1){
+  else if(firstchar=='"'&& lastchar=='"'){
   commandtype="C_COMMAND";
   }
   else{
@@ -43,6 +48,15 @@ if(current.charAt(0)==0){
   return commandtype;
 }
 //symbol(ignore for now, test  symbol-less first return string
+String symbol(){
+  
+if(commandtype=="A_COMMAND"){
+  return commandtype.substring(1);
+}
+else{
+  return null;
+}
+}
 
 //dest,return  string
 String dest(){

@@ -2,16 +2,17 @@ Parser parser;
 SymbolTable st;
 BufferedReader reader;
 PrintWriter output;
-String fileName="Pong";
+String fileName="Add";
 int rom=0;
 int ram=15;
 
 void setup(){
   //initialize symbol table with predefined symbols and pre=allocated ram address
-  parser= new Parser(fileName);
-  st= new SymbolTable();
   output=createWriter(fileName+".hack");
+  parser= new Parser(fileName+".asm");
+  //st= new SymbolTable();
   
+  noLoop();
 }
 
 void draw(){
@@ -41,7 +42,7 @@ void firstPass(){
       }
       case "L_COMMAND":{
         //symboltable
-        
+        break;
       }
     
     }
