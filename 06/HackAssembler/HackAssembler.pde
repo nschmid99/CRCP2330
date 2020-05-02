@@ -37,24 +37,25 @@ void firstPass() {
     case "A_COMMAND":
     {
      // String symb =parser.symbol();
-      
+      st.incRom();
       break;
     }
     case "C_COMMAND":
       {
         println("a/c");
-         rom=rom+1;
+          st.incRom();
         break;
       }
     case "L_COMMAND":
       {
         //symboltable
-        // parser.symbol();
+        String symbol=parser.symbol();
+        int address=this.st.getRom();
+        this.st.addElement(symbol,address);
         break;
       }
     }
     }}
-  // }}
 }
 boolean checkwhite() {
   if (parser.current.length()==0) {
@@ -78,15 +79,34 @@ boolean checkComments() {
 boolean checkAt() {
   //String temp;
   if (parser.current.startsWith("@")) {
-    println("rem@");
+   // println("@");
     parser.advance();
-    println(parser.current);
+    //println(parser.current);
     return true;
   } else {
-    println("atsign");
+    //println("atsign");
     return false;
   }
 }
+
+boolean isnumber(String temp){
+   //String temp="";
+  // String temp2="";
+   split(parser.current, '@');
+          checkAt();
+          temp=parser.current;
+          if (temp.charAt(0)==0||temp.charAt(0)==1||temp.charAt(0)==2||temp.charAt(0)==3||
+          temp.charAt(0)==4||temp.charAt(0)==5||temp.charAt(0)==6||temp.charAt(0)==7||
+          temp.charAt(0)==8||temp.charAt(0)==9) {
+            String temp2 =temp;
+            temp=binary(int( temp2), 16);}
+            
+           // output.println(temp2);
+           //println("a2");}
+          // return "0"+temp2;     
+         return true; 
+} 
+
 void secondPass() {
   String temp="";
   String temp2="";
@@ -102,14 +122,20 @@ void secondPass() {
       switch(parser.cmdtype()) {
       case "A_COMMAND":
         {
-          println("a");
-          split(parser.current, '@');
+         // println("a");
+        /*  split(parser.current, '@');
           checkAt();
           temp=parser.current;
           if (temp.charAt(0)==0||temp.charAt(0)==1||temp.charAt(0)==2||temp.charAt(0)==3||temp.charAt(0)==4||temp.charAt(0)==5||temp.charAt(0)==6||temp.charAt(0)==7||temp.charAt(0)==8||temp.charAt(0)==9) {
             temp2=binary(int( temp), 16);
             output.println(temp2);
             println("a2");
+          }*/
+          String  symbol=parser.symbol();
+          boolean isNumber=isnumber(symbol);
+          
+          if(!isNumber){
+          //  boolean symbol=this.symbolTable.hasString();
           }
           break;
         }
@@ -132,4 +158,5 @@ void secondPass() {
     output.flush();
     output.close();
   }
+  
 }

@@ -64,7 +64,7 @@ class SymbolTable {
     newTHAT.setString("symbol", "THAT"); newTHAT.setInt("value", 4);    
   }
   
-  void addElement(){
+  void addElement(String symbol, int value){
     //have temp row
     //with  variables
     //set  variables
@@ -96,4 +96,18 @@ boolean hasString(String symbol){
     return true;
   }
   
+  void incRam(){
+  this.ram++;
+  }
+   void incRom(){
+  this.rom++;
+  }
+  
+  int getRam(){
+  return this.ram;
+  }
+  
+  int getRom(){ 
+  return this.rom;
+  }
 }
