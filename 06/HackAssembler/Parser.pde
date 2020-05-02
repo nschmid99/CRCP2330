@@ -10,13 +10,17 @@ int i;
 Parser(String file){
   this.i=0;
   this.text=loadStrings(file);
+  //his.current=null;
   this.current=text[i].trim();
+  //current.trim().startsWith("//");
 
 }
 
 
+
 //boolean more commands, return boolean
 boolean moreCommands(){
+   
   //i> length of file there arent more.i<length thereare more
   if(i>=text.length){
   return(false);
@@ -26,29 +30,34 @@ boolean moreCommands(){
   }
   
 void advance(){
-    this.current=text[i].trim();
+   this.current=text[i].trim();
   i++;
+  println("advance");
+  
 }
 
 //command type A/C/L,  return A/C/L command
 //a=0,c=1,label=everything else
 String cmdtype(){
- 
+ println("cmd");
   char firstchar=current.charAt(0);
+  println(firstchar);
   char lastchar=current.charAt(current.length()-1);
 if(firstchar=='@'){
   commandtype="A_COMMAND";
+  println("a_cmd");
   }
   else if(firstchar=='"'&& lastchar=='"'){
   commandtype="C_COMMAND";
   }
   else{
   commandtype="L_COMMAND";
+  println("next");
   }
   return commandtype;
 }
 //symbol(ignore for now, test  symbol-less first return string
-String symbol(){
+/*String symbol(){
   
 if(commandtype=="A_COMMAND"){
   return commandtype.substring(1);
@@ -56,7 +65,7 @@ if(commandtype=="A_COMMAND"){
 else{
   return null;
 }
-}
+}*/
 
 //dest,return  string
 String dest(){

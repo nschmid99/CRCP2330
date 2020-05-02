@@ -1,86 +1,135 @@
 Parser parser;
-SymbolTable st;
+//SymbolTable st;
 BufferedReader reader;
 PrintWriter output;
 String fileName="Add";
-int rom=0;
-int ram=15;
 
-void setup(){
+void setup() {
   //initialize symbol table with predefined symbols and pre=allocated ram address
   output=createWriter(fileName+".hack");
   parser= new Parser(fileName+".asm");
-  //st= new SymbolTable();
-  
+  //st= new SymbolTa+".asm"ble();
+
   noLoop();
 }
 
-void draw(){
-firstPass();
-secondPass();
+void draw() {
+  //firstPass();
+  println(parser.current);
+  secondPass();
+  exit();
 }
 
-void firstPass(){
+void firstPass() {
+  println("first");
   //run through assembly line by line. build symbol table without generating coed
   //keep running number recording ROM add to where  current  command  will be loaded
   //number starts at 0 and is  incremented byt 1 whenever A/C inst is encountered
   //if  pseudocommand (Xxx) is encountered, add new entery to symbol table
   //first pass is  to enter all labels and ROM addresses into symbol table
-  while(parser.moreCommands()==true){
+  while (parser.moreCommands()==true) {
     parser.advance();
-    if((parser.current.length()!=0) && (parser.current.startsWith("/",0)==false)){
-    switch(parser.cmdtype()){
-      case "A_COMMAND":
+    char firstchar=parser.current.charAt(0);
+    println(firstchar);
+    println(parser.current.length());
+    //i//f((parser.current.length()==0) || (firstchar=='/')){
+    //parser.advance();
+    // println("nothing");
+    // }
+    //else{
+    println("mOve");
+    switch(parser.cmdtype()) {
+    case "A_COMMAND":
+    case "C_COMMAND":
       {
-       rom++;
-      break;
-      }
-      case "C_COMMAND":
-      {
-       rom++;
-      break;
-      }
-      case "L_COMMAND":{
-        //symboltable
+        println("c");
+        // rom=rom+1;
         break;
       }
-    
+    case "L_COMMAND":
+      {
+        //symboltable
+        // parser.symbol();
+        break;
+      }
     }
-    }
-    
+  }
+  // }}
+}
+boolean checkwhite() {
+  if (parser.current.length()==0) {
+    return true;
+  } else {
+    return false;
   }
 }
-void secondPass(){
+
+boolean checkComments() {
+  //String temp;
+  if (parser.current.startsWith("//")) {
+    parser.advance();
+    println(parser.current);
+    return true;
+  } else {
+    println("print");
+    return false;
+  }
+}
+boolean checkAt() {
+  //String temp;
+  if (parser.current.startsWith("@")) {
+    println("rem@");
+    parser.advance();
+    println(parser.current);
+    return true;
+  } else {
+    println("atsign");
+    return false;
+  }
+}
+void secondPass() {
+  String temp="";
+  String temp2="";
+
   //runn through entire program and parse each line
   //if symbolic A instruction encountered, look up Xxx in symbol table. 
   //If symbol is found replceit with numeric meaning
   //if not found must represent new variable
   //for new variable, add pair (Xxx,n) to symbol  table where n  is next available  RAM
-  while(parser.moreCommands()==true){
+  while (parser.moreCommands()==true) {
     parser.advance();
-      if((parser.current.length()!=0) && (parser.current.startsWith("/",0)==false)){
-      switch(parser.cmdtype()){
+    if ((checkwhite()==false) && (checkComments()==false)) {
+      switch(parser.cmdtype()) {
       case "A_COMMAND":
-      {
-       //rom++;
-      break;
-      }
+        {
+          println("a");
+          split(parser.current, '@');
+          checkAt();
+          temp=parser.current;
+          if (temp.charAt(0)==0||temp.charAt(0)==1||temp.charAt(0)==2||temp.charAt(0)==3||temp.charAt(0)==4||temp.charAt(0)==5||temp.charAt(0)==6||temp.charAt(0)==7||temp.charAt(0)==8||temp.charAt(0)==9) {
+            temp2=binary(int( temp), 16);
+            output.println(temp2);
+            println("a2");
+          }
+          break;
+        }
       case "C_COMMAND":
-      {
-       String comp = parser.comp();
-       String dest=parser.dest();
-       String jump=parser.jump();
-       
-       String instruction="111";
-       String ins= instruction+comp+dest+jump;
-         
-       output.println(ins);
-       
-       break;
+        {
+          println("c");
+          String comp = parser.comp();
+          String dest=parser.dest();
+          String jump=parser.jump();
+
+          String instruction="111";
+          String ins= instruction+comp+dest+jump;
+          println(ins);
+          output.println(ins);
+
+          break;
+        }
       }
-      }
- }
-}
-output.flush();
-output.close();
+    }
+    output.flush();
+    output.close();
+  }
 }
