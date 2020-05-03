@@ -39,28 +39,33 @@ void advance(){
 //command type A/C/L,  return A/C/L command
 //a=0,c=1,label=everything else
 String cmdtype(){
- println("cmd");
-  char firstchar=current.charAt(0);
+ //println("cmd");
+  char firstchar=this.current.charAt(0);
   println(firstchar);
   char lastchar=current.charAt(current.length()-1);
 if(firstchar=='@'){
   commandtype="A_COMMAND";
   println("a_cmd");
   }
-  else if(firstchar=='"'&& lastchar=='"'){
-  commandtype="C_COMMAND";
-  }
-  else{
+
+  else if(firstchar=='('){
   commandtype="L_COMMAND";
-  println("next");
+  println("l_cmd");
+  }
+   else {
+  commandtype="C_COMMAND";
+  println("c_cmd");
   }
   return commandtype;
 }
 //symbol(ignore for now, test  symbol-less first return string
 String symbol(){
-  
+  String trimmedLine=this.current.trim();
 if(commandtype=="A_COMMAND"){
-  return commandtype.substring(1);
+  return trimmedLine.substring(1);
+}
+else if(commandtype=="L_COMMAND"){
+  return trimmedLine.substring(1,this.current.length()-1);
 }
 else{
   return null;
