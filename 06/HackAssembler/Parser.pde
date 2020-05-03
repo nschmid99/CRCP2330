@@ -2,7 +2,6 @@ class Parser{
 
 String [] text;
 String current;
-String next;
  String commandtype;
 int i;
 
@@ -10,10 +9,7 @@ int i;
 Parser(String file){
   this.i=0;
   this.text=loadStrings(file);
-  //his.current=null;
   this.current=text[i].trim();
-  //current.trim().startsWith("//");
-
 }
 
 
@@ -39,24 +35,21 @@ void advance(){
 //command type A/C/L,  return A/C/L command
 //a=0,c=1,label=everything else
 String cmdtype(){
- //println("cmd");
-  char firstchar=this.current.charAt(0);
-  println(firstchar);
-  char lastchar=current.charAt(current.length()-1);
-if(firstchar=='@'){
-  commandtype="A_COMMAND";
+ String temp="";
+if(current.charAt(0)=='@'){
+  temp="A_COMMAND";
   println("a_cmd");
   }
 
-  else if(firstchar=='('){
-  commandtype="L_COMMAND";
+  else if(current.charAt(0)=='('){
+  temp="L_COMMAND";
   println("l_cmd");
   }
    else {
-  commandtype="C_COMMAND";
+  temp="C_COMMAND";
   println("c_cmd");
   }
-  return commandtype;
+  return temp;
 }
 //symbol(ignore for now, test  symbol-less first return string
 String symbol(){
