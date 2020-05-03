@@ -2,6 +2,8 @@ class Aliens {
 
    field int x;
    field int y;
+   field int bPosx;
+   field int bPosy;
    field int size;
    field int dead;
    field int pos;
@@ -11,6 +13,9 @@ constructor Aliens new(int Nx, int Ny, int Nsize){
    let x=Nx;
    let y=Ny;
    let size=Nsize;
+    let bPosx=x+5;
+    let bPosy=y+5;
+   let bullet=Bullet.new( bPosx,bPosy,5);
    let dead=0;
    do draw();
    return this;
@@ -33,6 +38,38 @@ let dead=1;
      do Memory.deAlloc(this);
    return;
 }
+
+method int alienbulletposx(){
+   let bulletx=alienbullet.bulletX();
+   return bulletx;
+   }
+
+
+   method int alienbulletposy(){
+   let bullety=alienbullet.bulletY();
+   return bullety;
+   }
+
+   method void alienrstBullet(){
+   do sgetX();
+   let bPosx=x+5;
+   //let bPosy=y+5;
+   do bullet.resetBullet(bPosx,bPosy,5);
+   return;
+   }
+
+   method void eraseBullet(){
+      do bullet.erase();
+      return;
+   }
+
+   method void shootBullet(){    //bullet needs to have same pos as spaceship
+      do bulletposy();
+       do bullet.moveUp();
+       //let inc=inc+1;
+     
+      return;
+   }
 
 method int getX(){ //get x to check if equal to bullet pos so alien can die
   return x;
