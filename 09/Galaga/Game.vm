@@ -71,12 +71,53 @@ return
 function Game.shoot 0
 push argument 0
 pop pointer 0
+push pointer 0
+call Game.isshot 1
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
 push this 0
 call Spaceship.shootBullet 1
 pop temp 0
 push this 0
 call Spaceship.draw 1
 pop temp 0
+label IF_FALSE0
+push constant 0
+return
+function Game.isshot 1
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+push this 0
+call Spaceship.shootBullet 1
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+pop local 0
+label IF_FALSE0
+push constant 0
+return
+function Game.bulletToFar 0
+push argument 0
+pop pointer 0
+push this 4
+push constant 15
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 0
+call Spaceship.eraseBullet 1
+pop temp 0
+push this 0
+call Spaceship.rstBullet 1
+pop temp 0
+label IF_FALSE0
 push constant 0
 return
 function Game.sortArray 6
@@ -137,9 +178,6 @@ add
 pop pointer 1
 push that 0
 pop local 1
-push local 1
-call Aliens.deadAlien 1
-pop local 5
 push local 1
 call Aliens.dispose 1
 pop temp 0

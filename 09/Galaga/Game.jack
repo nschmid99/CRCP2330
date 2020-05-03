@@ -46,10 +46,28 @@ class Game{
  }
 
 method void shoot(){
+if(~(isshot())){
 do spaceship.shootBullet();
-do spaceship.draw();
+do spaceship.draw();}
   return;
 }
+
+method boolean isshot(){    //makes  sure bullet can only be shot when other one is gone
+var boolean issht;
+let issht=false;
+  if(spaceship.shootBullet()){
+ let issht=true;}
+    return false;
+}
+
+method void bulletToFar(){
+  if (bPosY<15){
+   do spaceship.eraseBullet();
+    do spaceship.rstBullet();
+  }
+  return;
+}
+
 
  method void sortArray(){
 var int s;
@@ -72,7 +90,6 @@ while(s<10){ //go through array
     let d=1;      //let  d=1;
     let s=s-1;
     let atemp=aliens[s];
-    let d=atemp.deadAlien();
     do atemp.dispose();
     do spaceship.eraseBullet();
     do spaceship.rstBullet();

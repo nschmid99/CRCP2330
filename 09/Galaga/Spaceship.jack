@@ -20,7 +20,7 @@ class Spaceship {
       let inc=0;
       let bPosx=x+5;
       let bPosy=y+5;
-      let bullet=Bullet.new(bPosx,bPosy,5);
+      let bullet=Bullet.new( bPosx,bPosy,5);
       do draw();
       return this;
    }

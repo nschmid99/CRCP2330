@@ -1,9 +1,11 @@
 class Bullet{
   field int x, y; // screen location of the bullet 
    field int r; // radius of  bullet
-   
+   field int data;
+   field int next;
    constructor Bullet new(int Ax, int Ay, int Ar){    //constructs list
-       
+        
+     
         let x=Ax;
         let y=Ay;
         let r=Ar;
@@ -19,7 +21,8 @@ class Bullet{
    }
 
    method void draw() { //draws bullet and puts each one in a segment of the list
-        
+    
+            do current.getData();
             do Screen.setColor(true);
             do Screen.drawCircle(x, y, r);
         return;
