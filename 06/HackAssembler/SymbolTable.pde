@@ -83,9 +83,8 @@ class SymbolTable {
     return symbol;
   }
   
-  int getValue(int value){
+int getValue(int value){
     //get value to add to table
-    
     return value;
   }
   

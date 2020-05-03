@@ -1,4 +1,4 @@
- class Parser{
+class Parser{
 
 String [] text;
 String current;
