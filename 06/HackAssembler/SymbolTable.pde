@@ -36,9 +36,9 @@ class SymbolTable {
     symbolTable.put(symbol,add);
   }
   
- void addL(String symbol){
-   String num=Integer.toString(addn);
-   symbolTable.put(symbol,num);
+ void addL(String symbol, String add){
+   //String num=Integer.toString(addn);
+   symbolTable.put(symbol,add);
    addn++;
  }
   
