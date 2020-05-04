@@ -12,8 +12,8 @@ void setup() {
   //initialize symbol table with predefined symbols and pre=allocated ram address
   output=createWriter(fileName+".hack");
   parser= new Parser(fileName+".asm");
+  
   code=new Code();
-  //code2=new Code2();
   st= new SymbolTable();
 
   noLoop();
@@ -36,6 +36,7 @@ void draw() {
   //if  pseudocommand (Xxx) is encountered, add new entery to symbol table
   //first pass is  to enter all labels and ROM addresses into symbol table
 void firstPass() {
+  //parser.removeComments(parser.current);
   println("first");
  
   while (parser.moreCommands()==true) {
@@ -43,6 +44,13 @@ void firstPass() {
     
 
     if ((checkwhite()==false) && (checkCommentsBegin()==false)) {
+        if(checkCommentsin()==true){
+   int index=parser.current.indexOf("//");
+   String temp=parser.current.substring(index,parser.current.length());
+   parser.current=parser.current.replace(temp,"");
+   parser.current.trim();
+   }
+
     println("mOve");
 
       if(parser.cmdtype()=="A_COMMAND"){
@@ -61,6 +69,7 @@ void firstPass() {
       String symbol=parser.symbol();
      // int address=this.st.getAddress(symbol);
       this.st.addElement(symbol,binary((rom),16));
+      //rom++;
      // rom++;
       }
        
@@ -76,11 +85,18 @@ void firstPass() {
   //for new variable, add pair (Xxx,n) to symbol  table where n  is next available  RAM
 void secondPass() {
  while (parser.moreCommands()==true) {
+   //arser.removeComments(parser.current);
     parser.advance();
+   
    String instruction;
     
     if ((checkwhite()==false) && (checkCommentsBegin()==false)) {
- 
+   if(checkCommentsin()==true){
+   int index=parser.current.indexOf("//");
+   String temp=parser.current.substring(index,parser.current.length());
+   parser.current=parser.current.replace(temp,"");
+   parser.current.trim();
+   }
 
       
     if (parser.cmdtype()=="A_COMMAND"){
@@ -116,19 +132,36 @@ void secondPass() {
           
        
       if(parser.cmdtype()=="C_COMMAND"){
-  // checkCommentsin(parser.current);
+         println(parser.current+"parser");
+         if(parser.current.contains(";")){
         String ins="111";
         String compt = parser.comp();
-         String  destt=parser.dest();
+         String  destt="null";
          String  jumpt=parser.jump();
-           
+   
            println("compt"+compt);
-         String comp=code.getBinaryC(compt);
-        String dest=code.getBinaryD(destt);
-          String jump=code.getBinaryJ(jumpt);
-         instruction=ins+/*comp*/dest+jump;
-          println("instruct"+instruction);
+           println("jumpt"+jumpt);
+         String comp=code.getBinc(compt);
+        String dest=code.getBind("null");
+          String jump=code.getBinj(jumpt);
+         instruction=ins+comp+dest+jump;
+          println("instruct"+ins+compt+destt+jumpt);
+           this.output.println(instruction);}
+           else if(parser.current.contains("=")){
+             String ins="111";
+        String compt = parser.comp();
+         String  destt=parser.dest();
+         String  jumpt="null";
+   
+           println("compt"+compt);
+           println("jumpt"+jumpt);
+         String comp=code.getBinc(compt);
+        String dest=code.getBind(destt);
+          String jump=code.getBinj(jumpt);
+         instruction=ins+comp+dest+jump;
+          println("instruct"+ins+compt+destt+jumpt);
            this.output.println(instruction);
+           }
         }
     }}
         //if(parser.cmdtype()=="L_COMMAND"){
@@ -146,29 +179,15 @@ boolean checkwhite() {
   }
 }
 
-//String checkCommentsin(String right) {
-//  // String comment=parser.current;
-////  String right;
-//  String right2="";
-//  String replace="";
-//  if (parser.current.contains("//")) {
-// // String val=comment.substring(comment.indexOf("//"),comment.length());
+boolean checkCommentsin() {
+  // String comment=parser.current;
+//  String right;
   
-// // val=val.replace("val","");
-// // println(val);
-//    //String nocomment= comment.substring(parser.advance);
-//    int index=right.indexOf("//");
-//    println(index+"index");
-//    right2=right.substring(index,parser.current.length());
-//    println(right2+"right2");
-//     //right.next();
-//replace=right.replace(right2,"");
-//println("replace"+replace);
-//    //}
-   
-//}
-// return replace ;
-//}
+  if (parser.current.contains("//")) {
+ return true ;}
+ else{
+ return false;}
+}
 boolean checkCommentsBegin() {
   // String comment=parser.current;
   if (parser.current.startsWith("//")) {

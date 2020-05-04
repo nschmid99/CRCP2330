@@ -33,12 +33,14 @@ void advance(){
   
 }
 
-String removeComments(){
-  //if(current.contains("//")){
+String removeComments(String current){
+  if(current.contains("//")){
     int index=current.indexOf("//");
-    String right2=current.substring(index,parser.current.length());
+    if(index>-1){
+    String right2=current.substring(index,current.length());
     //println(right2+"right2");
-return current.replace(right2,"");
+return current.replace(right2,"");}}
+return current.trim();
 //return remove;
 }
 
@@ -83,13 +85,7 @@ String dest(){
   if(current.contains("=")){
   int endIndex=current.lastIndexOf("=");
   rDest=current.substring(0,endIndex);}
-  else if(current.contains("//")){
-    int index=current.indexOf("//");
-    String right2=current.substring(index,parser.current.length());
-    //println(right2+"right2");
-rDest=current.replace(right2," ");
 
-  }
   else{
   rDest="null";}
   return rDest;
@@ -97,7 +93,7 @@ rDest=current.replace(right2," ");
  
 //comp, return string 28 posibilities
 String comp(){
-  String rComp=current;
+  String rComp=current.trim();
   if(current.contains("=")){
   int neq=current.lastIndexOf("=");
    rComp=current.substring(neq+1,rComp.length());
@@ -107,22 +103,21 @@ String comp(){
    rComp=current.substring(0,nsem);
   }
   
-  println(rComp);
+  println(rComp+"rcomp");
   return rComp;
 
 }
 //jump, return string
 
  String jump(){ 
-        String rJump;
+       String rJump;
+       if(current.contains(";")){
 
-     if(current.contains(";")){
-     int nsem=current.indexOf(";");
+     int nsem=current.lastIndexOf(";");
      rJump=current.substring(nsem+1);
-   }
+    println("rjmp"+rJump);}
    else{
-     rJump="null";
-   }
+  rJump="null";}
    return  rJump;
-
+   
 }}

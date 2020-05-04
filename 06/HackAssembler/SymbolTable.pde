@@ -25,6 +25,13 @@ class SymbolTable {
     symbolTable.put("R7", "7");
     symbolTable.put( "R8", "8");
     symbolTable.put("R9", "9");
+    symbolTable.put("R10", "10");
+    symbolTable.put("R11", "11");
+    symbolTable.put("R12", "12");
+    symbolTable.put("R13", "13");
+    symbolTable.put("R14", "14");
+    symbolTable.put("R15", "15");
+
     
     symbolTable.put("SCREEN", "16384");
     symbolTable.put("KBD", "24576");
