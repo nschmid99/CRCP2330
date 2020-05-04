@@ -1,66 +1,55 @@
-class AlienBullet(){
-	 field int x, y; // screen location of the bullet 
-   field int r; // radius of  bullet
-   field int data;
-   field int next;
-
-   constructor AlienBullet new(int Ax, int Ay, int Ar){    //constructs list
-        let x=Ax;
-        let y=Ay;
-        let r=Ar;
-        return this;
-   }
-
-   method void dispose() {    //disposes bullet
-
-      do Screen.setColor(false);
-      do Screen.drawCircle(x, y,r);
-      do Memory.deAlloc(this);
-      return;
-   }
-
-   method void draw() { //draws bullet and puts each one in a segment of the list
-    
-            do current.getData();
-            do Screen.setColor(true);
-            do Screen.drawCircle(x, y, r);
+class AlienBullet {
+	
+	field int x, y, r;
+	
+	constructor AlienBullet new (int Ax, int Ay, int Ar) {
+		let x = Ax;
+		let y = Ay;
+		let r = Ar;
+		//do draw();
+		return this;
+	}
+	
+	
+	method void dispose() {
+		do Screen.setColor(false);
+	    do Screen.drawCircle(x, y, r);
+	   
+	    do Screen.setColor(true);
         return;
-    }
+	}
+	
+	
+	method int getY() {
+		return y;
+	}
+	
+	method int getX() {
+		return x;
+	}
 
-    method int bulletX(){
-    return x;
-    }
-
-    method int bulletY(){
-    return y;
-    }
-
-    method void erase(){
-      do Screen.setColor(false);
-            do Screen.drawCircle(x, y, r);
-        return;
-    }
-
-    method int resetBullet(int Ax, int Ay, int Ar){
-    do Screen.setColor(true);
-      let x=Ax;
-      let y=Ay;
-      let r=Ar;
-      return 0;
-    }
-
-   method void moveDown() {   //moves bullet up when shot
-      if (y <300) {
-      do bulletY();
+	method void draw(int isTrue) {
+		if (isTrue = 1) {
+		    do Screen.setColor(true);
+		}
+		else {
+			do Screen.setColor(false);
+		}
+		
+		
+		do Screen.drawCircle(x, y, r);
+		
+   return;
+  }
+	
+	 method void fire() {
+	 //if(y<80){
          do Screen.setColor(false);
-         do Screen.drawCircle(x, (y - r) - 1,r);
+         do Screen.drawCircle(x, y+1, r);
+         //do Screen.drawCircle(x, (y + r) - 1,r);
          let y = y + 2;
          do Screen.setColor(true);
-         do Screen.drawCircle(x, y-1, r);
-        
-      }
+         do Screen.drawCircle(x, (y + r) - 1,r);//}
       return;
    }
-
-   
 }

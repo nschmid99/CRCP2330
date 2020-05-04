@@ -3,6 +3,7 @@ class Game{
 	field Spaceship spaceship; // the spaceship
 	//field Aliens alien; //the aliens
   field Array aliens;
+  field AlienBullet ab;
 	field int aPos; //alien position
   field int bPosX;
   field int bPosY;
@@ -18,10 +19,14 @@ class Game{
    constructor Game new() {
       let aliens=Array.new(10);
       do initAliens();  
+      let ab=AlienBullet.new(80,20,5);
       let spaceship = Spaceship.new(200, 200, 10);
       let direction = 0;  // initial state is no movement
+      //let abullet=0;
       return this;
    }
+
+
 
  method void initAliens(){ //sets up aliens in row  across the screen
   var Aliens a;
@@ -50,6 +55,19 @@ if(~(isshot())){
 do spaceship.shootBullet();
 do spaceship.draw();}
   return;
+}
+
+method void bulletGo(){
+if(ab.getY()<spaceship.spaceshipY()){
+  do ab.fire();
+  if(ab.getY()>spaceship.spaceshipY()-15){
+  do ab.dispose();
+}
+
+}
+return;
+
+  
 }
 
 method boolean isshot(){    //makes  sure bullet can only be shot when other one is gone
@@ -174,6 +192,7 @@ if(d=0){    //0 goes right
       while(j<10){
       let al=aliens[j];
       do al.moveRight();
+   //  do al.moveRightBullet();
       let j=j+1;
         }
     }
@@ -183,6 +202,7 @@ if(d=0){    //0 goes right
       while(j<10){
       let al=aliens[j];
       do al.moveLeft();
+     // do al.moveLeftBullet();
       do al.chngDirection();    //changes d from 0 to 1
       let j=j+1;
           }
@@ -196,7 +216,8 @@ if(d=1){      //1 goes left
     while(j<10){
     let al=aliens[j];
     do al.moveLeft();
-    let j=j+1;
+    //do al.moveLeftBullet();
+   let j=j+1;
       }
     }
   else{    //change direction
@@ -205,6 +226,7 @@ if(d=1){      //1 goes left
       while(j<10){
       let al=aliens[j];
       do al.moveRight();
+     // do al.moveRightBullet();
       do al.chngDirection();
       let j=j+1;
         }
@@ -242,18 +264,25 @@ if(d=1){      //1 goes left
          // waits for a key to be pressed
          while (key = 0) {
             let key = Keyboard.keyPressed();
+           
             if(direction=1){
             if(go=1){
             do shoot();
             }
             }
             do moveSpaceship();
+            do bulletGo();
           
             if(time>0){
             do moveAlien();
+          // do bulletGo();
             let time=time+1;} 
               do bulletPosCheck();
             do sortArray();
+
+            //if(time=10){
+            //  do bulletGo();
+           // }
             
          }
 
@@ -272,9 +301,11 @@ if(d=1){      //1 goes left
             }
             }
             do moveSpaceship();
+            do bulletGo();
            
             if(time>0){
             do moveAlien();
+            //do bulletGo();
             let time=time+1;}
              do bulletPosCheck();
             do sortArray();
