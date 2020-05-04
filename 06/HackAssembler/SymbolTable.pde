@@ -3,111 +3,64 @@ class SymbolTable {
   int ram;
   Table table;
   String symbol;
-  int value;
+  String value;
+  int addn=16;
+  HashMap<String,String>symbolTable;
   
   SymbolTable() {
-    table=new Table();
-    this.initST();
-    this.rom=0;
-    this.ram=16;
+    symbolTable=new HashMap<String,String>();
+    symbolTable.put("SP", "0");
+    symbolTable.put("LCL", "1");
+    symbolTable.put("ARG", "2");
+    symbolTable.put("THIS", "3");
+    symbolTable.put("THAT", "4");    
+        
+    symbolTable.put("R0", "0");
+    symbolTable.put("R1", "1");
+    symbolTable.put( "R2", "2");
+   symbolTable.put( "R3", "3");
+    symbolTable.put( "R4", "4");
+    symbolTable.put("R5", "5");
+    symbolTable.put( "R6", "6");
+    symbolTable.put("R7", "7");
+    symbolTable.put( "R8", "8");
+    symbolTable.put("R9", "9");
+    
+    symbolTable.put("SCREEN", "16384");
+    symbolTable.put("KBD", "24576");
   }
 
-  void initST() {
-    TableRow newRow0=table.addRow();
-    TableRow newRow1=table.addRow();
-    TableRow newRow2=table.addRow();
-    TableRow newRow3=table.addRow();
-    TableRow newRow4=table.addRow();
-    TableRow newRow5=table.addRow();
-    TableRow newRow6=table.addRow();
-    TableRow newRow7=table.addRow();
-    TableRow newRow8=table.addRow();
-    TableRow newRow9=table.addRow();
-    TableRow newRow10=table.addRow();
-    TableRow newRow11=table.addRow();
-    TableRow newRow12=table.addRow();
-    TableRow newRow13=table.addRow();
-    TableRow newRow14=table.addRow();
-    TableRow newRow15=table.addRow();
-    TableRow newScreen=table.addRow();
-    TableRow newKBD=table.addRow();
-    TableRow newSP=table.addRow();
-    TableRow newLCL=table.addRow();
-    TableRow newARG=table.addRow();
-    TableRow newTHIS=table.addRow();
-    TableRow newTHAT=table.addRow();
-
-    table.addColumn("symbol");
-    table.addColumn("value");
-    newRow0.setString("symbol", "R0"); newRow0.setInt("value", 0);
-    newRow1.setString("symbol", "R1"); newRow1.setInt("value", 1);
-    newRow2.setString("symbol", "R2"); newRow2.setInt("value", 2);
-    newRow3.setString("symbol", "R3"); newRow3.setInt("value", 3);
-    newRow4.setString("symbol", "R4"); newRow4.setInt("value", 4);
-    newRow5.setString("symbol", "R5"); newRow5.setInt("value", 5);
-    newRow6.setString("symbol", "R6"); newRow6.setInt("value", 6);
-    newRow7.setString("symbol", "R7"); newRow7.setInt("value", 7);
-    newRow8.setString("symbol", "R8"); newRow8.setInt("value", 8);
-    newRow9.setString("symbol", "R9"); newRow9.setInt("value", 9);
-    newRow10.setString("symbol", "R10"); newRow10.setInt("value", 10);
-    newRow11.setString("symbol", "R11"); newRow11.setInt("value", 11);
-    newRow12.setString("symbol", "R12"); newRow12.setInt("value", 12);
-    newRow13.setString("symbol", "R13"); newRow12.setInt("value", 13);
-    newRow14.setString("symbol", "R14"); newRow14.setInt("value", 14);
-    newRow15.setString("symbol", "R15"); newRow15.setInt("value", 15);
-    newScreen.setString("symbol", "SCREEN"); newScreen.setInt("value", 16384);
-    newKBD.setString("symbol", "KBD"); newKBD.setInt("value", 24576);
-    newSP.setString("symbol", "SP"); newSP.setInt("value", 0);
-    newLCL.setString("symbol", "LCL"); newLCL.setInt("value", 1);
-    newARG.setString("symbol", "ARG"); newARG.setInt("value", 2);
-    newTHIS.setString("symbol", "THIS"); newTHIS.setInt("value", 3);
-    newTHAT.setString("symbol", "THAT"); newTHAT.setInt("value", 4);    
+ 
+  
+  void addElement(String symbol, String add){
+    symbolTable.put(symbol,add);
   }
   
-  void addElement(String symbol, int value){
-    //have temp row
-    //with  variables
-    //set  variables
-    //add row(source0
-   TableRow templateRow=table.addRow();
-   String tempString=""; int tempVal=0;
-   templateRow.setString("symbol", tempString); templateRow.setInt("value", tempVal); 
-
-   tempString=symbol;
-   tempVal=value;
-   table.addRow(templateRow); //copy row but with new values
-  }
+ void addL(String symbol){
+   String num=Integer.toString(addn);
+   symbolTable.put(symbol,num);
+   addn++;
+ }
   
-  String getStringV(String symbol){ 
-    //getsymbol to add to table
-    return symbol;
-  }
-  
-int getValue(int value){
-    //get value to add to table
-    return value;
-  }
-  
-  
-  
-boolean hasString(String symbol){
-    TableRow result=table.findRow("symbol",symbol);
-    result.getString(symbol);
-    return true;
-  }
-  
-  void incRam(){
-  this.ram++;
-  }
-   void incRom(){
-  this.rom++;
-  }
-  
-  int getRam(){
-  return this.ram;
-  }
-  
-  int getRom(){ 
-  return this.rom;
-  }
+boolean contains(String symbol){
+  return(symbolTable.containsKey(symbol));
 }
+
+String getAddress(String add){
+  return(symbolTable.get(add));
+}}
+  //void incRam(){
+  //this.ram++;
+  //}
+  // void incRom(){
+  //this.rom++;
+  //}
+  
+//  int getRam(){
+//  return this.ram;
+//  }
+  
+//  int getRom(){ 
+//  return this.rom;
+//  }
+//}
