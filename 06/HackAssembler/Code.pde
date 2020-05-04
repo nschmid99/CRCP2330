@@ -12,14 +12,15 @@ Code(){
 
 void jumpTable(){
 jumpTable=new HashMap<String,String>();
+ //jumpTable.put("null","000");
 jumpTable.put("JGT","001");
   jumpTable.put("JEQ","010");
   jumpTable.put("JGE","011");
   jumpTable.put("JLT","100");
   jumpTable.put("JNE","101");
   jumpTable.put("JLE","110");
-  jumpTable.put("JMP","111");
-  jumpTable.put("null","000");
+  
+ 
   }
   
 String getBinj(String jumpr){

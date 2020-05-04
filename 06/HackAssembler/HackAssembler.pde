@@ -6,7 +6,7 @@ SymbolTable st;
 Code code;
 String fileName="Max";
 int  rom=0;
-int ram=16;
+int ram=15;
 
 void setup() {
   //initialize symbol table with predefined symbols and pre=allocated ram address
@@ -69,6 +69,7 @@ void firstPass() {
       String symbol=parser.symbol();
      // int address=this.st.getAddress(symbol);
       this.st.addElement(symbol,binary((rom),16));
+      ram++;
       //rom++;
      // rom++;
       }
@@ -136,14 +137,16 @@ void secondPass() {
          if(parser.current.contains(";")){
         String ins="111";
         String compt = parser.comp();
-         String  destt="null";
+         String  destt="000";
          String  jumpt=parser.jump();
    
            println("compt"+compt);
            println("jumpt"+jumpt);
          String comp=code.getBinc(compt);
-        String dest=code.getBind("null");
+         String dest=destt;
+        //String dest=code.getBind("null");
           String jump=code.getBinj(jumpt);
+          println("junp"+jump);
          instruction=ins+comp+dest+jump;
           println("instruct"+ins+compt+destt+jumpt);
            this.output.println(instruction);}
@@ -151,23 +154,21 @@ void secondPass() {
              String ins="111";
         String compt = parser.comp();
          String  destt=parser.dest();
-         String  jumpt="null";
+         String jumpt="000";
+         //String  jumpt="null";
    
            println("compt"+compt);
            println("jumpt"+jumpt);
          String comp=code.getBinc(compt);
         String dest=code.getBind(destt);
-          String jump=code.getBinj(jumpt);
+          String jump=jumpt;//=code.getBinj(jumpt);
          instruction=ins+comp+dest+jump;
           println("instruct"+ins+compt+destt+jumpt);
            this.output.println(instruction);
            }
         }
     }}
-        //if(parser.cmdtype()=="L_COMMAND"){
-          // this.output.println(instruction);
-          // this.output.newLine();
-       //       }
+        
  }//}
  // }
 

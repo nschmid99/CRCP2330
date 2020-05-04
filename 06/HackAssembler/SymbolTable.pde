@@ -5,6 +5,7 @@ class SymbolTable {
   String symbol;
   String value;
   int addn=16;
+  
   HashMap<String,String>symbolTable;
   
   SymbolTable() {
@@ -55,7 +56,7 @@ boolean contains(String symbol){
 
 String getAddress(String add){
   return(symbolTable.get(add));
-}}
+}
   //void incRam(){
   //this.ram++;
   //}
@@ -63,11 +64,11 @@ String getAddress(String add){
   //this.rom++;
   //}
   
-//  int getRam(){
-//  return this.ram;
-//  }
+  //int getRam(){
+  //return this.ram;
+  //}
   
-//  int getRom(){ 
-//  return this.rom;
-//  }
-//}
+  //int getRom(){ 
+  //return this.rom;
+  //}
+}

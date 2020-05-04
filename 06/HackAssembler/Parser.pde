@@ -33,16 +33,6 @@ void advance(){
   
 }
 
-String removeComments(String current){
-  if(current.contains("//")){
-    int index=current.indexOf("//");
-    if(index>-1){
-    String right2=current.substring(index,current.length());
-    //println(right2+"right2");
-return current.replace(right2,"");}}
-return current.trim();
-//return remove;
-}
 
 //command type A/C/L,  return A/C/L command
 //a=0,c=1,label=everything else
