@@ -34,7 +34,10 @@ class Spaceship {
    }
 
    method void dispose() {
-      do Memory.deAlloc(this);
+       do Screen.setColor(false);
+      do Screen.drawRectangle(x, y, x + size, y + size);
+       do Screen.setColor(false);
+      //do Memory.deAlloc(this);
       return;
    }
    method int spaceshipX(){

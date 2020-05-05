@@ -13,7 +13,7 @@ class AlienBullet {
 	
 	method void dispose() {
 		do Screen.setColor(false);
-	    do Screen.drawCircle(x, y, r);
+	    do Screen.drawCircle(x, y+r-1, r);
 	   
 	    do Screen.setColor(true);
         return;

@@ -8,7 +8,7 @@ pop this 1
 push pointer 0
 call Game.initAliens 1
 pop temp 0
-push constant 80
+push constant 200
 push constant 20
 push constant 5
 call AlienBullet.new 3
@@ -91,13 +91,18 @@ pop temp 0
 label IF_FALSE0
 push constant 0
 return
-function Game.bulletGo 0
+function Game.bulletGo 3
 push argument 0
 pop pointer 0
+push constant 0
+pop local 0
+push constant 0
+pop local 1
+push constant 0
+pop local 2
 push this 2
 call AlienBullet.getY 1
-push this 0
-call Spaceship.spaceshipY 1
+push constant 200
 lt
 if-goto IF_TRUE0
 goto IF_FALSE0
@@ -105,21 +110,100 @@ label IF_TRUE0
 push this 2
 call AlienBullet.fire 1
 pop temp 0
+label IF_FALSE0
 push this 2
 call AlienBullet.getY 1
 push this 0
 call Spaceship.spaceshipY 1
-gt
-push constant 15
-sub
+eq
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
 push this 2
+call AlienBullet.getY 1
+pop temp 0
+push this 2
 call AlienBullet.dispose 1
 pop temp 0
 label IF_FALSE1
-label IF_FALSE0
+push this 2
+call AlienBullet.getX 1
+push this 0
+call Spaceship.spaceshipX 1
+gt
+push constant 6
+sub
+push this 2
+call AlienBullet.getX 1
+push this 0
+call Spaceship.spaceshipX 1
+lt
+push constant 16
+add
+and
+push this 2
+call AlienBullet.getY 1
+push this 0
+call Spaceship.spaceshipY 1
+eq
+and
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 2
+call AlienBullet.dispose 1
+pop temp 0
+push this 0
+call Spaceship.dispose 1
+pop temp 0
+push constant 1
+pop local 0
+label WHILE_EXP0
+push local 1
+push constant 20
+lt
+not
+if-goto WHILE_END0
+push constant 7
+call Sys.wait 1
+pop temp 0
+push local 1
+push constant 1
+add
+pop local 1
+push local 1
+call Output.printInt 1
+pop temp 0
+push local 1
+push constant 15
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 15
+pop local 2
+label IF_FALSE3
+goto WHILE_EXP0
+label WHILE_END0
+label IF_FALSE2
+push local 0
+push constant 1
+eq
+push local 2
+and
+push constant 15
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 200
+push constant 200
+push constant 10
+call Spaceship.new 3
+pop this 0
+push constant 21
+pop local 1
+label IF_FALSE4
 push constant 0
 return
 function Game.isshot 1

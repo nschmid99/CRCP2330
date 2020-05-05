@@ -19,6 +19,10 @@ pop temp 0
 push this 0
 push this 1
 push this 2
+add
+push constant 1
+sub
+push this 2
 call Screen.drawCircle 3
 pop temp 0
 push constant 0
