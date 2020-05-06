@@ -58,7 +58,8 @@ String symbol(){
   String trimmedLine=this.current.trim();
 
 if(commandtype=="L_COMMAND"){
-  return trimmedLine.replace("(","").replace(")","");
+  //return trimmedLine.replace("("," ").replace(")"," ");
+  return trimmedLine.substring(1,trimmedLine.length()-1);
 }
 else if(commandtype=="A_COMMAND"){
   return trimmedLine.substring(1);

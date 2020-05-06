@@ -1,10 +1,10 @@
 class SymbolTable {
-  int rom;
-  int ram;
+  int rom =0; //0
+  int ram = 15; //15
   Table table;
   String symbol;
-  String value;
-  int addn=15;
+  String address;
+  int addn=16;
   
   HashMap<String,String>symbolTable;
   
@@ -40,35 +40,33 @@ class SymbolTable {
 
  
   
-  void addElement(String symbol, String add){
-    symbolTable.put(symbol,add);
+  void addElement(String symbol, String address){
+    symbolTable.put(symbol,address);
+    println(symbol+"s"+address+"a");
+    println(symbolTable);
+    addn++;
   }
   
- void addL(String symbol, String add){
-   //String num=Integer.toString(addn);
-   symbolTable.put(symbol,add);
-   addn++;
- }
   
 boolean contains(String symbol){
   return(symbolTable.containsKey(symbol));
 }
 
-String getAddress(String add){
-  return(symbolTable.get(add));
+String getAddress(String address){
+  return(symbolTable.get(address));
 }
-  //void incRam(){
-  //this.ram++;
-  //}
-  // void incRom(){
-  //this.rom++;
-  //}
+  void incRam(){
+  this.ram++;
+  }
+   void incRom(){
+  this.rom++;
+  }
   
-  //int getRam(){
-  //return this.ram;
-  //}
+  int getRam(){
+  return this.ram;
+  }
   
-  //int getRom(){ 
-  //return this.rom;
-  //}
+  int getRom(){ 
+  return this.rom;
+  }
 }

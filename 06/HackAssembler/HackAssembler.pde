@@ -5,9 +5,10 @@ PrintWriter output;
 SymbolTable st;
 Code code;
 String saveL;
+String symbol;
 String fileName="Max";
 int  rom=0;
-int ram=15;
+int ram;
 
 void setup() {
   //initialize symbol table with predefined symbols and pre=allocated ram address
@@ -56,25 +57,27 @@ void firstPass() {
 
       if(parser.cmdtype()=="A_COMMAND"){
        println("a");
-       rom++;
-       //st.incRom();
+       //rom++;
+       st.incRom();
     }
     else if(parser.cmdtype()== "C_COMMAND")
       {
         println("c");
-        rom++;
-         //st.incRom();
+        //rom++;
+         st.incRom();
       }
       else if(parser.cmdtype()=="L_COMMAND"){
         //symbolTable.addL(parser.symbol.substring(0,parser.current-2),parser.i);
-      String symbol=parser.symbol();
-      println(symbol+"sym");
-     // int address=this.st.getAddress(symbol);
-  saveL=binary((rom),16);
-     println(binary((rom),16));
-    this.st.addElement(symbol,binary((rom),16));
-    //output.println(binary((rom),16));
-      //ram++;
+      symbol=parser.symbol();
+     // symbol.replace("("," ");
+    String  symbag= symbol.substring(1,symbol.length()-1);
+      println(symbag+"sym");
+      String address=Integer.toString(this.st.getRom());
+    this.st.addElement(symbag,address);
+    println(symbag +"symbol" + "address" + address);
+   // println(st.addElement(symbol,binary((address),16));
+    //st.incRam();
+     // ram++;
       //rom++;
      // rom++;
       }
@@ -106,42 +109,41 @@ void secondPass() {
 
       
     if (parser.cmdtype()=="A_COMMAND"){
-      
+      //rom++;
       String  temp=parser.current;
-    //  String tmp;
-    //String  tmp=split(temp,"@")[1];
       String tmp=temp.substring(1);
-      // println(tmp+"tmp");
-       //checkAt();
-          if(tmp.startsWith("@R")){
-            tmp=temp.substring(2);
-            println(tmp+"tmp");
+      
+          if(tmp.startsWith("@")){
+           // tmp=temp.substring(2);
+            println(tmp+"Atmp");
             String write=binary(int(tmp),16);
             println("write"+write);
-            output.println(write);
-          }
+           // output.println(write);
+         }
           else
           if(st.contains(tmp)==true){
             int tempr = Integer.parseInt(st.getAddress(tmp));
+            println(tempr+"tempr"+tmp+"temp");
            String write=binary(tempr,16);
             println(write+"write");
             output.println(write);
           }
-          else{
-          //  println("ram",ram);
-          //  println(tmp+"tmpp3");
-          //  st.addElement(tmp,Integer.toString(ram));
-          //String write=binary(ram,16);
-          //println(write+"write3");
-          //output.println(write);
-          ram++;
-          }
-         //int address=getAddress(tmp);
-          //st.addElement(tmp,address);
+        //  else if(tmp.startsWith("(")){
+           // println(tmp+"hasp");
+           // String write=symbol;
+           // output.println(write);
+           //ram=this.st.getRam();
+           //String r=Integer.toString(ram);;
+          // this.st.addElement(tmp,r);
+           //println(tmp+"anotexist"+r+"address");
+           //String write=binary(tmp,16);
+         // st.incRam();
+         // }
           }
           
        
-      if(parser.cmdtype()=="C_COMMAND"){
+     else if(parser.cmdtype()=="C_COMMAND"){
+       // rom++;
          println(parser.current+"parser");
          //if(parser.current.contains(";")){
         String ins="111";
@@ -159,9 +161,14 @@ void secondPass() {
           println("instruct"+ins+compt+destt+jumpt);
            this.output.println(instruction);
         }
-        if(parser.cmdtype()=="L_COMMAND"){
-        //output.println(binary((rom),16));
-        output.println(saveL);
+        
+       else if(parser.cmdtype()=="L_COMMAND"){
+         String syd=parser.symbol();
+         
+         if(st.contains(syd)==true);
+         println(symbol+"thesymbol");
+      // String symb= st.getAddress(syd);
+    // output.println((binary(Integer.parseInt(symb),16)));
         }
     }}
         
