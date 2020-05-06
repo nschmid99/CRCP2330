@@ -12,18 +12,19 @@ Code(){
 
 void jumpTable(){
 jumpTable=new HashMap<String,String>();
- //jumpTable.put("null","000");
+ jumpTable.put("no","000");
 jumpTable.put("JGT","001");
   jumpTable.put("JEQ","010");
   jumpTable.put("JGE","011");
   jumpTable.put("JLT","100");
   jumpTable.put("JNE","101");
   jumpTable.put("JLE","110");
-  
+  jumpTable.put("JMP","111");
  
   }
   
 String getBinj(String jumpr){
+  println(jumpr+"jumpr");
   return(jumpTable.get(jumpr));
 }
   
@@ -43,6 +44,7 @@ String getBinj(String jumpr){
   } 
   
   String getBind(String destr){
+    println(destr+"destr");
   return(destTable.get(destr));
 }
   
@@ -81,6 +83,7 @@ compTable.put("D&M","1000000");
   }
   
  String getBinc(String compr){
+   println(compr+"compr");
   return(compTable.get(compr));
 }
   

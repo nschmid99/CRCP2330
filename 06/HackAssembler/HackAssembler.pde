@@ -4,6 +4,7 @@ BufferedReader input;
 PrintWriter output;
 SymbolTable st;
 Code code;
+String saveL;
 String fileName="Max";
 int  rom=0;
 int ram=15;
@@ -67,9 +68,13 @@ void firstPass() {
       else if(parser.cmdtype()=="L_COMMAND"){
         //symbolTable.addL(parser.symbol.substring(0,parser.current-2),parser.i);
       String symbol=parser.symbol();
+      println(symbol+"sym");
      // int address=this.st.getAddress(symbol);
-      this.st.addElement(symbol,binary((rom),16));
-      ram++;
+  saveL=binary((rom),16);
+     println(binary((rom),16));
+    this.st.addElement(symbol,binary((rom),16));
+    //output.println(binary((rom),16));
+      //ram++;
       //rom++;
      // rom++;
       }
@@ -103,11 +108,12 @@ void secondPass() {
     if (parser.cmdtype()=="A_COMMAND"){
       
       String  temp=parser.current;
+    //  String tmp;
     //String  tmp=split(temp,"@")[1];
-       String tmp=temp.substring(1);
+      String tmp=temp.substring(1);
       // println(tmp+"tmp");
        //checkAt();
-          if(temp.startsWith("@R")){
+          if(tmp.startsWith("@R")){
             tmp=temp.substring(2);
             println(tmp+"tmp");
             String write=binary(int(tmp),16);
@@ -121,10 +127,13 @@ void secondPass() {
             println(write+"write");
             output.println(write);
           }
-          else{st.addElement(tmp,binary(ram,16));
-          String write=binary(ram,16);
-          println(write+"write3");
-          output.println(write);
+          else{
+          //  println("ram",ram);
+          //  println(tmp+"tmpp3");
+          //  st.addElement(tmp,Integer.toString(ram));
+          //String write=binary(ram,16);
+          //println(write+"write3");
+          //output.println(write);
           ram++;
           }
          //int address=getAddress(tmp);
@@ -134,38 +143,25 @@ void secondPass() {
        
       if(parser.cmdtype()=="C_COMMAND"){
          println(parser.current+"parser");
-         if(parser.current.contains(";")){
+         //if(parser.current.contains(";")){
         String ins="111";
         String compt = parser.comp();
-         String  destt="000";
+         String  destt=parser.dest();
          String  jumpt=parser.jump();
    
-           println("compt"+compt);
-           println("jumpt"+jumpt);
+          
          String comp=code.getBinc(compt);
-         String dest=destt;
-        //String dest=code.getBind("null");
+       String dest=code.getBind(destt);
           String jump=code.getBinj(jumpt);
-          println("junp"+jump);
-         instruction=ins+comp+dest+jump;
-          println("instruct"+ins+compt+destt+jumpt);
-           this.output.println(instruction);}
-           else if(parser.current.contains("=")){
-             String ins="111";
-        String compt = parser.comp();
-         String  destt=parser.dest();
-         String jumpt="000";
-         //String  jumpt="null";
-   
-           println("compt"+compt);
-           println("jumpt"+jumpt);
-         String comp=code.getBinc(compt);
-        String dest=code.getBind(destt);
-          String jump=jumpt;//=code.getBinj(jumpt);
+          
+
          instruction=ins+comp+dest+jump;
           println("instruct"+ins+compt+destt+jumpt);
            this.output.println(instruction);
-           }
+        }
+        if(parser.cmdtype()=="L_COMMAND"){
+        //output.println(binary((rom),16));
+        output.println(saveL);
         }
     }}
         
@@ -181,8 +177,7 @@ boolean checkwhite() {
 }
 
 boolean checkCommentsin() {
-  // String comment=parser.current;
-//  String right;
+  
   
   if (parser.current.contains("//")) {
  return true ;}
@@ -190,19 +185,12 @@ boolean checkCommentsin() {
  return false;}
 }
 boolean checkCommentsBegin() {
-  // String comment=parser.current;
+
   if (parser.current.startsWith("//")) {
- // String val=comment.substring(comment.indexOf("//"),comment.length());
-  
- // val=val.replace("val","");
- // println(val);
-    //String nocomment= comment.substring(parser.advance);
+ 
     int index=parser.current.indexOf("//");
   if(index>-1){
     parser.current.substring(0,index);
-     //parser.advance();
-    
-
     }
     return true;
 }
@@ -221,18 +209,11 @@ boolean checkAt() {
 }
 
 boolean isnumber(String temp){
-   //String temp="";
-  // String temp2="";
-   //temp=parser.current;
-   println("temprn"+temp);
-   //temp.split(temp, '@');
-   //println("tempsplit"+temp.charAt(1));
    if (temp.startsWith("0")||temp.startsWith("1")||temp.startsWith("2")||temp.startsWith("3")|
           temp.startsWith("4")|temp.startsWith("5")||temp.startsWith("6")||temp.startsWith("7")||
           temp.startsWith("8")||temp.startsWith("9")) {   
              println("true");
          return true;
-      
      }
          else {
          println("false");

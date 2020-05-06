@@ -58,7 +58,7 @@ String symbol(){
   String trimmedLine=this.current.trim();
 
 if(commandtype=="L_COMMAND"){
-  return trimmedLine.substring(1,this.current.length()-1);
+  return trimmedLine.replace("(","").replace(")","");
 }
 else if(commandtype=="A_COMMAND"){
   return trimmedLine.substring(1);
@@ -104,10 +104,10 @@ String comp(){
        if(current.contains(";")){
 
      int nsem=current.lastIndexOf(";");
-     rJump=current.substring(nsem+1);
+     rJump=current.substring(nsem+1).trim();
     println("rjmp"+rJump);}
    else{
-  rJump="null";}
+  rJump="no";}
    return  rJump;
    
 }}

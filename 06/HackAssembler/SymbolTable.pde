@@ -4,7 +4,7 @@ class SymbolTable {
   Table table;
   String symbol;
   String value;
-  int addn=16;
+  int addn=15;
   
   HashMap<String,String>symbolTable;
   
