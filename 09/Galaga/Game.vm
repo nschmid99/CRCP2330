@@ -1,5 +1,5 @@
 function Game.new 0
-push constant 13
+push constant 21
 call Memory.alloc 1
 pop pointer 0
 push constant 10
@@ -9,6 +9,8 @@ push pointer 0
 call Game.initAliens 1
 pop temp 0
 push constant 200
+push this 17
+add
 push constant 20
 push constant 5
 call AlienBullet.new 3
@@ -19,8 +21,38 @@ push constant 10
 call Spaceship.new 3
 pop this 0
 push constant 0
+pop this 20
+push constant 0
+pop this 11
+push constant 0
+pop this 19
+push constant 200
 pop this 12
+push constant 3
+pop this 14
+push constant 0
+pop this 15
+push constant 1
+pop this 18
+push constant 0
+pop this 16
+push constant 0
+pop this 17
 push pointer 0
+return
+function Game.recrAB 0
+push argument 0
+pop pointer 0
+push this 15
+pop this 15
+push this 14
+pop this 14
+push constant 0
+return
+function Game.scLiv 0
+push argument 0
+pop pointer 0
+push constant 0
 return
 function Game.initAliens 2
 push argument 0
@@ -79,25 +111,33 @@ pop pointer 0
 push pointer 0
 call Game.isshot 1
 not
+push this 13
+push constant 0
+eq
+and
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
 push this 0
 call Spaceship.shootBullet 1
 pop temp 0
-push this 0
-call Spaceship.draw 1
-pop temp 0
+push constant 1
+pop this 18
+push constant 1
+pop this 11
 label IF_FALSE0
 push constant 0
 return
-function Game.bulletGo 3
+function Game.bulletGo 5
 push argument 0
 pop pointer 0
 push constant 0
-pop local 0
+pop local 4
 push constant 0
-pop local 1
+pop local 0
+push this 2
+call AlienBullet.getX 1
+pop local 3
 push constant 0
 pop local 2
 push this 2
@@ -153,56 +193,43 @@ label IF_TRUE2
 push this 2
 call AlienBullet.dispose 1
 pop temp 0
-push this 0
-call Spaceship.dispose 1
-pop temp 0
-push constant 1
-pop local 0
-label WHILE_EXP0
-push local 1
-push constant 20
-lt
-not
-if-goto WHILE_END0
-push constant 7
-call Sys.wait 1
-pop temp 0
-push local 1
-push constant 1
+push this 17
+push constant 30
 add
-pop local 1
-push local 1
-call Output.printInt 1
-pop temp 0
-push local 1
-push constant 15
-eq
+pop this 17
+push this 17
+push constant 400
+gt
 if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
-push constant 15
-pop local 2
+push this 17
+push constant 30
+sub
+pop this 17
 label IF_FALSE3
-goto WHILE_EXP0
-label WHILE_END0
-label IF_FALSE2
-push local 0
+push constant 200
+push this 17
+add
+push constant 20
+push constant 5
+call AlienBullet.new 3
+pop this 2
+push this 14
 push constant 1
-eq
-push local 2
-and
-push constant 15
+sub
+pop this 14
+push constant 1
+pop local 4
+label IF_FALSE2
+push local 4
+push constant 1
 eq
 if-goto IF_TRUE4
 goto IF_FALSE4
 label IF_TRUE4
-push constant 200
-push constant 200
-push constant 10
-call Spaceship.new 3
-pop this 0
-push constant 21
-pop local 1
+push constant 0
+pop local 4
 label IF_FALSE4
 push constant 0
 return
@@ -219,14 +246,22 @@ label IF_TRUE0
 push constant 0
 not
 pop local 0
+push constant 0
+not
+return
+goto IF_END0
 label IF_FALSE0
 push constant 0
 return
+label IF_END0
 function Game.bulletToFar 0
 push argument 0
 pop pointer 0
+push pointer 0
+call Game.bulletPosCheck 1
+pop temp 0
 push this 5
-push constant 15
+push constant 20
 lt
 if-goto IF_TRUE0
 goto IF_FALSE0
@@ -237,14 +272,16 @@ pop temp 0
 push this 0
 call Spaceship.rstBullet 1
 pop temp 0
+push constant 0
+pop this 11
 label IF_FALSE0
 push constant 0
 return
-function Game.sortArray 6
+function Game.sortArray 5
 push argument 0
 pop pointer 0
 push constant 0
-pop local 5
+pop this 19
 push constant 0
 pop local 0
 label WHILE_EXP0
@@ -269,8 +306,16 @@ push pointer 0
 call Game.bulletPosCheck 1
 pop temp 0
 push this 5
+push constant 1
+sub
 push local 3
 lt
+push this 5
+push local 3
+gt
+push constant 10
+add
+and
 push this 4
 push local 4
 gt
@@ -279,7 +324,7 @@ add
 and
 push this 4
 push local 4
-push constant 10
+push constant 20
 sub
 lt
 and
@@ -287,11 +332,15 @@ if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
 push constant 1
-pop local 5
+pop this 19
 push local 0
 push constant 1
 sub
 pop local 0
+push this 15
+push constant 5
+add
+pop this 15
 push local 0
 push this 1
 add
@@ -311,17 +360,23 @@ push constant 0
 pop this 11
 goto IF_END0
 label IF_FALSE0
-push this 5
-push local 3
-lt
-push constant 10
+push this 4
+push local 4
+gt
+push constant 40
 add
+push this 4
+push local 4
+push constant 40
+sub
+lt
+and
 not
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
 push constant 0
-pop local 5
+pop this 19
 push local 0
 push constant 1
 add
@@ -445,7 +500,7 @@ push local 8
 call Aliens.getDir 1
 pop local 5
 push local 9
-push constant 480
+push constant 490
 gt
 if-goto IF_TRUE2
 goto IF_FALSE2
@@ -454,7 +509,7 @@ push constant 1
 pop local 2
 label IF_FALSE2
 push local 11
-push constant 30
+push constant 10
 lt
 if-goto IF_TRUE3
 goto IF_FALSE3
@@ -611,7 +666,7 @@ return
 function Game.moveSpaceship 1
 push argument 0
 pop pointer 0
-push this 12
+push this 20
 push constant 3
 eq
 if-goto IF_TRUE0
@@ -620,8 +675,10 @@ label IF_TRUE0
 push this 0
 call Spaceship.moveLeft 1
 pop temp 0
+push constant 1
+pop this 13
 label IF_FALSE0
-push this 12
+push this 20
 push constant 4
 eq
 if-goto IF_TRUE1
@@ -630,19 +687,73 @@ label IF_TRUE1
 push this 0
 call Spaceship.moveRight 1
 pop temp 0
+push constant 1
+pop this 13
 label IF_FALSE1
+push this 20
+push constant 0
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 0
+call Spaceship.stopMoving 1
+pop temp 0
+push constant 0
+pop this 13
+label IF_FALSE2
 push constant 10
 call Sys.wait 1
 pop temp 0
 push constant 0
 return
-function Game.run 4
+function Game.run 5
 push argument 0
 pop pointer 0
 push constant 0
-pop local 3
+pop local 4
+push constant 6
+call String.new 1
+push constant 83
+call String.appendChar 2
+push constant 67
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 15
+call Output.printInt 1
+pop temp 0
+call Output.println 0
+pop temp 0
+push constant 6
+call String.new 1
+push constant 76
+call String.appendChar 2
+push constant 73
+call String.appendChar 2
+push constant 86
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 14
+call Output.printInt 1
+pop temp 0
 label WHILE_EXP0
-push local 3
+push local 4
 not
 not
 if-goto WHILE_END0
@@ -658,78 +769,96 @@ not
 if-goto WHILE_END1
 call Keyboard.keyPressed 0
 pop local 0
-push this 12
-push constant 1
-eq
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
 push this 11
 push constant 1
 eq
+push this 13
+push constant 0
+eq
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call Game.shoot 1
+pop temp 0
+label IF_FALSE0
+push pointer 0
+call Game.scLiv 1
+pop temp 0
+push pointer 0
+call Game.moveSpaceship 1
+pop temp 0
+push local 1
+push constant 0
+gt
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
 push pointer 0
-call Game.shoot 1
-pop temp 0
-label IF_FALSE1
-label IF_FALSE0
-push pointer 0
-call Game.moveSpaceship 1
+call Game.moveAlien 1
 pop temp 0
 push pointer 0
 call Game.bulletGo 1
 pop temp 0
 push local 1
-push constant 0
-gt
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push pointer 0
-call Game.moveAlien 1
-pop temp 0
-push local 1
 push constant 1
 add
 pop local 1
-label IF_FALSE2
+label IF_FALSE1
 push pointer 0
 call Game.bulletPosCheck 1
 pop temp 0
 push pointer 0
 call Game.sortArray 1
 pop temp 0
+push pointer 0
+call Game.bulletToFar 1
+pop temp 0
 goto WHILE_EXP1
 label WHILE_END1
 push local 0
 push constant 81
 eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+not
+pop local 4
+label IF_FALSE2
+push local 0
+push constant 130
+eq
 if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
+push constant 3
+pop this 20
 push constant 0
-not
-pop local 3
+pop this 11
 label IF_FALSE3
 push local 0
-push constant 130
+push constant 132
 eq
 if-goto IF_TRUE4
 goto IF_FALSE4
 label IF_TRUE4
-push constant 3
-pop this 12
+push constant 4
+pop this 20
+push constant 0
+pop this 11
 label IF_FALSE4
 push local 0
-push constant 132
+push constant 131
 eq
 if-goto IF_TRUE5
 goto IF_FALSE5
 label IF_TRUE5
-push constant 4
-pop this 12
+push constant 0
+pop this 20
+push constant 0
+pop this 11
 label IF_FALSE5
 push local 0
 push constant 32
@@ -737,8 +866,6 @@ eq
 if-goto IF_TRUE6
 goto IF_FALSE6
 label IF_TRUE6
-push constant 1
-pop this 12
 push constant 1
 pop this 11
 label IF_FALSE6
@@ -755,48 +882,51 @@ add
 pop local 1
 call Keyboard.keyPressed 0
 pop local 0
-push this 12
-push constant 1
-eq
-if-goto IF_TRUE7
-goto IF_FALSE7
-label IF_TRUE7
 push this 11
 push constant 1
 eq
+push this 13
+push constant 0
+eq
+and
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push pointer 0
+call Game.shoot 1
+pop temp 0
+label IF_FALSE7
+push pointer 0
+call Game.scLiv 1
+pop temp 0
+push pointer 0
+call Game.moveSpaceship 1
+pop temp 0
+push local 1
+push constant 0
+gt
 if-goto IF_TRUE8
 goto IF_FALSE8
 label IF_TRUE8
 push pointer 0
-call Game.shoot 1
-pop temp 0
-label IF_FALSE8
-label IF_FALSE7
-push pointer 0
-call Game.moveSpaceship 1
+call Game.moveAlien 1
 pop temp 0
 push pointer 0
 call Game.bulletGo 1
 pop temp 0
 push local 1
-push constant 0
-gt
-if-goto IF_TRUE9
-goto IF_FALSE9
-label IF_TRUE9
-push pointer 0
-call Game.moveAlien 1
-pop temp 0
-push local 1
 push constant 1
 add
 pop local 1
-label IF_FALSE9
+label IF_FALSE8
 push pointer 0
 call Game.bulletPosCheck 1
 pop temp 0
 push pointer 0
 call Game.sortArray 1
+pop temp 0
+push pointer 0
+call Game.bulletToFar 1
 pop temp 0
 goto WHILE_EXP2
 label WHILE_END2

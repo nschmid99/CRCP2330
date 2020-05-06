@@ -14,9 +14,7 @@ push this 0
 push constant 5
 add
 pop this 6
-push this 1
-push constant 5
-add
+push constant 200
 pop this 7
 push this 6
 push this 7
@@ -47,6 +45,35 @@ call Screen.drawRectangle 4
 pop temp 0
 push constant 0
 return
+function Spaceship.spaceErase 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push this 4
+add
+push this 1
+push this 4
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Spaceship.initBullet 0
+push argument 0
+pop pointer 0
+push this 6
+push this 7
+push constant 5
+call Bullet.new 3
+pop this 10
+push constant 0
+return
 function Spaceship.dispose 0
 push argument 0
 pop pointer 0
@@ -65,6 +92,9 @@ call Screen.drawRectangle 4
 pop temp 0
 push constant 0
 call Screen.setColor 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
@@ -104,6 +134,8 @@ push this 0
 push constant 5
 add
 pop this 6
+push constant 200
+pop this 7
 push this 10
 push this 6
 push this 7
@@ -128,6 +160,21 @@ call Spaceship.bulletposy 1
 pop temp 0
 push this 10
 call Bullet.moveUp 1
+pop temp 0
+push constant 0
+return
+function Spaceship.stopMoving 0
+push argument 0
+pop pointer 0
+push this 0
+push this 1
+push this 0
+push this 4
+add
+push this 1
+push this 4
+add
+call Screen.drawRectangle 4
 pop temp 0
 push constant 0
 return

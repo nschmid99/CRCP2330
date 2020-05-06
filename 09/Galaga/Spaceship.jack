@@ -19,7 +19,7 @@ class Spaceship {
       let size = Nsize;
       let inc=0;
       let bPosx=x+5;
-      let bPosy=y+5;
+      let bPosy=200;
       let bullet=Bullet.new( bPosx,bPosy,5);
       do draw();
       return this;
@@ -33,11 +33,22 @@ class Spaceship {
       return;
    }
 
+method void spaceErase(){
+   do Screen.setColor(true);
+      do Screen.drawRectangle(x, y, x + size, y + size);
+      return;
+}
+
+method void initBullet(){
+   let bullet=Bullet.new( bPosx,bPosy,5);
+   return;
+}
+
    method void dispose() {
        do Screen.setColor(false);
       do Screen.drawRectangle(x, y, x + size, y + size);
        do Screen.setColor(false);
-      //do Memory.deAlloc(this);
+      do Memory.deAlloc(this);
       return;
    }
    method int spaceshipX(){
@@ -63,7 +74,7 @@ class Spaceship {
    do spaceshipX();
    //do spaceshipY();
    let bPosx=x+5;
-   //let bPosy=y+5;
+   let bPosy=200;
    do bullet.resetBullet(bPosx,bPosy,5);
    return;
    }
@@ -81,13 +92,17 @@ class Spaceship {
       return;
    }
 
+method void stopMoving(){
+      do Screen.drawRectangle(x, y, x + size, y + size);
+      return;
+}
    
    method void moveLeft() {   //moves spaceship L
       if (x > 1) {
          do rstBullet();
          do Screen.setColor(false);
          do Screen.drawRectangle((x + size) - 1, y, x + size, y + size);
-         let x = x - 2;
+         let x=  x - 2;
          do Screen.setColor(true);
          do Screen.drawRectangle(x, y, x + 1, y + size);
       }
@@ -100,7 +115,7 @@ class Spaceship {
       do rstBullet();
          do Screen.setColor(false);
          do Screen.drawRectangle(x, y, x + 1, y + size);
-         let x = x + 2;
+         let x= x + 2;
          do Screen.setColor(true);
          do Screen.drawRectangle((x + size) - 1, y, x + size, y + size);
       }

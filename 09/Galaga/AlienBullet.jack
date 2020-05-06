@@ -27,6 +27,12 @@ class AlienBullet {
 	method int getX() {
 		return x;
 	}
+	 method void recreate(){
+	 do Screen.setColor(true);
+	 do Screen.drawCircle(x,y,r);
+	 return;
+
+	 }
 
 	method void draw(int isTrue) {
 		if (isTrue = 1) {

@@ -36,6 +36,12 @@ class Bullet{
     return y;
     }
 
+    method void changec(){
+    do Screen.setColor(false);
+            do Screen.drawCircle(x, y, r);
+        return;
+    }
+
     method void erase(){
       do Screen.setColor(false);
             do Screen.drawCircle(x, y, r);
@@ -50,8 +56,10 @@ class Bullet{
       return 0;
     }
 
+
+
    method void moveUp() {   //moves bullet up when shot
-      if (y > 10) {
+      //if (y > 10) {
       do bulletY();
          do Screen.setColor(false);
          do Screen.drawCircle(x, (y + r) - 1,r);
@@ -59,7 +67,7 @@ class Bullet{
          do Screen.setColor(true);
          do Screen.drawCircle(x, y+1, r);
         
-      }
+      //}
       return;
    }
 
