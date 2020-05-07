@@ -72,7 +72,7 @@ method void initBullet(){
 
    method void rstBullet(){
    do spaceshipX();
-   //do spaceshipY();
+   do spaceshipY();
    let bPosx=x+5;
    let bPosy=200;
    do bullet.resetBullet(bPosx,bPosy,5);
