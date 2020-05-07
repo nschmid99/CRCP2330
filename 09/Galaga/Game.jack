@@ -44,12 +44,19 @@ field int d;
    }
 
 method void recrAB(){
+String liveC;
   let score=score;
   let lives=lives;
+  do Output.backSpace();
+  //  do Output.printInt(score);
+  //do Output.println();
+  let liveC=Output.printInt(lives);
+  //do liveC;
 return;
 }
 
 method void scLiv(){
+
  
   return;
 }
@@ -111,14 +118,9 @@ if(ab.getY()<200){
 
 if( (ab.getX()>spaceship.spaceshipX()-6) & (ab.getX()<spaceship.spaceshipX()+16) & (ab.getY()=spaceship.spaceshipY()) ){
    do ab.dispose();
-   let ince=ince+30;
-
-   if(ince>400){
-   let ince=ince-30;
-   }
-     let ab=AlienBullet.new(200+ince,20,5);
+   do incAB();
    let lives=lives-1;
-   //do recrAB();
+   
   // do spaceship.dispose();
   // let  spaceship = Spaceship.new(200, 200, 10);
 let kill=1;
@@ -126,7 +128,7 @@ let kill=1;
 }
 if(kill=1) {
      //do Sys.wait(30);
-     
+     do recrAB();
 //let spaceship = Spaceship.new(200, 200, 10);
 //let ab=AlienBullet.new(100,20,5);
 let kill=0;
@@ -134,6 +136,20 @@ let kill=0;
 return;
 
   
+}
+
+method void incAB(){
+var int right;
+let right=1;
+   
+    let ince=ince+30;
+    //do Output.printInt(ince);
+     let ab=AlienBullet.new(200+ince,20,5);
+   
+
+
+
+     return;
 }
 
 method boolean isshot(){    //makes  sure bullet can only be shot when other one is gone
@@ -356,7 +372,7 @@ if(d=1){      //1 goes left
             do shoot();
             }
             
-           do  scLiv();
+           //do  recrAB();
           do moveSpaceship();
       
             if(time>0){
@@ -391,7 +407,7 @@ if(d=1){      //1 goes left
             do shoot();
             }
             //let go=1;
-            do  scLiv();
+           // do  recrAB();
             do moveSpaceship();
             
             //do bulletGo();
