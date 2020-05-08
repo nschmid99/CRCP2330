@@ -3,10 +3,23 @@
 class Main {
     function void main() {
         var Game game;
+        //var GameOver gameover;
+        var String gmovr;
+        var int gamo;
+
+        //let gamo=game.liveS();
+        //do Output.printInt(gamo);
+        //let gameover=GameOver.new();
+       
         let game = Game.new();
         do game.run();
         do game.dispose();
+        
+        //do gameover.run();
+       //do gameover.dispose();
+       
         return;
 
     }
+
 }

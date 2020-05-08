@@ -54,6 +54,8 @@ field int d;
    }
 
 
+
+
  method void initAliens(){ //sets up aliens in row  across the screen
   var Aliens a;
   var int i;
@@ -126,10 +128,7 @@ let kill=0;
 if ( (ab.getY()>spaceship.spaceshipY()) & (ab.getX()>(spaceship.spaceshipX()-5) ) & (ab.getX()<(spaceship.spaceshipX()+11)) ) {
 
    let lives=lives-1;
-   if(lives<0){
- do Output.backSpace();
-}
- //do Output.backSpace();
+  do Output.moveCursor(1,6);
 
   do Output.printInt(lives);
 
@@ -138,6 +137,8 @@ if ( (ab.getY()>spaceship.spaceshipY()) & (ab.getX()>(spaceship.spaceshipX()-5) 
 //}
 
 }
+
+
 
 
 return;
@@ -172,13 +173,13 @@ do bulletPosCheck();
 
  method void sortArray(){
 var int s;
+var int trackd;
 var Aliens atemp;
-var Aliens alientodie;
 var int alienY;
  var  int  alienX;
 
 
-let d=0;
+let trackd=0;
 let s=0;
 while(s<10){ //go through array
   let atemp=aliens[s];  //get array 
@@ -192,29 +193,40 @@ while(s<10){ //go through array
   //& (bPosY>alienY) ){
 
   if( (bPosX>alienX)  & (bPosX<(alienX+15))  ){ //is by above ay
-    let d=1;      //let  d=1;
+    let trackd=trackd+1;      //let  d=1;
     //do Output.printInt(d);
 
-
-    let sc=1;
-
+    let score=score+5;
+    do Output.moveCursor(0,7);
+    do Output.moveCursor(0,6);
+    do Output.printInt(score);
     let atemp=aliens[s];
     do atemp.dispose();
+     //do Output.printInt(    s);
     let go=0;
 }
 
  }
 
-   
+  
 
- let s=s+1;}
+ let s=s+1;
+
+ }
+
+ if(trackd=9){
+let lives=0;
+ do Memory.deAlloc(atemp);
+ }
  return;
 
  }
 
 
   method void dispose() {
+ // do liveS();
       do spaceship.dispose();
+      do ab.dispose();
       do aliens.dispose();
       do Memory.deAlloc(this);
       return;
@@ -342,14 +354,11 @@ if(d=1){      //1 goes left
 
 
        do Output.printString("SCORE:"); do Output.printInt(score);
-       if(sc=1){
-       let score=score+5;
-       do Output.printInt(score);
-       }
   do Output.println();
-//do Output.printString("LIVES:"); do Output.printInt(lives);
+do Output.printString("LIVES:"); do Output.printInt(lives);
 
 
+//0,6 o,7
       while (~exit) {
         let time=time+1;
        // do recrLives();
@@ -376,20 +385,17 @@ if(d=1){      //1 goes left
           
  do sortArray();
   do bulletToFar();
-
-             if(gmOvr=1){
- let key=1;
-  }
+          if(lives=0){
+              // do Sys.halt();
+            //do  Screen.clearScreen();
+            //do dispose();
+            let key=81;
+            }
+             
             
          }
 
 
-//if  bullet isnt too far (is still shooting)can not  shoot new bullet
-        if(key=1){
-
-  do Screen.clearScreen();
- // do Output.printString("GAME OVER");
-        }
 
          if (key = 81)  { let exit = true; }     // q key
          if (key = 130) { let direction = 3; }   // left arrow to move
@@ -412,6 +418,16 @@ if(d=1){      //1 goes left
             if(go=0){
             do moveSpaceship();
             }
+
+
+             // if(lives=0){
+            
+            //do  Screen.clearScreen();
+           // do dispose();
+           // let exit=true;
+            //}
+
+
             do bulletGo();
             do  abTooFar();
            

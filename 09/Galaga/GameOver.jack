@@ -1,0 +1,18 @@
+class GameOver{
+	
+	constructor GameOver new() {
+      //do draw();
+      return this;
+   }
+
+   method void run(){
+    do Output.printString("GAME OVER");
+    return;
+   }
+
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+
+}
