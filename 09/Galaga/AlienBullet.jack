@@ -27,12 +27,21 @@ class AlienBullet {
 	method int getX() {
 		return x;
 	}
-	 method void recreate(){
+
+	 method void reset(int Ax, int Ay){
+	 do Screen.setColor(false);
+	 let x=Ax;
+	 let y=Ay;
 	 do Screen.setColor(true);
-	 do Screen.drawCircle(x,y,r);
 	 return;
 
 	 }
+
+	  method void erase(){
+	 do Screen.setColor(false);
+	 do Screen.drawCircle(x,y+4,r);
+	 return;
+}
 
 	method void draw(int isTrue) {
 		if (isTrue = 1) {

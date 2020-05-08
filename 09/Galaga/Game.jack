@@ -19,6 +19,8 @@ class Game{
   field int score;
   field int stro;
   field int xAB;
+  field int yAB;
+  field int gmOvr;
   //field int ince;
   field int bulletDone;
 field int d;
@@ -31,7 +33,9 @@ field int d;
    constructor Game new() {
       let aliens=Array.new(10);
       do initAliens();  
-      let ab=AlienBullet.new(200,20,5);
+        let xAB=200;
+      let yAB=20;
+      let ab=AlienBullet.new(xAB,yAB,5);
       let spaceship = Spaceship.new(200, 200, 10);
       let direction = 0;  // initial state is no movement
       let go=0;
@@ -39,9 +43,11 @@ field int d;
       let abx=200;
       let lives=3;
       let score=0;
+      let kill=0;
       let bulletDone=0;
       let stro=0;
-      let xAB=200;
+      let  gmOvr=0;
+    
     //  let ince=0;
       //let abullet=0;
       return this;
@@ -95,58 +101,61 @@ method void alienbulletPC(){
   return;
 }
 
+method void abTooFar(){
+   if(ab.getY()>200){
+  do ab.getY();
+  do ab.erase();
+  do ab.reset(xAB,yAB);
+   let xAB=xAB+40;
+   let yAB=20;
+    if(xAB=400){
+   let xAB=40;
+   }
+
+}
+return;
+}
+
 method void bulletGo(){
 var int spHit;
 var int wait;
 var int w;
 var int ince;
 let ince=0;
-//var int abX;
-//let kill=0;
-let spHit=0;
-//let abX=ab.getX();
 let w=0;
 
+//do Output.printInt(kill);
 
 do alienbulletPC();
 
-if(ab.getY()<200){
+if(ab.getY()<210){
   do ab.fire();
 let kill=0;
   } 
 
-  if(ab.getY()=spaceship.spaceshipY()){
-  do ab.getY();
-   let kill=0;     
- do ab.dispose();
+ 
+
+if ( (ab.getY()>spaceship.spaceshipY()) & (ab.getX()>(spaceship.spaceshipX()-5) ) & (ab.getX()<(spaceship.spaceshipX()+11)) ) {
+ //do ab.erase();
+ //do ab.reset(xAB,yAB);
+  //let xAB=xAB+40;
+  //let yAB=20;
+   let lives=lives-1;
+  // if(xAB=400){
+  // let xAB=40;
+ // }
+ do Output.backSpace();
+  do Output.printInt(lives);
+
+  if(lives=0){
+  let gmOvr=1;
 }
 
-if( (abX>spaceship.spaceshipX()-6) & (abX<spaceship.spaceshipX()+16) & (ab.getY()=spaceship.spaceshipY()) ){
-   do ab.dispose();
-let  lives=lives-1;
-do Output.backSpace();
-  do Output.printInt(lives);
-  //if (ince=80){ let  ince=0;}
-   //do incAB();
-    let kill=1;
-
-
-if (kill=1){
- let xAB=xAB+40;
-   let ab=AlienBullet.new(xAB,20,5);
-
-   if(xAB=400){
-   let xAB=40;
-   }
-  //do Output.backSpace();
-  //let lives=lives-1;
-  //do Output.printInt(lives);
- let kill=0;
-}}
+}
 
 
 return;
-  
+
 }
 
 
@@ -198,7 +207,7 @@ while(s<10){ //go through array
 
   if( (bPosX>alienX)  & (bPosX<(alienX+15))  ){ //is by above ay
     let d=1;      //let  d=1;
-    do Output.printInt(d);
+    //do Output.printInt(d);
 
 
     //let score=score+5;
@@ -349,6 +358,8 @@ if(d=1){      //1 goes left
   do Output.println();
 
 do Output.printString("LIVES:"); do Output.printInt(lives);
+
+
       while (~exit) {
         let time=time+1;
        // do recrLives();
@@ -363,21 +374,32 @@ do Output.printString("LIVES:"); do Output.printInt(lives);
             }
             
             if(go=0){
-          do moveSpaceship();}
+          do moveSpaceship();
       
-            if(time>0){
+          }
+          do bulletGo();
+            do  abTooFar();
             do moveAlien();
-               
-           do bulletGo();
-            let time=time+1;} 
+              
+           
               do bulletPosCheck();
           
  do sortArray();
   do bulletToFar();
-            
+
+             if(gmOvr=1){
+ let key=1;
+  }
             
          }
+
+
 //if  bullet isnt too far (is still shooting)can not  shoot new bullet
+        if(key=1){
+        
+  do Screen.clearScreen();
+  do Output.printString("GAME OVER");
+        }
 
          if (key = 81)  { let exit = true; }     // q key
          if (key = 130) { let direction = 3; }   // left arrow to move
@@ -393,24 +415,29 @@ do Output.printString("LIVES:"); do Output.printInt(lives);
             let key = Keyboard.keyPressed();
 
             
-            if((go=1) &  (moving=0)){     
-            //if((go=1))     
+            if((go=1) &  (moving=0)){         
             do shoot();
             }
 
             if(go=0){
-            do moveSpaceship();}
-            
-           
-            if(time>0){
-            do moveAlien();
+            do moveSpaceship();
+            }
             do bulletGo();
-            let time=time+1;}
+            do  abTooFar();
+           
+              do moveAlien();
+
+           
              do bulletPosCheck();
                    do sortArray();
                    do bulletToFar();
+
+
          }
-     }  
+     } 
+
+    
+
      return;
    }
 

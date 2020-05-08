@@ -41,15 +41,32 @@ push argument 0
 pop pointer 0
 push this 0
 return
-function AlienBullet.recreate 0
+function AlienBullet.reset 0
 push argument 0
 pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push argument 1
+pop this 0
+push argument 2
+pop this 1
 push constant 0
 not
 call Screen.setColor 1
 pop temp 0
+push constant 0
+return
+function AlienBullet.erase 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
 push this 0
 push this 1
+push constant 4
+add
 push this 2
 call Screen.drawCircle 3
 pop temp 0
