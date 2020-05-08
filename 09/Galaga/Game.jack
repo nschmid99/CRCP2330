@@ -17,7 +17,7 @@ class Game{
   field int lives;
   field int kill;
   field int score;
-  field int stro;
+  field int sc;
   field int xAB;
   field int yAB;
   field int gmOvr;
@@ -45,7 +45,7 @@ field int d;
       let score=0;
       let kill=0;
       let bulletDone=0;
-      let stro=0;
+      let sc=0;
       let  gmOvr=0;
     
     //  let ince=0;
@@ -53,18 +53,6 @@ field int d;
       return this;
    }
 
-method void recrLives(){
-var String liveC;
-  do Output.printString("LIVES:"); do Output.printInt(lives);
-
-return;
-}
-
-method void scLiv(){
-
- 
-  return;
-}
 
  method void initAliens(){ //sets up aliens in row  across the screen
   var Aliens a;
@@ -136,20 +124,18 @@ let kill=0;
  
 
 if ( (ab.getY()>spaceship.spaceshipY()) & (ab.getX()>(spaceship.spaceshipX()-5) ) & (ab.getX()<(spaceship.spaceshipX()+11)) ) {
- //do ab.erase();
- //do ab.reset(xAB,yAB);
-  //let xAB=xAB+40;
-  //let yAB=20;
+
    let lives=lives-1;
-  // if(xAB=400){
-  // let xAB=40;
- // }
+   if(lives<0){
  do Output.backSpace();
+}
+ //do Output.backSpace();
+
   do Output.printInt(lives);
 
-  if(lives=0){
-  let gmOvr=1;
-}
+ // if(lives=0){
+ // let gmOvr=1;
+//}
 
 }
 
@@ -210,7 +196,8 @@ while(s<10){ //go through array
     //do Output.printInt(d);
 
 
-    //let score=score+5;
+    let sc=1;
+
     let atemp=aliens[s];
     do atemp.dispose();
     let go=0;
@@ -353,11 +340,14 @@ if(d=1){      //1 goes left
       var boolean exit;
       let exit = false;
 
-//do  spaceship.initBullet();
-       do Output.printString("SCORE:"); do Output.printInt(score);
-  do Output.println();
 
-do Output.printString("LIVES:"); do Output.printInt(lives);
+       do Output.printString("SCORE:"); do Output.printInt(score);
+       if(sc=1){
+       let score=score+5;
+       do Output.printInt(score);
+       }
+  do Output.println();
+//do Output.printString("LIVES:"); do Output.printInt(lives);
 
 
       while (~exit) {
@@ -396,9 +386,9 @@ do Output.printString("LIVES:"); do Output.printInt(lives);
 
 //if  bullet isnt too far (is still shooting)can not  shoot new bullet
         if(key=1){
-        
+
   do Screen.clearScreen();
-  do Output.printString("GAME OVER");
+ // do Output.printString("GAME OVER");
         }
 
          if (key = 81)  { let exit = true; }     // q key
