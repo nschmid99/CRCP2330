@@ -48,6 +48,14 @@ let dead=1;
    return;
 }
 
+method void eraseAlien(){
+let dead=1;
+   do Screen.setColor(false);
+    do Screen.drawRectangle(x,y,x+size,y+size);
+   do Screen.setColor(true);
+
+   return;
+}
 
 
 method int getX(){ //get x to check if equal to bullet pos so alien can die
@@ -89,6 +97,15 @@ method void moveLeft() {  //moves alien left. currently not called
          do Screen.drawRectangle(x, y, x  + 1, y + size);
          
       }
+
+      if(dead=1){
+ do Screen.setColor(false);
+        // do Screen.drawRectangle((x +size)- 1, y, x + size, y + size);
+        // let x = x - 2;
+        // do Screen.setColor(false);
+        // do Screen.drawRectangle(x, y, x  + 1, y + size);
+
+      }
       return;
    }
    
@@ -100,6 +117,14 @@ method void moveLeft() {  //moves alien left. currently not called
          let x = x + 2;
          do Screen.setColor(true);
          do Screen.drawRectangle((x + size) - 1, y, x + size, y + size);
+         
+      }
+      if (dead=1) {
+         do Screen.setColor(false);
+         //do Screen.drawRectangle(x, y, x + 1, y + size);
+         //let x = x + 2;
+         //do Screen.setColor(false);
+         //do Screen.drawRectangle((x + size) - 1, y, x + size, y + size);
          
       }
       return;

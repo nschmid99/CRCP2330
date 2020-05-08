@@ -1,7 +1,6 @@
 class Game{
 
 	field Spaceship spaceship; // the spaceship
-	//field Aliens alien; //the aliens
   field Array aliens;
   field AlienBullet ab;
 	field int aPos; //alien position
@@ -21,9 +20,8 @@ class Game{
   field int xAB;
   field int yAB;
   field int gmOvr;
-  //field int ince;
   field int bulletDone;
-field int d;
+  field int d;
 
   
    field int direction; // the spaceships's current direction: 
@@ -48,8 +46,6 @@ field int d;
       let sc=0;
       let  gmOvr=0;
     
-    //  let ince=0;
-      //let abullet=0;
       return this;
    }
 
@@ -114,10 +110,8 @@ var int ince;
 let ince=0;
 let w=0;
 
-//do Output.printInt(kill);
 
 do alienbulletPC();
-
 if(ab.getY()<210){
   do ab.fire();
 let kill=0;
@@ -132,17 +126,8 @@ if ( (ab.getY()>spaceship.spaceshipY()) & (ab.getX()>(spaceship.spaceshipX()-5) 
 
   do Output.printInt(lives);
 
- // if(lives=0){
- // let gmOvr=1;
-//}
-
 }
-
-
-
-
 return;
-
 }
 
 
@@ -161,7 +146,6 @@ let issht=false;
 
 method void bulletToFar(){
 do bulletPosCheck();
-//do Output.printInt(bPosY);
   if ((bPosY<20)){
    do spaceship.eraseBullet();
    do spaceship.rstBullet();
@@ -175,6 +159,7 @@ do bulletPosCheck();
 var int s;
 var int trackd;
 var Aliens atemp;
+var Aliens temps;
 var int alienY;
  var  int  alienX;
 
@@ -183,6 +168,7 @@ let trackd=0;
 let s=0;
 while(s<10){ //go through array
   let atemp=aliens[s];  //get array 
+  let temps=aliens[9];
   let alienY=atemp.getY(); //gety
   let alienX=atemp.getX();  //getx
 
@@ -190,21 +176,32 @@ while(s<10){ //go through array
  do bulletPosCheck();// check bulletpos
 
   if  (  (bPosY<20) ){
-  //& (bPosY>alienY) ){
 
   if( (bPosX>alienX)  & (bPosX<(alienX+15))  ){ //is by above ay
-    let trackd=trackd+1;      //let  d=1;
-    //do Output.printInt(d);
+  
+   // let trackd=trackd+1;      //let  d=1;
 
     let score=score+5;
     do Output.moveCursor(0,7);
     do Output.moveCursor(0,6);
     do Output.printInt(score);
+   // if(s<9){
+    do Output.printString("atkp");
+     //do atemp.dispose();
+     do atemp.eraseAlien();
     let atemp=aliens[s];
-    do atemp.dispose();
-     //do Output.printInt(    s);
-    let go=0;
+
+    //}
+    //if (trackd>8){
+     //let lives=0;
+      do Output.printString("erase");
+     //do temps.eraseAlien();
+    // }
+      let go=0;
+let trackd=trackd+1;
+     do Output.printInt(trackd);
 }
+ 
 
  }
 
@@ -214,17 +211,14 @@ while(s<10){ //go through array
 
  }
 
- if(trackd=9){
-let lives=0;
- do Memory.deAlloc(atemp);
- }
  return;
 
  }
-
+method String getScore(){
+  return score;
+}
 
   method void dispose() {
- // do liveS();
       do spaceship.dispose();
       do ab.dispose();
       do aliens.dispose();
@@ -340,9 +334,7 @@ if(d=1){      //1 goes left
   
       return;
    }
-//need to make  it so spaceship can not move until bullet is done shooting
    
-
 
      method void run() {
       var char key;  // the key currently pressed by the user
@@ -361,7 +353,6 @@ do Output.printString("LIVES:"); do Output.printInt(lives);
 //0,6 o,7
       while (~exit) {
         let time=time+1;
-       // do recrLives();
  
 
          // waits for a key to be pressed
@@ -386,9 +377,7 @@ do Output.printString("LIVES:"); do Output.printInt(lives);
  do sortArray();
   do bulletToFar();
           if(lives=0){
-              // do Sys.halt();
-            //do  Screen.clearScreen();
-            //do dispose();
+            do  Screen.clearScreen();
             let key=81;
             }
              
@@ -407,7 +396,7 @@ do Output.printString("LIVES:"); do Output.printInt(lives);
          // waits for the key to be released
          while (~(key = 0)) {
          let time=time+1;
-        // do recrLives();
+
             let key = Keyboard.keyPressed();
 
             
@@ -418,14 +407,6 @@ do Output.printString("LIVES:"); do Output.printInt(lives);
             if(go=0){
             do moveSpaceship();
             }
-
-
-             // if(lives=0){
-            
-            //do  Screen.clearScreen();
-           // do dispose();
-           // let exit=true;
-            //}
 
 
             do bulletGo();

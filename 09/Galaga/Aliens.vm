@@ -94,6 +94,30 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
+function Aliens.eraseAlien 0
+push argument 0
+pop pointer 0
+push constant 1
+pop this 5
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push this 4
+add
+push this 1
+push this 4
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push constant 0
+return
 function Aliens.getX 0
 push argument 0
 pop pointer 0
@@ -182,6 +206,16 @@ add
 call Screen.drawRectangle 4
 pop temp 0
 label IF_FALSE0
+push this 5
+push constant 1
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+call Screen.setColor 1
+pop temp 0
+label IF_FALSE1
 push constant 0
 return
 function Aliens.moveRight 0
@@ -229,6 +263,16 @@ add
 call Screen.drawRectangle 4
 pop temp 0
 label IF_FALSE0
+push this 5
+push constant 1
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+call Screen.setColor 1
+pop temp 0
+label IF_FALSE1
 push constant 0
 return
 function Aliens.moveLeftBullet 0
