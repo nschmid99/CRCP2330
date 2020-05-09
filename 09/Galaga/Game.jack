@@ -20,8 +20,10 @@ class Game{
   field int xAB;
   field int yAB;
   field int gmOvr;
+  field int fly;
   field int bulletDone;
   field int d;
+  field int trackd;
 
   
    field int direction; // the spaceships's current direction: 
@@ -44,7 +46,9 @@ class Game{
       let kill=0;
       let bulletDone=0;
       let sc=0;
+      let trackd=0;
       let  gmOvr=0;
+      let fly=0;
     
       return this;
    }
@@ -157,7 +161,6 @@ do bulletPosCheck();
 
  method void sortArray(){
 var int s;
-var int trackd;
 var Aliens atemp;
 var Aliens temps;
 var int alienY;
@@ -165,50 +168,67 @@ var int alienY;
 
 let alienX=0;
 let alienY=0;
-let trackd=0;
+
 let s=0;
 
 
-
-
-while(s<10){ //go through array
+while(s<9){ //go through array
   let atemp=aliens[s];  //get array 
-  let temps=aliens[9];
+  //let temps=aliens[9];
   let alienY=atemp.getY(); //gety
   let alienX=atemp.getX();  //getx
 
  //do Output.printString("before");
 
  do bulletPosCheck();// check bulletpos
-
+if(trackd<13){
   if  (  (bPosY<20) ){
 
   if( (bPosX>alienX)  & (bPosX<(alienX+15))  ){ //is by above ay
-  
 
-    let score=score+5;
+  
+   let score=score+5;
     do Output.moveCursor(0,7);
     do Output.moveCursor(0,6);
     do Output.printInt(score);
          do atemp.dispose();
     let atemp=aliens[s];
     let go=0;
-    do Output.printString("after");
+   
     //return 0;
-
-}
- 
+let trackd=trackd+1;
+} 
 
  }
+ 
 
-   let s=s+1;
+   
 
+}
+if(trackd=13){
+  
+let fly=1;
+}
+
+let s=s+1;
 }
 
 
  return;
 
  }
+
+ method int keepScore(){
+ return  score;
+ }
+
+ method int checkgmF(){
+   
+   if(fly=1){
+   return 0;
+   }
+   return 1;
+   }
 
 method String getScore(){
   return score;
@@ -320,6 +340,8 @@ if(d=1){      //1 goes left
   return;
 }
 
+
+
    method void moveSpaceship() {
    var int k;
       if (direction = 3) { do spaceship.moveLeft(); 
@@ -372,7 +394,7 @@ do Output.printString("LIVES:"); do Output.printInt(lives);
           
  do sortArray();
   do bulletToFar();
-          if(lives=0){
+          if((lives=0)| (fly=1) ){
             do  Screen.clearScreen();
             let key=81;
             }

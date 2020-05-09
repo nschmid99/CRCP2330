@@ -44,7 +44,7 @@ class Bullet{
 
     method void erase(){
       do Screen.setColor(false);
-            do Screen.drawCircle(x, y, r);
+            do Screen.drawCircle(x, y+2, r);
             do dispose();
         return;
     }

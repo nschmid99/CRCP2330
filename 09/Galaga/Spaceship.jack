@@ -110,6 +110,7 @@ method void stopMoving(){
       return;
    }
    
+  
 
    method void moveRight() {  //moves spaceship R
       if ((x + size) < 510) {

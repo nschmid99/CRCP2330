@@ -3,14 +3,40 @@
 class Main {
     function void main() {
         var Game game;
+         var  int score;
 
         let game = Game.new();
         do game.run();
 
         do game.dispose();
+   
+        let score = game.keepScore();
           do Screen.clearScreen();
-        do Output.printString("GAME OVER");
-      
+
+          if(game.checkgmF()=1){
+          do Output.println();
+          do Output.println();
+          do Output.println();
+          do Output.println();
+          do Output.println();
+        do Output.printString("                          GAME OVER");
+         do Output.println();
+        do Output.printString("                          SCORE:");
+         do Output.printInt(score);
+      }
+
+      if(game.checkgmF()=0){
+      do Output.println();
+      do Output.println();
+      do Output.println();
+      do Output.println();
+      do Output.println();
+        do Output.printString("                       YOU WIN!THE ALIENS FLED");
+        do Output.println();
+        do Output.printString("                          SCORE:");
+         do Output.printInt(score);
+      }
+
         return;
 
     }

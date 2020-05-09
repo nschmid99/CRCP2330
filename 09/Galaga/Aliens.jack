@@ -32,13 +32,7 @@ if (dead=0) {
    return;
 }
 
-method void drawBullet(){ 
-if (dead=0) {
-  do Screen.setColor(true);
-   do Screen.drawCircle(x,y+10,2);}
-  //do moveLeftBullet();
-   return;
-}
+
 method void dispose(){    //erases alien from screen
 let dead=1;
    do Screen.setColor(false);
@@ -115,30 +109,6 @@ method void moveLeft() {  //moves alien left. currently not called
          
       }
     
-      return;
-   }
-method void moveLeftBullet() {  //moves alien left. currently not called
-      if (dead=0) {
-         do Screen.setColor(false);
-         do Screen.drawCircle((x +2)- 1, y+10, 2);
-         let x = x - 2;
-         do Screen.setColor(true);
-         do Screen.drawCircle(x, y, 2);
-         
-      }
-      return;
-   }
-   
-
-   method void moveRightBullet() {    //moves alien right. currently not called
-      if (dead=0) {
-         do Screen.setColor(false);
-         do Screen.drawCircle(x, y, 2);
-         let x = x + 2;
-         do Screen.setColor(true);
-         do Screen.drawCircle((x + 2) - 1, y+10, 2);
-         
-      }
       return;
    }
 

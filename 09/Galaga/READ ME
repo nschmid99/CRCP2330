@@ -1,0 +1,15 @@
+READ ME
+// The first part of this text file is a description of how to play the game. The second half is a description of where this game could be improved upon
+
+//PART 1
+This game is a basic version of Galaga (AKA Space Invaders). There is one spaceship located  at the bottom center of the screen, aliens that are flying around the top of the screen, and in the upper right hand corner a score-keeper and a life tracker. You get three lives and each  time an alien bullet collides with the spaceship the life tracker decreases by one. The goal is to shoot/scare off as many aliens as possible. To move the spaceship use the right and left arrow keys on your keyboard. To stop moving/aim to shoot use the up arrow  on your  keyboard. To shoot press the space bar on your keyboard. To quit the game at any time hit "q"  on your keyboard. YOU MUST AIM BEFORE YOU SHOOT. This is what reloads the bullet into the spaceship. If you don't than you risk jamming the spaceship. If you shoot enough aliens the rest will get scared and fly away.
+
+KEYS
+"q"-> quits the game
+LEFT->  moves the spaceship to the left
+RIGHT-> moves the spaceship to the right
+UP-> aims the spaceship to shoot
+SPACEBAR-> shoots a bullet from the spaceship
+
+//PART 2
+This game does work but I  kinda cheated it into working. I kept getting an error when killing my final alien but I couldn't figure it out so to work around that I tracked the amount of times the bullet collided with the aliens. When it reaches a certain amount the remainder of the aliens "fly away" and you win the game. Another thing is I would ideally like to have the bullets dropping from the Aliens. I worked on it for a bit but it was a little funky so I just set the bullet to draw at certain positions on the screen. I wanted to add in multiple levels or have the aliens move to different formations. I also would like to wait a bit before causing the program to exit or have a function to be able to restart the game. These are definitely things that would improve the game and make it more advanced but for a basic version of galaga I think I did a good job. 
