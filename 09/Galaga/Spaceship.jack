@@ -70,6 +70,7 @@ method void initBullet(){
    return bullety;
    }
 
+
    method void rstBullet(){
    do spaceshipX();
    do spaceshipY();

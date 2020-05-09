@@ -3,10 +3,6 @@
 class Main {
     function void main() {
         var Game game;
-        var String gmovr;
-        var int gamo;
-        var int score;
-        //let score=game.getScore();
 
         let game = Game.new();
         do game.run();
@@ -15,9 +11,6 @@ class Main {
           do Screen.clearScreen();
         do Output.printString("GAME OVER");
       
-       
-        //do Output.printInt(score);
-
         return;
 
     }

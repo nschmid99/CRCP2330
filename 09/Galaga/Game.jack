@@ -163,15 +163,21 @@ var Aliens temps;
 var int alienY;
  var  int  alienX;
 
-
+let alienX=0;
+let alienY=0;
 let trackd=0;
 let s=0;
+
+
+
+
 while(s<10){ //go through array
   let atemp=aliens[s];  //get array 
   let temps=aliens[9];
   let alienY=atemp.getY(); //gety
   let alienX=atemp.getX();  //getx
 
+ //do Output.printString("before");
 
  do bulletPosCheck();// check bulletpos
 
@@ -179,41 +185,31 @@ while(s<10){ //go through array
 
   if( (bPosX>alienX)  & (bPosX<(alienX+15))  ){ //is by above ay
   
-   // let trackd=trackd+1;      //let  d=1;
 
     let score=score+5;
     do Output.moveCursor(0,7);
     do Output.moveCursor(0,6);
     do Output.printInt(score);
-   // if(s<9){
-    do Output.printString("atkp");
-     //do atemp.dispose();
-     do atemp.eraseAlien();
+         do atemp.dispose();
     let atemp=aliens[s];
+    let go=0;
+    do Output.printString("after");
+    //return 0;
 
-    //}
-    //if (trackd>8){
-     //let lives=0;
-      do Output.printString("erase");
-     //do temps.eraseAlien();
-    // }
-      let go=0;
-let trackd=trackd+1;
-     do Output.printInt(trackd);
 }
  
 
  }
 
-  
+   let s=s+1;
 
- let s=s+1;
+}
 
- }
 
  return;
 
  }
+
 method String getScore(){
   return score;
 }
@@ -416,7 +412,7 @@ do Output.printString("LIVES:"); do Output.printInt(lives);
 
            
              do bulletPosCheck();
-                   do sortArray();
+                  // do sortArray();
                    do bulletToFar();
 
 
